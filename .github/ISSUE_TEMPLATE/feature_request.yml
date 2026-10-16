@@ -1,0 +1,17 @@
+name: Learning or maintenance improvement
+description: Propose a bounded improvement to the investigation.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or learning goal
+      description: Describe who needs the change and what they need to understand or accomplish.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Proposed behavior and evidence
+      description: Include scientific references or source and reuse terms when proposing new calculations or datasets.
+    validations:
+      required: true

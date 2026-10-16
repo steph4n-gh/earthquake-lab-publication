@@ -1,0 +1,26 @@
+{
+  "schema": "earthquake-lab-upstream-notice-v1",
+  "upstream": "ObsPy",
+  "version": "1.5.1",
+  "retrieved_at_utc": "2026-10-16T02:14:58.309001+00:00",
+  "sources": {
+    "readme": {
+      "url": "https://raw.githubusercontent.com/obspy/obspy/1.5.1/obspy/taup/README.txt",
+      "sha256": "04d39c5a7845c99507aea133aabfb449caa5c68fad5f8bb8965ca4bbc5bc5f06",
+      "bytes": 628,
+      "retained_file": "licenses/obspy-taup-README.txt"
+    },
+    "package_header": {
+      "url": "https://raw.githubusercontent.com/obspy/obspy/1.5.1/obspy/taup/__init__.py",
+      "sha256": "c3585f74b1f62d238bdc10280c89f51522e90368d536e511a209be071d928fcf",
+      "bytes": 21562
+    },
+    "license": {
+      "url": "https://raw.githubusercontent.com/obspy/obspy/1.5.1/obspy/LICENSE.txt",
+      "sha256": "6bc0aaa42f91c71d32e33bb8c1cd46b76b3b056bb48af1a55cfc5f971ad8d94b",
+      "bytes": 42989,
+      "retained_file": "licenses/obspy-LICENSE.txt"
+    }
+  },
+  "interpretation": "The package header explicitly declares GNU LGPL version 3. The TauP README contains the differing literal label GLPv3. The project retains LGPL-3.0-only and the original README attribution without asserting consistency across those statements. The root LICENSE is the complete verbatim LGPL version 3 section of the retained combined upstream license."
+}

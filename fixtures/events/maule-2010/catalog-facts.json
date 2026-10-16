@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "case": "maule-2010",
+  "event": {
+    "id": "official20100227063411530_30",
+    "origin_time_utc": "2010-02-27T06:34:11.530000Z",
+    "latitude_deg": -36.122,
+    "longitude_deg": -72.898,
+    "depth_km": 22.9,
+    "magnitude": 8.8,
+    "magnitude_type": "mww",
+    "place": "2010 Maule, Chile Earthquake",
+    "event_page_url": "https://earthquake.usgs.gov/earthquakes/eventpage/official20100227063411530_30",
+    "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/official20100227063411530_30.geojson"
+  },
+  "phase": {
+    "event_resource_id": "quakeml:US.anss.org/event/pde20100227063411530_22",
+    "source_url": "https://earthquake.usgs.gov/product/phase-data/official20100227063411530_30/official/1478119680198/quakeml.xml",
+    "all_source_pick_count": 835,
+    "source_manual_p_count": 533,
+    "configured_phase_url_present_in_event": true
+  },
+  "manual_p_picks": {
+    "LVC": null,
+    "ANMO": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20100227063411530_22/ANMO/P",
+      "station_code": "ANMO",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2010-02-27T06:46:04.600000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "KIP": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20100227063411530_22/KIP/P",
+      "station_code": "KIP",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2010-02-27T06:48:00.000000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": null,
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "KONO": null,
+    "CTAO": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20100227063411530_22/CTAO/P",
+      "station_code": "CTAO",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2010-02-27T06:53:00.000000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": null,
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "TATO": null
+  },
+  "source_aggregates": {
+    "usgs-event.geojson": {
+      "sha256": "6df47ba7621d98701be78b05f443eb62eec8ff4d25713026eacfc676bbbaad4d",
+      "bytes": 111145,
+      "requested_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/official20100227063411530_30.geojson",
+      "response_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=official20100227063411530_30&format=geojson",
+      "retrieved_at_utc": "2026-10-15T23:55:59.348180+00:00",
+      "content_type": "application/json; charset=utf-8"
+    },
+    "usgs-phase-data.xml": {
+      "sha256": "9145f9dd8d7d60fef6a1d41c43d833efb450c7ce102f5c5770d84d2d45577e6f",
+      "bytes": 950645,
+      "requested_url": "https://earthquake.usgs.gov/product/phase-data/official20100227063411530_30/official/1478119680198/quakeml.xml",
+      "response_url": "https://earthquake.usgs.gov/product/phase-data/official20100227063411530_30/official/1478119680198/quakeml.xml",
+      "retrieved_at_utc": "2026-10-15T23:55:59.430857+00:00",
+      "content_type": "application/xml"
+    }
+  }
+}

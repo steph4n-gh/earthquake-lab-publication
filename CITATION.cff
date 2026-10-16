@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, cite this repository and credit the scientific model, software, data networks, and media sources listed in THIRD_PARTY.md."
+type: software
+title: Earthquake Lab
+version: 0.1.0
+authors:
+  - name: steph4n-gh
+repository-code: https://github.com/steph4n-gh/earthquake-lab-publication
+url: https://github.com/steph4n-gh/earthquake-lab-publication
+abstract: "An educational browser lab for real earthquake recordings, bounded source location, and modeled seismic travel through Earth."
+license: LGPL-3.0-only
+keywords:
+  - seismology
+  - earthquake
+  - WebAssembly
+  - IASP91

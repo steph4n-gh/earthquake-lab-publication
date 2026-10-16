@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "case": "okhotsk-2013",
+  "event": {
+    "id": "usb000h4jh",
+    "origin_time_utc": "2013-05-24T05:44:48.980000Z",
+    "latitude_deg": 54.892,
+    "longitude_deg": 153.221,
+    "depth_km": 598.1,
+    "magnitude": 8.3,
+    "magnitude_type": "mww",
+    "place": "2013 Sea of Okhotsk Earthquake",
+    "event_page_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usb000h4jh",
+    "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/usb000h4jh.geojson"
+  },
+  "phase": {
+    "event_resource_id": "quakeml:US.anss.org/event/pde20130524054448980_598",
+    "source_url": "https://earthquake.usgs.gov/product/phase-data/usb000h4jh/us/1415325053714/quakeml.xml",
+    "all_source_pick_count": 686,
+    "source_manual_p_count": 348,
+    "configured_phase_url_present_in_event": true
+  },
+  "manual_p_picks": {
+    "MAJO": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20130524054448980_598/MAJO/P",
+      "station_code": "MAJO",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2013-05-24T05:48:52.800000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "TATO": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20130524054448980_598/TATO/P",
+      "station_code": "TATO",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2013-05-24T05:51:17.280000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "COLA": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20130524054448980_598/COLA/P",
+      "station_code": "COLA",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2013-05-24T05:50:11.680000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "KIP": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20130524054448980_598/KIP/P",
+      "station_code": "KIP",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2013-05-24T05:52:45.050000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "ANMO": {
+      "resource_id": "quakeml:us.anss.org/pick/pde20130524054448980_598/ANMO/P",
+      "station_code": "ANMO",
+      "reported_network": "IR",
+      "channel_code": null,
+      "location_code": null,
+      "time_utc": "2013-05-24T05:54:47.580000Z",
+      "phase": "P",
+      "evaluation_mode": "manual",
+      "evaluation_status": "reviewed",
+      "onset": "emergent",
+      "uncertainty_s": null,
+      "lower_uncertainty_s": null,
+      "upper_uncertainty_s": null,
+      "creator_agency": null
+    },
+    "LVC": null
+  },
+  "source_aggregates": {
+    "usgs-event.geojson": {
+      "sha256": "06bd3cb9b670bb3c82ab5842481d392777b76150751fb34e99d0fefeec762bb0",
+      "bytes": 70195,
+      "requested_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/usb000h4jh.geojson",
+      "response_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=usb000h4jh&format=geojson",
+      "retrieved_at_utc": "2026-10-15T23:56:12.369169+00:00",
+      "content_type": "application/json; charset=utf-8"
+    },
+    "usgs-phase-data.xml": {
+      "sha256": "0f11f9fe38010e4cd78eb9bfdc1ccd9af03a95c9abd47ad046ecc7f227e30edc",
+      "bytes": 511102,
+      "requested_url": "https://earthquake.usgs.gov/product/phase-data/usb000h4jh/us/1415325053714/quakeml.xml",
+      "response_url": "https://earthquake.usgs.gov/product/phase-data/usb000h4jh/us/1415325053714/quakeml.xml",
+      "retrieved_at_utc": "2026-10-15T23:56:12.426144+00:00",
+      "content_type": "application/xml"
+    }
+  }
+}

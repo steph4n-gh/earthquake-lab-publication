@@ -1,0 +1,109 @@
+{
+  "verdict": "PASS",
+  "claim": "This validates checker sensitivity using synthetic and self-reference fixtures. It does not validate Rust fan output.",
+  "helper_sha256": "d74a6207e44f3c4dde11f4177cef9d573a1caf018d62d686665fe50b69196744",
+  "checks": [
+    {
+      "name": "self-reference positive",
+      "depth_km": 0.0,
+      "failures": [],
+      "maximum_errors": {
+        "time_s": 0.0,
+        "ray_param_s_rad": 0.0,
+        "turning_depth_km": 0.0,
+        "endpoint_distance_deg": 1.7811106216195694e-13,
+        "path_depth_km": 2.842170943040401e-14,
+        "all_sample_depth_km": 1.3642420526593924e-12
+      }
+    },
+    {
+      "name": "self-reference positive",
+      "depth_km": 598.1,
+      "failures": [],
+      "maximum_errors": {
+        "time_s": 0.0,
+        "ray_param_s_rad": 0.0,
+        "turning_depth_km": 0.0,
+        "endpoint_distance_deg": 1.7811106216195694e-13,
+        "path_depth_km": 1.6402821474604117e-16,
+        "all_sample_depth_km": 1.3642420526593924e-12
+      }
+    },
+    {
+      "name": "arrival time corruption",
+      "rejected": true,
+      "failure_count": 1,
+      "example": "depth=0.0 phase=P p=309.322375906: endpoint time does not match summary"
+    },
+    {
+      "name": "nonfinite path coordinate",
+      "rejected": true,
+      "failure_count": 1,
+      "example": "depth=0.0 phase=P p=309.322375906: nonfinite path coordinate"
+    },
+    {
+      "name": "missing discontinuity metadata",
+      "rejected": true,
+      "failure_count": 9,
+      "example": "depth=0.0 phase=P: missing explicit jump gap at 20.0km"
+    },
+    {
+      "name": "cross-discontinuity segment",
+      "rejected": true,
+      "failure_count": 9,
+      "example": "depth=0.0 phase=P: segment 0 bridges jump at 660.0km"
+    },
+    {
+      "name": "analytic fixture positive",
+      "depth_km": 0.0,
+      "test_fixture_only": true,
+      "radius_km": 6371.0,
+      "velocity_km_s": 6.0,
+      "rays": 4,
+      "path_samples": 4005,
+      "time_quantiles": 84,
+      "maximum_errors": {
+        "time_s": 1.1368683772161603e-13,
+        "turning_depth_km": 0.0,
+        "endpoint_distance_deg": 1.2722218725854067e-14,
+        "sample_depth_km": 2.7284841053187847e-12,
+        "sample_distance_deg": 1.2722218725854067e-14,
+        "sample_isochron_radius_km": 3.637978807091713e-12,
+        "quantile_depth_km": 1.8189894035458565e-12
+      }
+    },
+    {
+      "name": "analytic coordinate corruption",
+      "depth_km": 0.0,
+      "rejected": true,
+      "failure_count": 2,
+      "example": "constant sphere depth=0.0: sample_depth_km error 0.000999999999976 exceeds 1e-06"
+    },
+    {
+      "name": "analytic fixture positive",
+      "depth_km": 100.0,
+      "test_fixture_only": true,
+      "radius_km": 6371.0,
+      "velocity_km_s": 6.0,
+      "rays": 4,
+      "path_samples": 4008,
+      "time_quantiles": 84,
+      "maximum_errors": {
+        "time_s": 1.1368683772161603e-13,
+        "turning_depth_km": 0.0,
+        "endpoint_distance_deg": 1.2722218725854067e-14,
+        "sample_depth_km": 2.7284841053187847e-12,
+        "sample_distance_deg": 1.2722218725854067e-14,
+        "sample_isochron_radius_km": 3.637978807091713e-12,
+        "quantile_depth_km": 1.8189894035458565e-12
+      }
+    },
+    {
+      "name": "analytic coordinate corruption",
+      "depth_km": 100.0,
+      "rejected": true,
+      "failure_count": 2,
+      "example": "constant sphere depth=100.0: sample_depth_km error 0.000999999999976 exceeds 1e-06"
+    }
+  ]
+}

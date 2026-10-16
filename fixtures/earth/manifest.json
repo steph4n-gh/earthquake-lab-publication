@@ -1,0 +1,89 @@
+{
+  "schema": "taup-earth-imagery-v1",
+  "title": "Blue Marble Next Generation, July 2004 base map",
+  "credit": "NASA Earth Observatory",
+  "creator": "Reto Stöckli, NASA Earth Observatory, NASA Goddard Space Flight Center",
+  "retrieved_at_utc": "2026-10-16T00:42:34.262741+00:00",
+  "source_page": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-map/",
+  "dataset_page": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/",
+  "source_url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x5400x2700.jpg",
+  "source_http_last_modified": "Tue, 16 Dec 2025 13:05:01 GMT",
+  "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+  "reuse_basis": "NASA permits factual educational and informational use of its imagery under its media guidelines. Credit NASA Earth Observatory. No NASA endorsement is implied. This imagery is separate from the application code license.",
+  "observation_period": "2004-07",
+  "scientific_role": "Decorative geographic surface reference. The image is a monthly cloud-reduced composite, not event-time weather, a seismic measurement, or the seismic velocity model.",
+  "projection": {
+    "name": "Equirectangular longitude/latitude grid",
+    "crs": "EPSG:4326",
+    "longitude_bounds_deg": [
+      -180,
+      180
+    ],
+    "latitude_bounds_deg": [
+      -90,
+      90
+    ],
+    "raster_top_left_lon_lat_deg": [
+      -180,
+      90
+    ],
+    "horizontal_direction": "west to east",
+    "vertical_direction": "north to south",
+    "pixel_edge_formula": "x = (longitude + 180) / 360 * width; y = (90 - latitude) / 180 * height",
+    "verification": {
+      "source_url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x5400x2700_geo.tif",
+      "download_bytes": 12175080,
+      "sha256": "a6d0df740db7eea2d8e274ecffcc1181df60c5329a7c16e637db6046b77b94c2",
+      "retained_locally": false,
+      "width": 5400,
+      "height": 2700,
+      "ModelPixelScaleTag": [
+        0.0666666667,
+        0.0666666667,
+        0.0
+      ],
+      "ModelTiepointTag": [
+        0.0,
+        0.0,
+        0.0,
+        -180.00000000034998,
+        90.00000000005,
+        0.0
+      ],
+      "GTRasterTypeGeoKey": 1,
+      "GeographicTypeGeoKey": 4326,
+      "GeogCitationGeoKey": "WGS 84|",
+      "GeogAngularUnitsGeoKey": 9102
+    }
+  },
+  "derivative": {
+    "input": "source-blue-marble-2004-07-5400.jpg",
+    "output": "blue-marble-2004-07-4096.jpg",
+    "changes": [
+      "Resize from 5400x2700 to 4096x2048 with Pillow LANCZOS.",
+      "Encode RGB JPEG at quality 88 with 4:2:0 subsampling, optimize, and progressive flags.",
+      "No crop, longitude rotation, color adjustment, or horizontal or vertical flip."
+    ],
+    "pillow_version": "12.2.0",
+    "jpeg_codec_version": "6.2",
+    "recipe_document": "docs/earth-imagery.md"
+  },
+  "files": {
+    "source-blue-marble-2004-07-5400.jpg": {
+      "sha256": "f55226d46d27e05511f2118dc6aa24f5dbf9b6b2cddc87cc6e0e7dd067c00b11",
+      "bytes": 1617810,
+      "width": 5400,
+      "height": 2700,
+      "media_type": "image/jpeg",
+      "role": "source"
+    },
+    "blue-marble-2004-07-4096.jpg": {
+      "sha256": "742ed25019ad1c3e9080ab01e15be8c33c418a28383ba1e51788839c970d16cc",
+      "bytes": 806194,
+      "width": 4096,
+      "height": 2048,
+      "media_type": "image/jpeg",
+      "role": "surface_texture"
+    }
+  }
+}

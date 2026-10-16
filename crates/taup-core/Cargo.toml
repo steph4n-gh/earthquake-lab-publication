@@ -1,0 +1,28 @@
+[package]
+name = "taup-core"
+version = "0.1.0"
+edition = "2021"
+license = "LGPL-3.0-only"
+description = "Limited spherical IASP91 travel times and ray paths for P, S and PKIKP"
+repository = "https://github.com/steph4n-gh/earthquake-lab-publication"
+homepage = "https://github.com/steph4n-gh/earthquake-lab-publication"
+readme = "../../README.md"
+keywords = ["seismology", "earthquake", "iasp91", "wasm"]
+categories = ["science", "wasm"]
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[features]
+default = []
+wasm = ["dep:wasm-bindgen"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+wasm-bindgen = { version = "=0.2.129", optional = true }
+
+[[bin]]
+name = "taup"
+path = "src/bin/taup.rs"

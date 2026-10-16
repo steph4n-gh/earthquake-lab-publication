@@ -1,0 +1,8 @@
+{
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson",
+  "policy_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "source_sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
+  "derivative_sha256": "80741bb67b5f87e7948320836c10b4d536e60a9d006aa94cb9e61ddb5ea57ac7",
+  "license": "Public domain",
+  "processing": "Retain polygon rings, omit feature metadata, round geographic coordinates to four decimal degrees."
+}

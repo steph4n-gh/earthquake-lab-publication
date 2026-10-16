@@ -1,0 +1,319 @@
+{
+  "verdict": "PASS",
+  "claim": "Each exported sampled ray is checked by an arbitrary-p ObsPy shot. Constant-velocity controls check actual-engine ray samples against analytic source-centered spherical isochrons. This is not a full wavefield or a completeness proof.",
+  "input": ".audit/wavefronts/reference/fan.json",
+  "input_sha256": "0f223ca2da5f7f5ce6f0949f952226bfc383a04dd98b0bb3627fc64f1c78d53b",
+  "helper_sha256": "d74a6207e44f3c4dde11f4177cef9d573a1caf018d62d686665fe50b69196744",
+  "model_sha256": "2a64bd69790c69168c61a7de0d8048af5ce1e26064efedc6e7d89f9dfbc72971",
+  "rust_source_sha256": "d1ebdadf016a8c5b81bc47c7498e4e6b6e9ac91610ed996005f3be288a93e2ec",
+  "native_binary_sha256": "aa7bb3089a737a5249359d24215ff1432aa24d4a7a88fef92f30d37875f36fa1",
+  "numerical_contract_sha256": "6b8739510679f5abbcb42aa13ac6ed7532285037c40de08391f2864089465a49",
+  "versions": {
+    "obspy": "1.5.1",
+    "numpy": "2.5.4"
+  },
+  "reference_velocity_sha256": "c16b31d1eeae292e857a4224ac98719abcad7aff5c0068204fcadeb2868dd6f2",
+  "oracle_api": "SeismicPhase(name, depth_corrected_model).shoot_ray(0, p); calc_path_from_arrival(shot)",
+  "oracle_source_sha256": "4f3dd8bc36601a715011b315fbe5da58a55ed7eb164fc82a2c217ea039d6cf06",
+  "limits": {
+    "time_s": 0.1,
+    "ray_param_s_rad": 0.05,
+    "turning_depth_km": 0.5,
+    "path_depth_km": 2.0,
+    "all_sample_depth_km": 2.0,
+    "endpoint_distance_deg": 1e-05
+  },
+  "maximum_errors": {
+    "time_s": 4.278103915567044e-08,
+    "ray_param_s_rad": 0.0,
+    "turning_depth_km": 1.2732925824820995e-11,
+    "endpoint_distance_deg": 3.202579895410464e-07,
+    "path_depth_km": 1.543632063177938,
+    "all_sample_depth_km": 7.461017048626672e-08,
+    "analytic_time_s": 8.185452315956354e-12,
+    "analytic_turning_depth_km": 9.094947017729282e-13,
+    "analytic_endpoint_distance_deg": 8.396664359063685e-13,
+    "analytic_sample_depth_km": 4.8203219193965197e-11,
+    "analytic_sample_distance_deg": 3.5367768057874305e-12,
+    "analytic_sample_isochron_radius_km": 3.2741809263825417e-11,
+    "analytic_quantile_depth_km": 0.8315061939016459
+  },
+  "cases": [
+    {
+      "depth_km": 0.0,
+      "rays": 330,
+      "segments": 12,
+      "phases": {
+        "P": 90,
+        "S": 95,
+        "PKIKP": 145
+      },
+      "independent_gaps": {
+        "P": [
+          {
+            "phase": "P",
+            "depth_km": 20.0,
+            "lower_p_s_rad": 977.0769230769231,
+            "upper_p_s_rad": 1095.0
+          },
+          {
+            "phase": "P",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 788.0597014925374,
+            "upper_p_s_rad": 974.7692307692307
+          },
+          {
+            "phase": "P",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 636.8589743589744,
+            "upper_p_s_rad": 660.1328903654486
+          },
+          {
+            "phase": "P",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 529.2863762743282,
+            "upper_p_s_rad": 559.9019607843138
+          }
+        ],
+        "S": [
+          {
+            "phase": "S",
+            "depth_km": 20.0,
+            "lower_p_s_rad": 1693.6,
+            "upper_p_s_rad": 1890.1785714285716
+          },
+          {
+            "phase": "S",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 1417.4496644295302,
+            "upper_p_s_rad": 1689.6
+          },
+          {
+            "phase": "S",
+            "depth_km": 210.0,
+            "lower_p_s_rad": 1362.4502432551967,
+            "upper_p_s_rad": 1363.6564851704295
+          },
+          {
+            "phase": "S",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 1175.7396449704142,
+            "upper_p_s_rad": 1224.024640657084
+          },
+          {
+            "phase": "S",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 959.8319327731092,
+            "upper_p_s_rad": 1019.8214285714287
+          }
+        ],
+        "PKIKP": []
+      }
+    },
+    {
+      "depth_km": 29.0,
+      "rays": 354,
+      "segments": 10,
+      "phases": {
+        "P": 102,
+        "S": 107,
+        "PKIKP": 145
+      },
+      "independent_gaps": {
+        "P": [
+          {
+            "phase": "P",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 788.0597014925374,
+            "upper_p_s_rad": 974.7692307692307
+          },
+          {
+            "phase": "P",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 636.8589743589744,
+            "upper_p_s_rad": 660.1328903654486
+          },
+          {
+            "phase": "P",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 529.2863762743282,
+            "upper_p_s_rad": 559.9019607843138
+          }
+        ],
+        "S": [
+          {
+            "phase": "S",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 1417.4496644295302,
+            "upper_p_s_rad": 1689.6
+          },
+          {
+            "phase": "S",
+            "depth_km": 210.0,
+            "lower_p_s_rad": 1362.4502432551967,
+            "upper_p_s_rad": 1363.6564851704295
+          },
+          {
+            "phase": "S",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 1175.7396449704142,
+            "upper_p_s_rad": 1224.024640657084
+          },
+          {
+            "phase": "S",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 959.8319327731092,
+            "upper_p_s_rad": 1019.8214285714287
+          }
+        ],
+        "PKIKP": []
+      }
+    },
+    {
+      "depth_km": 22.9,
+      "rays": 354,
+      "segments": 10,
+      "phases": {
+        "P": 102,
+        "S": 107,
+        "PKIKP": 145
+      },
+      "independent_gaps": {
+        "P": [
+          {
+            "phase": "P",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 788.0597014925374,
+            "upper_p_s_rad": 974.7692307692307
+          },
+          {
+            "phase": "P",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 636.8589743589744,
+            "upper_p_s_rad": 660.1328903654486
+          },
+          {
+            "phase": "P",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 529.2863762743282,
+            "upper_p_s_rad": 559.9019607843138
+          }
+        ],
+        "S": [
+          {
+            "phase": "S",
+            "depth_km": 35.0,
+            "lower_p_s_rad": 1417.4496644295302,
+            "upper_p_s_rad": 1689.6
+          },
+          {
+            "phase": "S",
+            "depth_km": 210.0,
+            "lower_p_s_rad": 1362.4502432551967,
+            "upper_p_s_rad": 1363.6564851704295
+          },
+          {
+            "phase": "S",
+            "depth_km": 410.0,
+            "lower_p_s_rad": 1175.7396449704142,
+            "upper_p_s_rad": 1224.024640657084
+          },
+          {
+            "phase": "S",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 959.8319327731092,
+            "upper_p_s_rad": 1019.8214285714287
+          }
+        ],
+        "PKIKP": []
+      }
+    },
+    {
+      "depth_km": 598.1,
+      "rays": 410,
+      "segments": 5,
+      "phases": {
+        "P": 133,
+        "S": 132,
+        "PKIKP": 145
+      },
+      "independent_gaps": {
+        "P": [
+          {
+            "phase": "P",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 529.2863762743282,
+            "upper_p_s_rad": 559.9019607843138
+          }
+        ],
+        "S": [
+          {
+            "phase": "S",
+            "depth_km": 660.0,
+            "lower_p_s_rad": 959.8319327731092,
+            "upper_p_s_rad": 1019.8214285714287
+          }
+        ],
+        "PKIKP": []
+      }
+    },
+    {
+      "depth_km": 700.0,
+      "rays": 435,
+      "segments": 3,
+      "phases": {
+        "P": 145,
+        "S": 145,
+        "PKIKP": 145
+      },
+      "independent_gaps": {
+        "P": [],
+        "S": [],
+        "PKIKP": []
+      }
+    }
+  ],
+  "rays_checked": 1883,
+  "oracle_rays_checked": 1883,
+  "time_quantiles_per_ray": 21,
+  "constant_velocity_controls": [
+    {
+      "radius_km": 6371.0,
+      "velocity_km_s": 6.0,
+      "depth_km": 0.0,
+      "rays": 5,
+      "path_samples": 6355,
+      "time_quantiles": 105,
+      "maximum_errors": {
+        "time_s": 4.490630090003833e-12,
+        "turning_depth_km": 0.0,
+        "endpoint_distance_deg": 4.579998741307465e-13,
+        "sample_depth_km": 2.637534635141492e-11,
+        "sample_distance_deg": 3.015165838027414e-12,
+        "sample_isochron_radius_km": 2.9103830456733704e-11,
+        "quantile_depth_km": 0.4777040795189862
+      }
+    },
+    {
+      "radius_km": 6371.0,
+      "velocity_km_s": 6.0,
+      "depth_km": 598.1,
+      "rays": 5,
+      "path_samples": 6365,
+      "time_quantiles": 105,
+      "maximum_errors": {
+        "time_s": 8.185452315956354e-12,
+        "turning_depth_km": 9.094947017729282e-13,
+        "endpoint_distance_deg": 8.396664359063685e-13,
+        "sample_depth_km": 4.8203219193965197e-11,
+        "sample_distance_deg": 3.5367768057874305e-12,
+        "sample_isochron_radius_km": 3.2741809263825417e-11,
+        "quantile_depth_km": 0.8315061939016459
+      }
+    }
+  ],
+  "oracle_path": ".audit/wavefronts/reference/report-oracle.json",
+  "oracle_sha256": "a78c55c6836734cd79cc5f5e131ae0b4d61f5c18693e96287c13ef197af07955",
+  "failure_count": 0,
+  "failures": []
+}

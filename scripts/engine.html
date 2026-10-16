@@ -1,0 +1,15 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>TauP Rust engine measurement</title>
+<script type="module">
+import init, { calculate_json } from '../web/pkg/taup_core.js';
+window.engine = { ready: false, error: null, started: performance.now() };
+try {
+  const wasm = await init();
+  window.engine.query = (depth, distance) => JSON.parse(calculate_json(depth, distance));
+  window.engine.heapBytes = () => wasm.memory.buffer.byteLength;
+  window.engine.ready = true;
+} catch (error) {
+  window.engine.error = String(error);
+}
+</script>

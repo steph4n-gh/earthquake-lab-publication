@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ObsPy browser baseline</title>
+<link rel="icon" href="data:,">
+<pre id="status">Loading the pinned ObsPy browser baseline.</pre>
+<script src="../.cache/baseline/runtime/pyjs_runtime_browser.js"></script>
+<script>
+window.baseline = {ready:false, error:null};
+window.baseline.boot = (async () => {
+  const start = performance.now();
+  const runtimePath = '../.cache/baseline/runtime/';
+  const module = await createModule({locateFile: (filename) => runtimePath + filename});
+  window.Module = module;
+  const interpreterMs = performance.now() - start;
+  await module.bootstrap_from_empack_packed_environment(runtimePath + 'empack_env_meta.json',runtimePath + 'packages/',false,new URLSearchParams(location.search).get('eager') !== '1');
+  const packagesMs = performance.now() - start - interpreterMs;
+  module.exec(`import json, sys, obspy, numpy, scipy, time
+from obspy.taup import TauPyModel
+model = TauPyModel('iasp91')
+def baseline_query(depth, distance):
+    return json.dumps([{
+        'phase': a.name,
+        'time_s': float(a.time),
+        'ray_param_s_per_rad': float(a.ray_param),
+        'path': [{'time_s': float(p['time']), 'distance_deg': float(numpy.degrees(p['dist'])), 'depth_km': float(p['depth'])} for p in a.path]
+    } for a in model.get_ray_paths(depth, distance, phase_list=['P', 'S', 'PKIKP'])])
+`);
+  window.baseline.query = async (depth,distance) => JSON.parse(await module.async_exec_eval('baseline_query(' + Number(depth) + ',' + Number(distance) + ')'));
+  window.baseline.exec = async (code) => await module.async_exec_eval(code);
+  window.baseline.versions = JSON.parse(await module.async_exec_eval(`json.dumps({'obspy':obspy.__version__,'python':sys.version,'platform':sys.platform,'numpy':numpy.__version__,'scipy':scipy.__version__})`));
+  window.baseline.timings = {interpreterMs,packagesMs,importMs:performance.now()-start-interpreterMs-packagesMs};
+  window.baseline.heapBytes = () => module.HEAP8.buffer.byteLength;
+  window.baseline.ready = true;
+  document.querySelector('#status').textContent = JSON.stringify(window.baseline.versions,null,2);
+})().catch(error => {window.baseline.error=String(error);document.querySelector('#status').textContent=String(error);console.error(error);});
+</script>

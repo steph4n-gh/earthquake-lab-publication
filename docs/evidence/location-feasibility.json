@@ -1,0 +1,1217 @@
+{
+  "status": "PASS",
+  "claim": "These independently sourced manual picks and obtainable recordings support a bounded educational source-location exercise. They do not exactly reproduce the catalog hypocenter or establish calibrated uncertainty.",
+  "tools": {
+    "obspy": "1.5.1",
+    "scipy": "1.18.1",
+    "numpy": "2.5.4"
+  },
+  "provenance": {
+    "case_sha256": "ee27e9e57bf03e02b84e7751c9d40b63479b98b5cc57e5cf0a0c65bb54f53b2c",
+    "native_binary_sha256": "ea1ee245b7dd451af39bfda185c52f8884e1f7aec35fc70f03b9d3091515a8f4",
+    "native_source_sha256": "4ee534ce0d356f4626f8dfeba6ee1b2cb404083ef22ac81ce74f0bec87d10610",
+    "model_file_sha256": "2a64bd69790c69168c61a7de0d8048af5ce1e26064efedc6e7d89f9dfbc72971",
+    "source_manifest_sha256": "7b8028a1a5da70756abb32cc5871e0872a244bf884c8d9744243b5625b0bdf9c",
+    "control_script_sha256": "665012374c293152f690a643f69fbe9c943f187c0410e52896449f98bfb6889b",
+    "reference_requirements_sha256": "c6799175024f4d448c1da1cf9531aa6763ce6467890d1e2401d0b050dda07e52"
+  },
+  "selection": {
+    "station_count": 8,
+    "selected_before_fitting": [
+      "IU.TATO.00.BHZ",
+      "IU.GUMO.00.BHZ",
+      "IU.COLA.00.BHZ",
+      "IU.KIP.00.BHZ",
+      "IU.CTAO.00.BHZ",
+      "IU.KEV.00.BHZ",
+      "IU.KONO.00.BHZ",
+      "IU.ANMO.00.BHZ"
+    ],
+    "missing_selected_recordings": [],
+    "stations_removed_for_residual": [],
+    "maximum_azimuthal_gap_deg": 98.30600126150216,
+    "catalog_distance_range_deg": [
+      22.122303508259773,
+      82.95377927009868
+    ]
+  },
+  "assumptions": {
+    "depth_km": 29,
+    "depth_fitted": false,
+    "origin_time_fitted": true,
+    "earth_model": "IASP91 spherical",
+    "receivers": "Surface. Station elevation and sensor depth omitted by model.",
+    "arrival": "Earliest uppercase P",
+    "station_weights": "Equal. Pick uncertainties absent in upstream XML.",
+    "distance": "Independent haversine on geographic latitudes. No geocentric correction."
+  },
+  "catalog_geometry": {
+    "latitude_deg": 38.297,
+    "longitude_deg": 142.373,
+    "rms_at_catalog_origin_s": 2.19773598173646,
+    "fitted_origin_offset_s": 0.04386987457038316,
+    "rms_with_fitted_origin_s": 2.1972980861786366,
+    "stations": [
+      {
+        "station_id": "IU.TATO.00.BHZ",
+        "observed_pick_s": 291.97,
+        "predicted_p_s": 293.0668824895475,
+        "residual_at_catalog_origin_s": -1.096882489547454
+      },
+      {
+        "station_id": "IU.GUMO.00.BHZ",
+        "observed_pick_s": 316.16,
+        "predicted_p_s": 319.45640302265747,
+        "residual_at_catalog_origin_s": -3.2964030226574437
+      },
+      {
+        "station_id": "IU.COLA.00.BHZ",
+        "observed_pick_s": 513.81,
+        "predicted_p_s": 511.8049519556719,
+        "residual_at_catalog_origin_s": 2.0050480443280208
+      },
+      {
+        "station_id": "IU.KIP.00.BHZ",
+        "observed_pick_s": 557.52,
+        "predicted_p_s": 557.0681602422359,
+        "residual_at_catalog_origin_s": 0.45183975776410534
+      },
+      {
+        "station_id": "IU.CTAO.00.BHZ",
+        "observed_pick_s": 590.33,
+        "predicted_p_s": 593.4018014363851,
+        "residual_at_catalog_origin_s": -3.0718014363850443
+      },
+      {
+        "station_id": "IU.KEV.00.BHZ",
+        "observed_pick_s": 621.8,
+        "predicted_p_s": 619.2863244245651,
+        "residual_at_catalog_origin_s": 2.5136755754348314
+      },
+      {
+        "station_id": "IU.KONO.00.BHZ",
+        "observed_pick_s": 698.91,
+        "predicted_p_s": 696.3595104799912,
+        "residual_at_catalog_origin_s": 2.550489520008796
+      },
+      {
+        "station_id": "IU.ANMO.00.BHZ",
+        "observed_pick_s": 742.49,
+        "predicted_p_s": 742.1950069523828,
+        "residual_at_catalog_origin_s": 0.294993047617254
+      }
+    ]
+  },
+  "all_station_best_fit": {
+    "latitude_deg": 37.92666413347411,
+    "longitude_deg": 142.45957475680265,
+    "origin_offset_s": 0.07267747723764728,
+    "rms_s": 0.4756682224678171,
+    "station_ids": [
+      "IU.TATO.00.BHZ",
+      "IU.GUMO.00.BHZ",
+      "IU.COLA.00.BHZ",
+      "IU.KIP.00.BHZ",
+      "IU.CTAO.00.BHZ",
+      "IU.KEV.00.BHZ",
+      "IU.KONO.00.BHZ",
+      "IU.ANMO.00.BHZ"
+    ],
+    "start": [
+      45,
+      150
+    ],
+    "optimizer_success": true,
+    "evaluations": 7,
+    "residuals": [
+      {
+        "station_id": "IU.TATO.00.BHZ",
+        "distance_deg": 21.993227756099785,
+        "predicted_p_s": 291.68995774720463,
+        "observed_pick_s": 291.97,
+        "residual_s": 0.20736477555774968
+      },
+      {
+        "station_id": "IU.GUMO.00.BHZ",
+        "distance_deg": 24.43138617788237,
+        "predicted_p_s": 316.0379006868788,
+        "observed_pick_s": 316.16,
+        "residual_s": 0.04942183588357807
+      },
+      {
+        "station_id": "IU.COLA.00.BHZ",
+        "distance_deg": 47.71581456438721,
+        "predicted_p_s": 513.9416143142323,
+        "observed_pick_s": 513.81,
+        "residual_s": -0.20429179147001264
+      },
+      {
+        "station_id": "IU.KIP.00.BHZ",
+        "distance_deg": 53.355932715004805,
+        "predicted_p_s": 556.5551972482026,
+        "observed_pick_s": 557.52,
+        "residual_s": 0.8921252745597315
+      },
+      {
+        "station_id": "IU.CTAO.00.BHZ",
+        "distance_deg": 58.12452527090366,
+        "predicted_p_s": 590.7845507848111,
+        "observed_pick_s": 590.33,
+        "residual_s": -0.5272282620487374
+      },
+      {
+        "station_id": "IU.KEV.00.BHZ",
+        "distance_deg": 62.65327619080407,
+        "predicted_p_s": 621.7654336027957,
+        "observed_pick_s": 621.8,
+        "residual_s": -0.03811108003341701
+      },
+      {
+        "station_id": "IU.KONO.00.BHZ",
+        "distance_deg": 74.97201696635132,
+        "predicted_p_s": 698.4904614013012,
+        "observed_pick_s": 698.91,
+        "residual_s": 0.34686112146110304
+      },
+      {
+        "station_id": "IU.ANMO.00.BHZ",
+        "distance_deg": 83.13748268103404,
+        "predicted_p_s": 743.1434643966724,
+        "observed_pick_s": 742.49,
+        "residual_s": -0.7261418739099952
+      }
+    ],
+    "catalog_offset_km": 41.8702610613365
+  },
+  "multistart_fits": [
+    {
+      "latitude_deg": 37.926664133052014,
+      "longitude_deg": 142.45957475692302,
+      "origin_offset_s": 0.07267747727475893,
+      "rms_s": 0.47566822246783713,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        32,
+        140
+      ],
+      "optimizer_success": true,
+      "evaluations": 6,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.993227755970935,
+          "predicted_p_s": 291.689957745829,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.20736477689624877
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.431386177452957,
+          "predicted_p_s": 316.03790068296405,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.049421839761215836
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71581456469186,
+          "predicted_p_s": 513.9416143165961,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.20429179387090102
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.35593271490877,
+          "predicted_p_s": 556.5551972474965,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8921252752287288
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.12452527047574,
+          "predicted_p_s": 590.7845507818136,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5272282590882682
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65327619123259,
+          "predicted_p_s": 621.765433605657,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.03811108293179899
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97201696677756,
+          "predicted_p_s": 698.4904614037629,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.3468611189623303
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13748268123005,
+          "predicted_p_s": 743.1434643976828,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7261418749575554
+        }
+      ]
+    },
+    {
+      "latitude_deg": 37.92666413347411,
+      "longitude_deg": 142.45957475680265,
+      "origin_offset_s": 0.07267747723764728,
+      "rms_s": 0.4756682224678171,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        45,
+        150
+      ],
+      "optimizer_success": true,
+      "evaluations": 7,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.993227756099785,
+          "predicted_p_s": 291.68995774720463,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.20736477555774968
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.43138617788237,
+          "predicted_p_s": 316.0379006868788,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.04942183588357807
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71581456438721,
+          "predicted_p_s": 513.9416143142323,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.20429179147001264
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.355932715004805,
+          "predicted_p_s": 556.5551972482026,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8921252745597315
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.12452527090366,
+          "predicted_p_s": 590.7845507848111,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5272282620487374
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65327619080407,
+          "predicted_p_s": 621.7654336027957,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.03811108003341701
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97201696635132,
+          "predicted_p_s": 698.4904614013012,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.34686112146110304
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13748268103404,
+          "predicted_p_s": 743.1434643966724,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7261418739099952
+        }
+      ],
+      "catalog_offset_km": 41.8702610613365
+    },
+    {
+      "latitude_deg": 37.926664133493254,
+      "longitude_deg": 142.45957475682974,
+      "origin_offset_s": 0.07267747724594642,
+      "rms_s": 0.475668222467975,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        30,
+        160
+      ],
+      "optimizer_success": true,
+      "evaluations": 7,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.993227756127872,
+          "predicted_p_s": 291.68995774750437,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.2073647752497152
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.43138617789931,
+          "predicted_p_s": 316.03790068703324,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.04942183572083536
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71581456435956,
+          "predicted_p_s": 513.9416143140178,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.20429179126378472
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.35593271498345,
+          "predicted_p_s": 556.5551972480456,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8921252747084338
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.12452527092119,
+          "predicted_p_s": 590.7845507849339,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5272282621798183
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65327619079366,
+          "predicted_p_s": 621.7654336027265,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.038111079972480866
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97201696634185,
+          "predicted_p_s": 698.4904614012461,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.346861121507942
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13748268100537,
+          "predicted_p_s": 743.1434643965249,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7261418737708425
+        }
+      ]
+    }
+  ],
+  "four_station_fit": {
+    "latitude_deg": 37.95142133536015,
+    "longitude_deg": 142.41931922350125,
+    "origin_offset_s": 0.23458616661102383,
+    "rms_s": 0.3661845526024477,
+    "station_ids": [
+      "IU.TATO.00.BHZ",
+      "IU.GUMO.00.BHZ",
+      "IU.COLA.00.BHZ",
+      "IU.KIP.00.BHZ"
+    ],
+    "start": [
+      32,
+      140
+    ],
+    "optimizer_success": true,
+    "evaluations": 7,
+    "residuals": [
+      {
+        "station_id": "IU.TATO.00.BHZ",
+        "distance_deg": 21.978153134140157,
+        "predicted_p_s": 291.5290163139268,
+        "observed_pick_s": 291.97,
+        "residual_s": 0.20639751946222873
+      },
+      {
+        "station_id": "IU.GUMO.00.BHZ",
+        "distance_deg": 24.45918077130866,
+        "predicted_p_s": 316.291274352199,
+        "observed_pick_s": 316.16,
+        "residual_s": -0.3658605188100239
+      },
+      {
+        "station_id": "IU.COLA.00.BHZ",
+        "distance_deg": 47.71204096322644,
+        "predicted_p_s": 513.9123335229093,
+        "observed_pick_s": 513.81,
+        "residual_s": -0.33691968952038565
+      },
+      {
+        "station_id": "IU.KIP.00.BHZ",
+        "distance_deg": 53.3877438633049,
+        "predicted_p_s": 556.7890311445208,
+        "observed_pick_s": 557.52,
+        "residual_s": 0.4963826888681808
+      }
+    ],
+    "catalog_offset_km": 38.639611422585375
+  },
+  "leave_one_out": [
+    {
+      "latitude_deg": 37.920635956460465,
+      "longitude_deg": 142.421228249734,
+      "origin_offset_s": -0.014930406145903621,
+      "rms_s": 0.4905232767995398,
+      "station_ids": [
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.428399677032573,
+          "predicted_p_s": 316.0106741425521,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.16425626359383777
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.73717521384262,
+          "predicted_p_s": 514.1073411075148,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.2824107013689497
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.38616729858719,
+          "predicted_p_s": 556.7774441048621,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.7574863012838152
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.12073878766293,
+          "predicted_p_s": 590.7580240175203,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.4130936113743116
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.64827778165826,
+          "predicted_p_s": 621.7320625288551,
+          "observed_pick_s": 621.8,
+          "residual_s": 0.08286787729079086
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.96597978725313,
+          "predicted_p_s": 698.4555910690391,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.4693393371067844
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.16462559019814,
+          "predicted_p_s": 743.2833758726779,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.778445466531967
+        }
+      ],
+      "excluded_station": "IU.TATO.00.BHZ",
+      "catalog_offset_km": 42.06195918996967,
+      "full_fit_offset_km": 3.429664014697153
+    },
+    {
+      "latitude_deg": 37.923577429100575,
+      "longitude_deg": 142.4609879609172,
+      "origin_offset_s": 0.06197022245672607,
+      "rms_s": 0.5078915185640839,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.992649775046676,
+          "predicted_p_s": 291.6837875423747,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.22424223516858482
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71781608301066,
+          "predicted_p_s": 513.9571444522683,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.20911467472504747
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.35480996024329,
+          "predicted_p_s": 556.5469428312329,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.9110869463104011
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.12136526036249,
+          "predicted_p_s": 590.762412938667,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.4943831611236971
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65655775306527,
+          "predicted_p_s": 621.7873414093928,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.04931163184952376
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97529517463445,
+          "predicted_p_s": 698.5093950228854,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.33863475465781384
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13859211242567,
+          "predicted_p_s": 743.1491842459818,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7211544684385315
+        }
+      ],
+      "excluded_station": "IU.GUMO.00.BHZ",
+      "catalog_offset_km": 42.230261969507154,
+      "full_fit_offset_km": 0.36492313447777863
+    },
+    {
+      "latitude_deg": 37.920514399282006,
+      "longitude_deg": 142.45392585670191,
+      "origin_offset_s": 0.10829356583728408,
+      "rms_s": 0.4998647211174019,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.98629369468299,
+          "predicted_p_s": 291.6159309059119,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.24577552825083362
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.425707293553483,
+          "predicted_p_s": 315.986128631063,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.06557780309971609
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.360373141266464,
+          "predicted_p_s": 556.5878420303819,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8238644037807765
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.118718481848184,
+          "predicted_p_s": 590.7438700273945,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5221635932316937
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65746566304437,
+          "predicted_p_s": 621.793402501015,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.10169606685228214
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97598752979457,
+          "predicted_p_s": 698.5133936918803,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.2883127422823739
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.1448366748035,
+          "predicted_p_s": 743.1813772514924,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7996708173297244
+        }
+      ],
+      "excluded_station": "IU.COLA.00.BHZ",
+      "catalog_offset_km": 42.457823706399985,
+      "full_fit_offset_km": 0.8444624551654588
+    },
+    {
+      "latitude_deg": 37.91552387502962,
+      "longitude_deg": 142.53586120049968,
+      "origin_offset_s": -0.09146362480714743,
+      "rms_s": 0.2599527825935103,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 7,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 22.03982106739265,
+          "predicted_p_s": 292.187229344542,
+          "observed_pick_s": 291.97,
+          "residual_s": -0.12576571973482942
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.414446803969962,
+          "predicted_p_s": 315.88346764672394,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.36799597808322915
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.69281590339763,
+          "predicted_p_s": 513.7631438595226,
+          "observed_pick_s": 513.81,
+          "residual_s": 0.1383197652844501
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.10905318972064,
+          "predicted_p_s": 590.6761520646199,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.25468843981275313
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.68486214811699,
+          "predicted_p_s": 621.9762689207071,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.08480529589996877
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 75.00536919051795,
+          "predicted_p_s": 698.6830546199794,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.31840900482768575
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.09821078281409,
+          "predicted_p_s": 742.940928917555,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.3594652927478137
+        }
+      ],
+      "excluded_station": "IU.KIP.00.BHZ",
+      "catalog_offset_km": 44.74768051498513,
+      "full_fit_offset_km": 6.805308163445838
+    },
+    {
+      "latitude_deg": 37.946819618450554,
+      "longitude_deg": 142.4517501251009,
+      "origin_offset_s": 0.16579968839104303,
+      "rms_s": 0.448344246311551,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.99797286946299,
+          "predicted_p_s": 291.74061242219915,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.06358788940983523
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.45205315674,
+          "predicted_p_s": 316.2263023823756,
+          "observed_pick_s": 316.16,
+          "residual_s": -0.232102070766611
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.70215039117555,
+          "predicted_p_s": 513.8355842054428,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.19138389383393978
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.36215819430811,
+          "predicted_p_s": 556.6009648263131,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.7532354852958503
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.632238069366245,
+          "predicted_p_s": 621.6249633740798,
+          "observed_pick_s": 621.8,
+          "residual_s": 0.009236937529099765
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.951035983039,
+          "predicted_p_s": 698.3692656155523,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.37493469605661695
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.12938437914893,
+          "predicted_p_s": 743.1017093552998,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7775090436908516
+        }
+      ],
+      "excluded_station": "IU.CTAO.00.BHZ",
+      "catalog_offset_km": 39.542953966039214,
+      "full_fit_offset_km": 2.3438861683096612
+    },
+    {
+      "latitude_deg": 37.925115735071685,
+      "longitude_deg": 142.46123761727017,
+      "origin_offset_s": 0.08052725281433075,
+      "rms_s": 0.5081962576964755,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KONO.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.99358942798006,
+          "predicted_p_s": 291.6938187349441,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.19565401224159423
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.429715828608952,
+          "predicted_p_s": 316.02267292957373,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.056799817611964246
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71641358979193,
+          "predicted_p_s": 513.9462622875507,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.2167895403650521
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.354617012621155,
+          "predicted_p_s": 556.5455242838163,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8939484633693026
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.1228850332459,
+          "predicted_p_s": 590.7730599896769,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5235872424911706
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97394999667758,
+          "predicted_p_s": 698.5016259048462,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.32784684233948674
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13745954223602,
+          "predicted_p_s": 743.1433450998918,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.7338723527061249
+        }
+      ],
+      "excluded_station": "IU.KEV.00.BHZ",
+      "catalog_offset_km": 42.066075864572944,
+      "full_fit_offset_km": 0.22564705658996817
+    },
+    {
+      "latitude_deg": 37.937964447097215,
+      "longitude_deg": 142.44661424090665,
+      "origin_offset_s": 0.006726644348459233,
+      "rms_s": 0.4837558122078056,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.ANMO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 5,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.99003216684571,
+          "predicted_p_s": 291.655842907161,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.30743044849056594
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.443643140502367,
+          "predicted_p_s": 316.1496380781177,
+          "observed_pick_s": 316.16,
+          "residual_s": 0.0036352775338904008
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.71179333640971,
+          "predicted_p_s": 513.9104120589881,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.10713870333658601
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.36618460333447,
+          "predicted_p_s": 556.6305640415079,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.8827093141436129
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.13654465540655,
+          "predicted_p_s": 590.8687472360476,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5454738803960433
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.639102185518276,
+          "predicted_p_s": 621.6707982815018,
+          "observed_pick_s": 621.8,
+          "residual_s": 0.12247507414970674
+        },
+        {
+          "station_id": "IU.ANMO.00.BHZ",
+          "distance_deg": 83.13815116555352,
+          "predicted_p_s": 743.1469108862367,
+          "observed_pick_s": 742.49,
+          "residual_s": -0.6636375305851467
+        }
+      ],
+      "excluded_station": "IU.KONO.00.BHZ",
+      "catalog_offset_km": 40.43900248164623,
+      "full_fit_offset_km": 1.6943840046894787
+    },
+    {
+      "latitude_deg": 37.918728072476135,
+      "longitude_deg": 142.43946199113603,
+      "origin_offset_s": 0.1821028705853353,
+      "rms_s": 0.4033147136954303,
+      "station_ids": [
+        "IU.TATO.00.BHZ",
+        "IU.GUMO.00.BHZ",
+        "IU.COLA.00.BHZ",
+        "IU.KIP.00.BHZ",
+        "IU.CTAO.00.BHZ",
+        "IU.KEV.00.BHZ",
+        "IU.KONO.00.BHZ"
+      ],
+      "start": [
+        37.92666413347411,
+        142.45957475680265
+      ],
+      "optimizer_success": true,
+      "evaluations": 4,
+      "residuals": [
+        {
+          "station_id": "IU.TATO.00.BHZ",
+          "distance_deg": 21.975519800548494,
+          "predicted_p_s": 291.5008992113404,
+          "observed_pick_s": 291.97,
+          "residual_s": 0.2869979180742673
+        },
+        {
+          "station_id": "IU.GUMO.00.BHZ",
+          "distance_deg": 24.425063102826766,
+          "predicted_p_s": 315.9802557291876,
+          "observed_pick_s": 316.16,
+          "residual_s": -0.0023585997729144714
+        },
+        {
+          "station_id": "IU.COLA.00.BHZ",
+          "distance_deg": 47.73104212786273,
+          "predicted_p_s": 514.0597607318712,
+          "observed_pick_s": 513.81,
+          "residual_s": -0.43186360245655514
+        },
+        {
+          "station_id": "IU.KIP.00.BHZ",
+          "distance_deg": 53.37177902922208,
+          "predicted_p_s": 556.6716881402164,
+          "observed_pick_s": 557.52,
+          "residual_s": 0.6662089891982856
+        },
+        {
+          "station_id": "IU.CTAO.00.BHZ",
+          "distance_deg": 58.11777506296884,
+          "predicted_p_s": 590.7372604572037,
+          "observed_pick_s": 590.33,
+          "residual_s": -0.5893633277889552
+        },
+        {
+          "station_id": "IU.KEV.00.BHZ",
+          "distance_deg": 62.65512425815177,
+          "predicted_p_s": 621.7777714540468,
+          "observed_pick_s": 621.8,
+          "residual_s": -0.15987432463222312
+        },
+        {
+          "station_id": "IU.KONO.00.BHZ",
+          "distance_deg": 74.97326059299293,
+          "predicted_p_s": 698.4976441820365,
+          "observed_pick_s": 698.91,
+          "residual_s": 0.23025294737809482
+        }
+      ],
+      "excluded_station": "IU.ANMO.00.BHZ",
+      "catalog_offset_km": 42.461971660164764,
+      "full_fit_offset_km": 1.9725856360509348
+    }
+  ],
+  "two_station_ambiguity": {
+    "stations": [
+      "IU.COLA.00.BHZ",
+      "IU.KIP.00.BHZ"
+    ],
+    "fits_from_three_starts": [
+      {
+        "latitude_deg": 33.08798960209603,
+        "longitude_deg": 130.956005198952,
+        "origin_offset_s": -67.02949261300301,
+        "rms_s": 2.8421709430404007e-13,
+        "station_ids": [
+          "IU.COLA.00.BHZ",
+          "IU.KIP.00.BHZ"
+        ],
+        "start": [
+          25,
+          135
+        ],
+        "optimizer_success": true,
+        "evaluations": 6,
+        "residuals": [
+          {
+            "station_id": "IU.COLA.00.BHZ",
+            "distance_deg": 56.715133451431626,
+            "predicted_p_s": 580.8394926130027,
+            "observed_pick_s": 513.81,
+            "residual_s": 2.8421709430404007e-13
+          },
+          {
+            "station_id": "IU.KIP.00.BHZ",
+            "distance_deg": 63.07125103389008,
+            "predicted_p_s": 624.5494926130033,
+            "observed_pick_s": 557.52,
+            "residual_s": -2.8421709430404007e-13
+          }
+        ],
+        "catalog_offset_km": 1181.3046399911532
+      },
+      {
+        "latitude_deg": 39.6595726592512,
+        "longitude_deg": 146.84574784631045,
+        "origin_offset_s": 25.983116909143916,
+        "rms_s": 8.526512829121202e-13,
+        "station_ids": [
+          "IU.COLA.00.BHZ",
+          "IU.KIP.00.BHZ"
+        ],
+        "start": [
+          35,
+          155
+        ],
+        "optimizer_success": true,
+        "evaluations": 6,
+        "residuals": [
+          {
+            "station_id": "IU.COLA.00.BHZ",
+            "distance_deg": 44.40040990846157,
+            "predicted_p_s": 487.8268830908569,
+            "observed_pick_s": 513.81,
+            "residual_s": -8.526512829121202e-13
+          },
+          {
+            "station_id": "IU.KIP.00.BHZ",
+            "distance_deg": 50.007910018494144,
+            "predicted_p_s": 531.5368830908552,
+            "observed_pick_s": 557.52,
+            "residual_s": 8.526512829121202e-13
+          }
+        ],
+        "catalog_offset_km": 415.1954093891752
+      },
+      {
+        "latitude_deg": 39.81414955392313,
+        "longitude_deg": 147.30879504114003,
+        "origin_offset_s": 28.588622644435873,
+        "rms_s": 2.2737367544323206e-13,
+        "station_ids": [
+          "IU.COLA.00.BHZ",
+          "IU.KIP.00.BHZ"
+        ],
+        "start": [
+          48,
+          140
+        ],
+        "optimizer_success": true,
+        "evaluations": 6,
+        "residuals": [
+          {
+            "station_id": "IU.COLA.00.BHZ",
+            "distance_deg": 44.074987806399896,
+            "predicted_p_s": 485.2213773555643,
+            "observed_pick_s": 513.81,
+            "residual_s": -2.2737367544323206e-13
+          },
+          {
+            "station_id": "IU.KIP.00.BHZ",
+            "distance_deg": 49.66536982665499,
+            "predicted_p_s": 528.9313773555639,
+            "observed_pick_s": 557.52,
+            "residual_s": 2.2737367544323206e-13
+          }
+        ],
+        "catalog_offset_km": 458.28066681735334
+      }
+    ],
+    "maximum_separation_km": 1639.2013047203518,
+    "interpretation": "Different source points fit the same two arrival picks after origin-time fitting. Their small residual is not evidence of a unique location."
+  },
+  "independent_native_check": {
+    "locations_checked": [
+      "catalog",
+      "eight-station SciPy best fit"
+    ],
+    "arrivals_checked": 16,
+    "maximum_native_vs_obspy_first_p_error_s": 5.684341886080801e-13
+  },
+  "gate": {
+    "station_count": "Exactly eight actual recordings and manual picks",
+    "maximum_azimuthal_gap_deg": 120,
+    "eight_station_rms_s": 3,
+    "catalog_offset_km": 100,
+    "native_reference_tolerance_s": 0.1,
+    "two_station_alternative_separation_km_minimum": 100,
+    "two_station_rms_s_maximum": 0.1
+  },
+  "limitations": [
+    "Depth is fixed at 29 km and receivers are modeled at the surface of spherical IASP91.",
+    "Origin-time offset is fitted from observations and is not treated as known.",
+    "Upstream manual picks have no stated time uncertainty. Equal weighting is an exercise choice, not a measurement of confidence.",
+    "The QuakeML network IR and absent channel do not identify a specific sensor. Recordings are independently matched by station code and event-time StationXML.",
+    "The historical catalog location is a reference, not an exact answer guaranteed by these eight picks and a one-dimensional model.",
+    "Residual contours and station-dropout differences are sensitivity displays, not calibrated statistical confidence regions.",
+    "Observed amplitudes are filtered instrumental counts without response removal. They are not comparable ground-motion measurements.",
+    "Zero-phase filtering may spread energy before an onset. Analyst picks come from the archived phase file, not this display filter or model."
+  ],
+  "catalog_comparison_note": "The catalog may itself use these same archived observations. Agreement with its location is a descriptive comparison, not an independent validation of location accuracy."
+}

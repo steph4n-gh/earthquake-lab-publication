@@ -1,0 +1,35 @@
+# Atlas contract
+
+This contract extends [the application contract](lab-contract.md). Three frozen cases share one experiment owner and one clock. Tohoku alone has a validated source-location exercise. Maule and Okhotsk preserve their real recordings, nullable manual picks, and unsupported model results. [The 3D Earth contract](globe-contract.md) defines the current primary globe, stable quarter cutaway and timed paths. [The wavefront contract](wavefront-contract.md) adds modeled equal-time fronts and exact station cues without adding a clock.
+
+## Ownership and lifetime
+
+Main replaces the complete investigation lifetime on an event change. It pauses, aborts numerical and chart work, advances an event generation and request revision, disposes the old engine, globe and panels, clears answers, assigns the selected case and experiment, then creates the new presentation and Worker. Late startup results dispose themselves. Hash changes use the same activation path. No event reset protocol is added inside Workers or renderers.
+
+`experiment.js` exports `investigations`, `defaultExperiment(investigation)`, `decodeExperiment(hash)`, `encodeExperiment(experiment, investigation)`, and `requestFor(experiment, investigation)`. Decoding returns `{investigation, experiment, warning}`. Current links use lab2, event registry key, exact identity, and `view=records|travel` plus `interior=section|globe`. Strict lab1 links retain the historical Tohoku identity, whitelist and values, adding current default view fields after validation. Any invalid link resets atomically to default Tohoku.
+
+Normalized investigations retain current fields and add `key`, `event`, `title`, `shortTitle`, `summary`, `replayBounds:{startS,endS}`, and `defaults:{stationId,phase,camera}`. Challenge is null or the existing challenge shape with `initialCandidate`. Tohoku retains legacy LVC and its original identity. The additional pack paths are `fixtures/events/maule-2010/case.json` and `fixtures/events/okhotsk-2013/case.json`. Per-pack manifests supply case hashes. Pick absence never chooses a phase.
+
+Experiment adds `evidenceView:'records'|'travel'` and `interiorView:'section'|'globe'`. Explore and Replay default to the 3D globe. The analytical section remains an explicit choice. Shared intent preserves that selection, including existing section links. `cutaway` controls the 3D cutaway only. The wavefront extension adds `wavefronts` visibility, encoded as the optional `fronts=0|1` field. Older links enable the default fronts after their existing intent is validated.
+
+## Numerical output
+
+Existing exact Snapshot fields remain. Every geographic or radial Snapshot includes `stationArrivals:[{stationId,distanceDeg,arrivals:[{phase,branch,timeS,rayParamSRad,turningDepthKm}]}]`. Branch is the index among arrivals of that phase at that exact geometry. Geographic source matches request source. Radial summaries use the requested depth and actual catalog source latitude/longitude to every real station. The virtual receiver remains separately labeled and never replaces a historical recording. The wavefront extension also retains exact `stationRays` for independently checked anchors. Those anchors never join across an excluded fan interval.
+
+`engine.travelTimes(depthKm,{signal,onProgress})` returns `{depthKm,samples:[{distanceDeg,arrivals:[same summaries]}],policy:{model:'iasp91',distanceStepDeg:2,rootPolicy:'all-current-engine-roots'},elapsedMs}`. Samples cover 1 through 179 degrees inclusive in 2 degree steps, including empty arrays. The existing Worker queries `calculate_json`, yields and checks cancellation between samples, and caches one completed diagram by depth. The plot does not use the locator interpolation curve. Null challenge rejects locate/fitted-origin at the Worker boundary. Replay chooses actual P, otherwise actual PKIKP, otherwise S, otherwise no ray, independent of station name.
+
+## Presentation APIs
+
+`createPanels(root,callbacks)` still owns page DOM and existing canvas. It includes the event selector `Earthquake investigation`, `callbacks.event(key)`, `callbacks.evidence(view)`, and `callbacks.interior(view)`. It exposes `canvas` for 3D, `sectionHost` for the section, and `evidenceHost` for linked evidence. Existing public controls, IDs, classes and labels used by verification remain unless a direct visual requirement justifies a documented change. Null challenge shows a reason and an explicit switch to the Tohoku exercise. Event facts, counts, title, credits and export context derive from investigation. Station and phase controls stay near the primary view on mobile.
+
+`createSection(sectionHost)` returns `{render({investigation,experiment,snapshot,playbackTimeS}),renderTime(timeS),dispose()}`. It draws the actual selected arrival and proportional planet in SVG, with readable source, station, depth and layer labels. It handles no arrivals explicitly. It has no clock or controls. Phase color includes a dark outline against pale layers. Packet positions interpolate adjacent actual path samples at cumulative ray time, subtracting fitted origin offset just as 3D does. Annotated boundaries remain 6371, 2889 and 5153.9 km.
+
+`createGlobe` keeps its current signature and methods. Main toggles 3D and section visibility according to context and interiorView, and resizes on transitions. Globe source labels become event-derived. Selected paths get consistent screen-space width and stronger contrast. No numerical coordinates or physics change.
+
+`createEvidenceViews(evidenceHost,callbacks)` returns `{render({investigation,experiment,snapshot,diagram,diagramPending,diagramError}),renderTime(timeS),dispose()}`. Callbacks are `station(id)`, `phase(phase)`, `arrival(phase,branch)`, `sample({depthKm,distanceDeg,phase,branch})`, and `time(timeS)`. Exact station markers preserve their phase-local branch. Main stores diagram state separately from primary pending. Travel preparation is lazy on travel view and cancels before a primary action. Primary results render before starting diagram preparation. Graphs own no engine or animation loop.
+
+Record rows sort by actual angular distance and independently normalize instrumental counts. Picks and exact model predictions use distinct shapes and labels. Phase selection emphasizes matching model markers. Travel diagrams show all sampled root points, with no invented lines joining branch indices across distance. Exact station predictions and manual picks are separate overlays. A virtual receiver has a distinct marker and caption. Static waveform paths rebuild only with changed scientific inputs; cursors update per frame.
+
+## Source areas
+
+`web/experiment.js` and `web/main.js` own intent and lifecycle. `web/panels.js` and `web/style.css` own controls and layout. `web/globe.js` and `web/section.js` own interior display. `web/compute.js` and `web/compute-worker.js` own the numerical boundary. `web/evidence.js` owns linked plots. [The verification guide](verification.md) checks their integrated behavior through public controls.

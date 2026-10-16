@@ -1,0 +1,68 @@
+{
+  "schema": "earthquake-lab-curated-scientific-evidence-v1",
+  "prepared_at_utc": "2026-10-16T02:15:45.177444+00:00",
+  "mode": "historical-snapshots",
+  "claim": "These receipts preserve the recorded finite experiments and negative results. Their embedded source and binary hashes identify those runs, not the current checkout. Hashes do not establish that omitted raw inputs are bundled.",
+  "files": [
+    {
+      "path": "held-out-original.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/numerics-reference-held-out-original.json",
+      "original_sha256": "d35aedab00c837bb5469010cdebdc885f9feff12d594e23fea3675be9fac6f2c",
+      "curated_sha256": "d35aedab00c837bb5469010cdebdc885f9feff12d594e23fea3675be9fac6f2c",
+      "bytes": 1082,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Original exact-count comparison. Eight arrival-count groups failed. Scalar agreement does not turn this into a pass."
+    },
+    {
+      "path": "held-out-reconciliation.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/lab/numerics/reconciliation.json",
+      "original_sha256": "e330889da8a448daae2146bd6f959d97f63cd5b2935d139b7a85241dbaa7ea0b",
+      "curated_sha256": "e330889da8a448daae2146bd6f959d97f63cd5b2935d139b7a85241dbaa7ea0b",
+      "bytes": 38650,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Dense independent upstream shooting recovers sixteen additional rays across the eight count-mismatch groups. The original exact-count failure remains."
+    },
+    {
+      "path": "boundaries.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/numerics-reference-boundaries.json",
+      "original_sha256": "e0e5c4f07d8f6d114d2446cff59b7d744afd618afed26174d9ac27a2ae9e331b",
+      "curated_sha256": "e0e5c4f07d8f6d114d2446cff59b7d744afd618afed26174d9ac27a2ae9e331b",
+      "bytes": 786,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Frozen finite phase-boundary comparison at the recorded historical source and binary hashes."
+    },
+    {
+      "path": "location-feasibility.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/lab/data-feasibility.json",
+      "original_sha256": "5366cf9ba26e30c0abb3dc8448d461392e0d9cbb75dce264eda2ee4a335dd9ac",
+      "curated_sha256": "5366cf9ba26e30c0abb3dc8448d461392e0d9cbb75dce264eda2ee4a335dd9ac",
+      "bytes": 38659,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Independent Tohoku fixed-depth fit, station-dropout sensitivity, and two-station ambiguity control."
+    },
+    {
+      "path": "wavefront-reference.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/wavefronts/reference/report.json",
+      "original_sha256": "889cd39a48b76afdb5dc63de0c7f04fb1f5d887179ea9e3003f9d2f7bcb57175",
+      "curated_sha256": "889cd39a48b76afdb5dc63de0c7f04fb1f5d887179ea9e3003f9d2f7bcb57175",
+      "bytes": 9242,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Finite native ray fan comparison against arbitrary-parameter ObsPy shots and actual-engine constant-velocity controls."
+    },
+    {
+      "path": "wavefront-checker-controls.json",
+      "mode": "historical-snapshot",
+      "source_path": ".audit/wavefronts/reference/checker-controls.json",
+      "original_sha256": "4081ac66f34064d282d474f129da78290319b63ab5d339a1cd1a1d3024e1e760",
+      "curated_sha256": "4081ac66f34064d282d474f129da78290319b63ab5d339a1cd1a1d3024e1e760",
+      "bytes": 3492,
+      "transformation": "None. Byte-identical copy. No personal absolute path was present.",
+      "claim": "Synthetic and self-reference controls check rejection sensitivity of the checker. They do not validate Rust rays."
+    }
+  ]
+}

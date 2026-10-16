@@ -1,0 +1,883 @@
+{
+  "source_repository": "https://github.com/MMesch/pyjs-obspy",
+  "source_revision": "cac66b289a36a61592cbce911c968c74f951b9cb",
+  "metadata_url": "https://mmesch.com/pyjs-obspy/empack_env_meta.json",
+  "original_metadata_sha256": "19fe9b070c6dfe1e1308871d5fc7341a5c6e54a67a3f1582e4ee67932edde7a1",
+  "packages": {
+    "prefix": "/",
+    "packages": [
+      {
+        "name": "python_abi",
+        "version": "3.13",
+        "build": "8_cp313",
+        "filename_stem": "python_abi-3.13-8_cp313",
+        "filename": "python_abi-3.13-8_cp313.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [],
+        "subdir": "noarch"
+      },
+      {
+        "name": "python",
+        "version": "3.13.1",
+        "build": "h_2efca29_11_cp313",
+        "filename_stem": "python-3.13.1-h_2efca29_11_cp313",
+        "filename": "python-3.13.1-h_2efca29_11_cp313.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python_abi 3.13.* *_cp313",
+          "emscripten-abi >=4,<5.0a0"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "idna",
+        "version": "3.13",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "idna-3.13-pyhcf101f3_0",
+        "filename": "idna-3.13-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "sqlalchemy",
+        "version": "2.0.32",
+        "build": "py313h6d8a2ba_2",
+        "filename_stem": "sqlalchemy-2.0.32-py313h6d8a2ba_2",
+        "filename": "sqlalchemy-2.0.32-py313h6d8a2ba_2.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "typing-extensions",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.2.2",
+        "build": "pyhd8ed1ab_0",
+        "filename_stem": "urllib3-2.2.2-pyhd8ed1ab_0",
+        "filename": "urllib3-2.2.2-pyhd8ed1ab_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "brotli-python >=1.0.9",
+          "pysocks >=1.5.6,<2.0,!=1.5.7",
+          "python >=3.8"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "obspy",
+        "version": "1.5.0",
+        "build": "np23py313h1e705a5_0",
+        "filename_stem": "obspy-1.5.0-np23py313h1e705a5_0",
+        "filename": "obspy-1.5.0-np23py313h1e705a5_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "numpy >=1.20",
+          "scipy",
+          "matplotlib >=3.3",
+          "lxml",
+          "sqlalchemy >=1.4",
+          "decorator",
+          "requests",
+          "setuptools <82",
+          "jaraco.text",
+          "platformdirs",
+          "emscripten-abi >=4,<5.0a0",
+          "numpy >=2.2,<3",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "pyjs-rt",
+        "version": "4.0.3",
+        "build": "py313h690bb57_0",
+        "filename_stem": "pyjs-rt-4.0.3-py313h690bb57_0",
+        "filename": "pyjs-rt-4.0.3-py313h690bb57_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "packaging",
+        "version": "26.2",
+        "build": "pyhc364b38_0",
+        "filename_stem": "packaging-26.2-pyhc364b38_0",
+        "filename": "packaging-26.2-pyhc364b38_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.8",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "emscripten-abi",
+        "version": "4.0.9",
+        "build": "h267e887_8",
+        "filename_stem": "emscripten-abi-4.0.9-h267e887_8",
+        "filename": "emscripten-abi-4.0.9-h267e887_8.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [],
+        "subdir": "noarch"
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.15.0",
+        "build": "h396c80c_0",
+        "filename_stem": "typing-extensions-4.15.0-h396c80c_0",
+        "filename": "typing-extensions-4.15.0-h396c80c_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "typing_extensions ==4.15.0 pyhcf101f3_0"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "zlib",
+        "version": "1.3.2",
+        "build": "h8b79025_0",
+        "filename_stem": "zlib-1.3.2-h8b79025_0",
+        "filename": "zlib-1.3.2-h8b79025_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "backports.tarfile",
+        "version": "1.2.0",
+        "build": "pyhcf101f3_2",
+        "filename_stem": "backports.tarfile-1.2.0-pyhcf101f3_2",
+        "filename": "backports.tarfile-1.2.0-pyhcf101f3_2.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "backports",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "fonttools",
+        "version": "4.39.4",
+        "build": "py313h6d8a2ba_2",
+        "filename_stem": "fonttools-4.39.4-py313h6d8a2ba_2",
+        "filename": "fonttools-4.39.4-py313h6d8a2ba_2.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "autocommand",
+        "version": "2.2.2",
+        "build": "pyhcf101f3_2",
+        "filename_stem": "autocommand-2.2.2-pyhcf101f3_2",
+        "filename": "autocommand-2.2.2-pyhcf101f3_2.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "pillow",
+        "version": "12.2.0",
+        "build": "py313h6414d15_0",
+        "filename_stem": "pillow-12.2.0-py313h6414d15_0",
+        "filename": "pillow-12.2.0-py313h6414d15_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "zlib",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "jaraco.functools",
+        "version": "4.4.0",
+        "build": "pyhcf101f3_1",
+        "filename_stem": "jaraco.functools-4.4.0-pyhcf101f3_1",
+        "filename": "jaraco.functools-4.4.0-pyhcf101f3_1.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "more-itertools",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.7",
+        "build": "pyhd8ed1ab_0",
+        "filename_stem": "charset-normalizer-3.4.7-pyhd8ed1ab_0",
+        "filename": "charset-normalizer-3.4.7-pyhd8ed1ab_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "backports",
+        "version": "1.0",
+        "build": "pyhd8ed1ab_5",
+        "filename_stem": "backports-1.0-pyhd8ed1ab_5",
+        "filename": "backports-1.0-pyhd8ed1ab_5.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.9"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "pyparsing",
+        "version": "3.3.2",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "pyparsing-3.3.2-pyhcf101f3_0",
+        "filename": "pyparsing-3.3.2-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "contourpy",
+        "version": "1.3.3",
+        "build": "py313hffb8c6e_4",
+        "filename_stem": "contourpy-1.3.3-py313hffb8c6e_4",
+        "filename": "contourpy-1.3.3-py313hffb8c6e_4.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "numpy",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0",
+        "build": "pyhe01879c_2",
+        "filename_stem": "python-dateutil-2.9.0.post0-pyhe01879c_2",
+        "filename": "python-dateutil-2.9.0.post0-pyhe01879c_2.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.9",
+          "six >=1.5",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "pytz",
+        "version": "2026.1.post1",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "pytz-2026.1.post1-pyhcf101f3_0",
+        "filename": "pytz-2026.1.post1-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "more-itertools",
+        "version": "11.0.2",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "more-itertools-11.0.2-pyhcf101f3_0",
+        "filename": "more-itertools-11.0.2-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.9.6",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "platformdirs-4.9.6-pyhcf101f3_0",
+        "filename": "platformdirs-4.9.6-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0",
+        "build": "pyhe01879c_1",
+        "filename_stem": "six-1.17.0-pyhe01879c_1",
+        "filename": "six-1.17.0-pyhe01879c_1.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.9",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "matplotlib-base",
+        "version": "3.10.9",
+        "build": "np23py313h2ca9bdc_0",
+        "filename_stem": "matplotlib-base-3.10.9-np23py313h2ca9bdc_0",
+        "filename": "matplotlib-base-3.10.9-np23py313h2ca9bdc_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "contourpy",
+          "cycler",
+          "fonttools",
+          "kiwisolver",
+          "numpy",
+          "packaging",
+          "pillow",
+          "pyparsing",
+          "python-dateutil",
+          "pytz",
+          "emscripten-abi >=4,<5.0a0",
+          "numpy >=2.2,<3",
+          "qhull >=2020.2,<2020.3.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.15.0",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "typing_extensions-4.15.0-pyhcf101f3_0",
+        "filename": "typing_extensions-4.15.0-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "kiwisolver",
+        "version": "1.5.0",
+        "build": "py313hb42c9ef_1",
+        "filename_stem": "kiwisolver-1.5.0-py313hb42c9ef_1",
+        "filename": "kiwisolver-1.5.0-py313hb42c9ef_1.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "cycler",
+        "version": "0.12.1",
+        "build": "pyhcf101f3_2",
+        "filename_stem": "cycler-0.12.1-pyhcf101f3_2",
+        "filename": "cycler-0.12.1-pyhcf101f3_2.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "lxml",
+        "version": "6.1.0",
+        "build": "py313hbe6240c_0",
+        "filename_stem": "lxml-6.1.0-py313hbe6240c_0",
+        "filename": "lxml-6.1.0-py313hbe6240c_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.10.9",
+        "build": "pyh0dac07b_0",
+        "filename_stem": "matplotlib-3.10.9-pyh0dac07b_0",
+        "filename": "matplotlib-3.10.9-pyh0dac07b_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "matplotlib-base ==3.10.9 np23py313h2ca9bdc_0"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "pysocks",
+        "version": "1.7.1",
+        "build": "py313h1804a44_3",
+        "filename_stem": "pysocks-1.7.1-py313h1804a44_3",
+        "filename": "pysocks-1.7.1-py313h1804a44_3.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python >=3.8",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "decorator",
+        "version": "5.2.1",
+        "build": "pyhd8ed1ab_0",
+        "filename_stem": "decorator-5.2.1-pyhd8ed1ab_0",
+        "filename": "decorator-5.2.1-pyhd8ed1ab_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.9"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "numpy",
+        "version": "2.4.4",
+        "build": "py313hcf5bae3_0",
+        "filename_stem": "numpy-2.4.4-py313hcf5bae3_0",
+        "filename": "numpy-2.4.4-py313hcf5bae3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "requests",
+        "version": "2.33.1",
+        "build": "pyhcf101f3_1",
+        "filename_stem": "requests-2.33.1-pyhcf101f3_1",
+        "filename": "requests-2.33.1-pyhcf101f3_1.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "certifi >=2023.5.7",
+          "charset-normalizer >=2,<4",
+          "idna >=2.5,<4",
+          "urllib3 >=1.26,<3",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "jaraco.context",
+        "version": "6.1.2",
+        "build": "pyhcf101f3_0",
+        "filename_stem": "jaraco.context-6.1.2-pyhcf101f3_0",
+        "filename": "jaraco.context-6.1.2-pyhcf101f3_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "backports.tarfile",
+          "python"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "setuptools",
+        "version": "81.0.0",
+        "build": "pyh332efcf_0",
+        "filename_stem": "setuptools-81.0.0-pyh332efcf_0",
+        "filename": "setuptools-81.0.0-pyh332efcf_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "openblas",
+        "version": "0.3.31",
+        "build": "h8b79025_4",
+        "filename_stem": "openblas-0.3.31-h8b79025_4",
+        "filename": "openblas-0.3.31-h8b79025_4.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0",
+          "emscripten-abi >=4,<5.0"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "brotli-python",
+        "version": "1.2.0",
+        "build": "py313ha26e73d_2",
+        "filename_stem": "brotli-python-1.2.0-py313ha26e73d_2",
+        "filename": "brotli-python-1.2.0-py313ha26e73d_2.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "qhull",
+        "version": "2020.2",
+        "build": "h0b0027f_1",
+        "filename_stem": "qhull-2020.2-h0b0027f_1",
+        "filename": "qhull-2020.2-h0b0027f_1.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "emscripten-abi >=4,<5.0a0"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "scipy",
+        "version": "1.17.1",
+        "build": "np23py313h1a2f9be_1",
+        "filename_stem": "scipy-1.17.1-np23py313h1a2f9be_1",
+        "filename": "scipy-1.17.1-np23py313h1a2f9be_1.tar.gz",
+        "channel": "https://repo.prefix.dev/emscripten-forge-4x",
+        "depends": [
+          "python",
+          "numpy",
+          "openblas",
+          "emscripten-abi >=4,<5.0a0",
+          "python_abi 3.13.* *_cp313",
+          "numpy >=2.2,<3"
+        ],
+        "subdir": "emscripten-wasm32"
+      },
+      {
+        "name": "certifi",
+        "version": "2026.4.22",
+        "build": "pyhd8ed1ab_0",
+        "filename_stem": "certifi-2026.4.22-pyhd8ed1ab_0",
+        "filename": "certifi-2026.4.22-pyhd8ed1ab_0.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10"
+        ],
+        "subdir": "noarch"
+      },
+      {
+        "name": "jaraco.text",
+        "version": "4.0.0",
+        "build": "pyh338ee8c_1",
+        "filename_stem": "jaraco.text-4.0.0-pyh338ee8c_1",
+        "filename": "jaraco.text-4.0.0-pyh338ee8c_1.tar.gz",
+        "channel": "https://repo.prefix.dev/conda-forge",
+        "depends": [
+          "python >=3.10",
+          "jaraco.functools",
+          "jaraco.context >=4.1",
+          "autocommand",
+          "more-itertools",
+          "python"
+        ],
+        "subdir": "noarch"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "path": "pyjs_runtime_browser.js",
+      "url": "https://mmesch.com/pyjs-obspy/pyjs_runtime_browser.js",
+      "bytes": 3668943,
+      "sha256": "81e42df6a6ea0bfbf6208da5a4555af0dce280771be61538656ef3b6cf560d8d"
+    },
+    {
+      "path": "pyjs_runtime_browser.wasm",
+      "url": "https://mmesch.com/pyjs-obspy/pyjs_runtime_browser.wasm",
+      "bytes": 15116335,
+      "sha256": "b3dc6d0667df17d33dd359878dd8c3996748f4a2f6b91ea6e6ced07fce61661e"
+    },
+    {
+      "path": "packages/python_abi-3.13-8_cp313.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/python_abi-3.13-8_cp313.tar.gz",
+      "bytes": 362,
+      "sha256": "7cdcc07c6a400d01889798547acd60cc185ab8da9f2d3b285a60e692127e757e"
+    },
+    {
+      "path": "packages/python-3.13.1-h_2efca29_11_cp313.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/python-3.13.1-h_2efca29_11_cp313.tar.gz",
+      "bytes": 6599269,
+      "sha256": "9cd9f1123cfbb69a0520705c8d507b44319c7fa9d74d9d02ab750ff09ce801ad"
+    },
+    {
+      "path": "packages/idna-3.13-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/idna-3.13-pyhcf101f3_0.tar.gz",
+      "bytes": 68241,
+      "sha256": "d91c8595e8a5bd681d0bd8f93ab211886c1a15aab97ffb83118d71bbc9a209e6"
+    },
+    {
+      "path": "packages/sqlalchemy-2.0.32-py313h6d8a2ba_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/sqlalchemy-2.0.32-py313h6d8a2ba_2.tar.gz",
+      "bytes": 1669933,
+      "sha256": "ed31535a34d73848624b46436b809d632add5945c6792138018f3dd1b83a10df"
+    },
+    {
+      "path": "packages/urllib3-2.2.2-pyhd8ed1ab_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/urllib3-2.2.2-pyhd8ed1ab_0.tar.gz",
+      "bytes": 106954,
+      "sha256": "7b6503e3d1314bf59c668c2e9ebd428a5cf287b9cb3f7a43829386118ad54a37"
+    },
+    {
+      "path": "packages/obspy-1.5.0-np23py313h1e705a5_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/obspy-1.5.0-np23py313h1e705a5_0.tar.gz",
+      "bytes": 3066514,
+      "sha256": "f3d6d667e15e9240fb16759812a2b8cf2e0b3cf3209d8e7a70fdf8bf6fcfc2ef"
+    },
+    {
+      "path": "packages/pyjs-rt-4.0.3-py313h690bb57_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/pyjs-rt-4.0.3-py313h690bb57_0.tar.gz",
+      "bytes": 11544,
+      "sha256": "c5d03f462960b7e0d2b2c862e7d1c974585b39470af8f81698010130255ff361"
+    },
+    {
+      "path": "packages/packaging-26.2-pyhc364b38_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/packaging-26.2-pyhc364b38_0.tar.gz",
+      "bytes": 92526,
+      "sha256": "4e8da0eb3b0a46bafc2b6aff3ac1cd3ba88a3cddf2afb9c181a48f94d53e9efb"
+    },
+    {
+      "path": "packages/emscripten-abi-4.0.9-h267e887_8.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/emscripten-abi-4.0.9-h267e887_8.tar.gz",
+      "bytes": 378,
+      "sha256": "c6c0ac2253fa8f729c119c84f6fba214648cc98caf46ce261c1140b6d0b2f3d2"
+    },
+    {
+      "path": "packages/typing-extensions-4.15.0-h396c80c_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/typing-extensions-4.15.0-h396c80c_0.tar.gz",
+      "bytes": 92976,
+      "sha256": "b67eacfc5354aa0c697a4f5c5562aa494f959749f0cf597605fde59fadcefc8a"
+    },
+    {
+      "path": "packages/zlib-1.3.2-h8b79025_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/zlib-1.3.2-h8b79025_0.tar.gz",
+      "bytes": 935271,
+      "sha256": "960b7ef2cbd0628acad568bdad2cd3882ca56690aa8780f918a40153bce4358b"
+    },
+    {
+      "path": "packages/backports.tarfile-1.2.0-pyhcf101f3_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/backports.tarfile-1.2.0-pyhcf101f3_2.tar.gz",
+      "bytes": 29622,
+      "sha256": "87c1fcbc0701f176e186ab1e0aab6576ff2d012c1e2473cc670a3e3c613b73f2"
+    },
+    {
+      "path": "packages/fonttools-4.39.4-py313h6d8a2ba_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/fonttools-4.39.4-py313h6d8a2ba_2.tar.gz",
+      "bytes": 1210989,
+      "sha256": "f0c22e4717454235ffc8d286cdc5404f19bad00ff327b09f7976e522c4e4009a"
+    },
+    {
+      "path": "packages/autocommand-2.2.2-pyhcf101f3_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/autocommand-2.2.2-pyhcf101f3_2.tar.gz",
+      "bytes": 15843,
+      "sha256": "461665c890808c1efd02b30ad2d110e57ec030b407ca3e526e9c458b20aac364"
+    },
+    {
+      "path": "packages/pillow-12.2.0-py313h6414d15_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/pillow-12.2.0-py313h6414d15_0.tar.gz",
+      "bytes": 814781,
+      "sha256": "b05ca3b4940c10d3053526ae0a7e518a936e208e58d58a361d81ebf57867d227"
+    },
+    {
+      "path": "packages/jaraco.functools-4.4.0-pyhcf101f3_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/jaraco.functools-4.4.0-pyhcf101f3_1.tar.gz",
+      "bytes": 9164,
+      "sha256": "887368e2f166719360ff52b92633e2d9f02df4bc906dc2abfb599240a2b9f1a6"
+    },
+    {
+      "path": "packages/charset-normalizer-3.4.7-pyhd8ed1ab_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/charset-normalizer-3.4.7-pyhd8ed1ab_0.tar.gz",
+      "bytes": 58301,
+      "sha256": "edd8bd613a551d7184a154f4e1caba63461c823f8c7c37ddbceffc78afefba93"
+    },
+    {
+      "path": "packages/backports-1.0-pyhd8ed1ab_5.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/backports-1.0-pyhd8ed1ab_5.tar.gz",
+      "bytes": 584,
+      "sha256": "86ce4cdb2331dbd1d9b9749cfe97a289c33d0c9dfb944f653d756c592e39bdf4"
+    },
+    {
+      "path": "packages/pyparsing-3.3.2-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/pyparsing-3.3.2-pyhcf101f3_0.tar.gz",
+      "bytes": 115853,
+      "sha256": "0619b82b07e68fd8288da185591e4faffb8a7c10242dec627979d49dd62ec144"
+    },
+    {
+      "path": "packages/contourpy-1.3.3-py313hffb8c6e_4.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/contourpy-1.3.3-py313hffb8c6e_4.tar.gz",
+      "bytes": 120431,
+      "sha256": "e29024881852d648a8c8597010c1d4bfec178946a9a32621d77ecdd8a629e9a8"
+    },
+    {
+      "path": "packages/python-dateutil-2.9.0.post0-pyhe01879c_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/python-dateutil-2.9.0.post0-pyhe01879c_2.tar.gz",
+      "bytes": 226072,
+      "sha256": "60c0926e47b34f48e4a524b5d5d9130caf41f499a7a54aa25463fcb666248838"
+    },
+    {
+      "path": "packages/pytz-2026.1.post1-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/pytz-2026.1.post1-pyhcf101f3_0.tar.gz",
+      "bytes": 328194,
+      "sha256": "2d39e1788dc29dc54192b296131c4873f390a1c36599fae77a751b62d08985e8"
+    },
+    {
+      "path": "packages/more-itertools-11.0.2-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/more-itertools-11.0.2-pyhcf101f3_0.tar.gz",
+      "bytes": 64056,
+      "sha256": "dbed28ee9a582154f36b8e8330789be7414f877bf3ccbd739dd68ea32f519011"
+    },
+    {
+      "path": "packages/platformdirs-4.9.6-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/platformdirs-4.9.6-pyhcf101f3_0.tar.gz",
+      "bytes": 17586,
+      "sha256": "04f7cb91d70b5bf450eb769a0d96d761ce1c42cffd18c9d51452e9b5b77efe5e"
+    },
+    {
+      "path": "packages/six-1.17.0-pyhe01879c_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/six-1.17.0-pyhe01879c_1.tar.gz",
+      "bytes": 10862,
+      "sha256": "dd007294ede2fcb602ad78aa840b51947d73f3b41d8aae3c5a3a869b6e021a2b"
+    },
+    {
+      "path": "packages/matplotlib-base-3.10.9-np23py313h2ca9bdc_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/matplotlib-base-3.10.9-np23py313h2ca9bdc_0.tar.gz",
+      "bytes": 7031308,
+      "sha256": "0b79a4b9a37c5a953075269783b1b353b348b70c8d59f7eed589df8fa4621806"
+    },
+    {
+      "path": "packages/typing_extensions-4.15.0-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/typing_extensions-4.15.0-pyhcf101f3_0.tar.gz",
+      "bytes": 44467,
+      "sha256": "f27b03bbb95a775ac3e94bc698526d6553923d6084e0d2f531f3f9a4f3a8afc2"
+    },
+    {
+      "path": "packages/kiwisolver-1.5.0-py313hb42c9ef_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/kiwisolver-1.5.0-py313hb42c9ef_1.tar.gz",
+      "bytes": 33452,
+      "sha256": "6dff1fcb83d15ab177af25b8f13178dd19bd35bea27f3ed59563dc8fcd8747ea"
+    },
+    {
+      "path": "packages/cycler-0.12.1-pyhcf101f3_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/cycler-0.12.1-pyhcf101f3_2.tar.gz",
+      "bytes": 7693,
+      "sha256": "0ae2c31620c3b0ee21001d1d329db36d869fa7f4a90aa16b8eb3f5a4a20c46ee"
+    },
+    {
+      "path": "packages/lxml-6.1.0-py313hbe6240c_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/lxml-6.1.0-py313hbe6240c_0.tar.gz",
+      "bytes": 1843959,
+      "sha256": "9efd147a82bca7248ad46be661535da844dd38b2530b218eb906ea48a3a927f2"
+    },
+    {
+      "path": "packages/matplotlib-3.10.9-pyh0dac07b_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/matplotlib-3.10.9-pyh0dac07b_0.tar.gz",
+      "bytes": 742,
+      "sha256": "68b3edc824331e0b8cb5565d8d416dc951bafe5d8b64d9e8b7fe37140ca626bf"
+    },
+    {
+      "path": "packages/pysocks-1.7.1-py313h1804a44_3.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/pysocks-1.7.1-py313h1804a44_3.tar.gz",
+      "bytes": 16252,
+      "sha256": "13d9311d98373bab5bd24df85ee81945db34ce32fed454fa958b105dbfe15d7d"
+    },
+    {
+      "path": "packages/decorator-5.2.1-pyhd8ed1ab_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/decorator-5.2.1-pyhd8ed1ab_0.tar.gz",
+      "bytes": 8418,
+      "sha256": "d209e420725243931db42da08600bcf6e499e4f5cd11aecd6d823853446dafa2"
+    },
+    {
+      "path": "packages/numpy-2.4.4-py313hcf5bae3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/numpy-2.4.4-py313hcf5bae3_0.tar.gz",
+      "bytes": 3303944,
+      "sha256": "4a97ca63eec0eb67c2472c4bde4e659806ded3a0d79508e19eb9e314769ace2a"
+    },
+    {
+      "path": "packages/requests-2.33.1-pyhcf101f3_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/requests-2.33.1-pyhcf101f3_1.tar.gz",
+      "bytes": 59420,
+      "sha256": "7742b2785966aa127acda7d338110404c05182e231b0d70087ee6e92d3c7a448"
+    },
+    {
+      "path": "packages/jaraco.context-6.1.2-pyhcf101f3_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/jaraco.context-6.1.2-pyhcf101f3_0.tar.gz",
+      "bytes": 7665,
+      "sha256": "028279f87fd9cd8cf604c0d0d9734837aea1fc9e2860fe524837ad6780e89eb3"
+    },
+    {
+      "path": "packages/setuptools-81.0.0-pyh332efcf_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/setuptools-81.0.0-pyh332efcf_0.tar.gz",
+      "bytes": 59741,
+      "sha256": "ae3cf98b8f2b573305b012c325aa9c1873536d514e4e54047884d807db827385"
+    },
+    {
+      "path": "packages/openblas-0.3.31-h8b79025_4.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/openblas-0.3.31-h8b79025_4.tar.gz",
+      "bytes": 16262439,
+      "sha256": "ece8838b127ac8f896b948e3e51a9b24113d6a7b90a20907bb56c23ab2d4ae9a"
+    },
+    {
+      "path": "packages/brotli-python-1.2.0-py313ha26e73d_2.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/brotli-python-1.2.0-py313ha26e73d_2.tar.gz",
+      "bytes": 313823,
+      "sha256": "f1bd8c85ef585f153011615ea69c2247cb11741c15b33a06a5c925bac1ce85bf"
+    },
+    {
+      "path": "packages/qhull-2020.2-h0b0027f_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/qhull-2020.2-h0b0027f_1.tar.gz",
+      "bytes": 1219314,
+      "sha256": "4126fe063c787e7c76b6114161e1f10ecd3f9fe32f665334e41cc95dda515a86"
+    },
+    {
+      "path": "packages/scipy-1.17.1-np23py313h1a2f9be_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/scipy-1.17.1-np23py313h1a2f9be_1.tar.gz",
+      "bytes": 10506064,
+      "sha256": "0ded856997aa7cf722c1d1412e0724b50b22e7ae95047b02cc38b17efb915170"
+    },
+    {
+      "path": "packages/certifi-2026.4.22-pyhd8ed1ab_0.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/certifi-2026.4.22-pyhd8ed1ab_0.tar.gz",
+      "bytes": 135669,
+      "sha256": "43316188e67d26aca8e5e5acf8f5669d91ef44015f00089f6af74d6fa8eb71ce"
+    },
+    {
+      "path": "packages/jaraco.text-4.0.0-pyh338ee8c_1.tar.gz",
+      "url": "https://mmesch.com/pyjs-obspy/packages/jaraco.text-4.0.0-pyh338ee8c_1.tar.gz",
+      "bytes": 10236,
+      "sha256": "bedc1c8b98917781676368afe29f9326c33fd87ebc89a37c973e15fa075c7f65"
+    }
+  ],
+  "deployment_revision": "unverified; exact deployed asset bytes pinned by sha256",
+  "browser_replay_package": "playwright@1.58.2",
+  "runtime_license_notes": {
+    "upstream_demo": "MIT",
+    "obspy": "LGPL-3.0; package LICENSE.txt and METADATA state version 3",
+    "other_packages": "retain package licenses if redistributing; runtime assets stay in ignored cache"
+  }
+}

@@ -1,0 +1,11 @@
+.cache/
+.audit/
+.venv/
+target/
+node_modules/
+dist/
+web/pkg/
+.DS_Store
+__pycache__/
+.env
+.env.*

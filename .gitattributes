@@ -1,0 +1,5 @@
+fixtures/** -text linguist-detectable=false
+docs/** linguist-documentation
+docs/media/** -text
+licenses/** linguist-vendored
+.cursor/** linguist-documentation

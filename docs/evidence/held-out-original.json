@@ -1,0 +1,30 @@
+{
+  "verdict": "NOT VERIFIED",
+  "corpus": "fixtures/reference-held-out.json",
+  "corpus_sha256": "702596cc99add5cb4cceece4d4cc4baf423535979989bfacad61d558768d4fcc",
+  "cases": 276,
+  "reference_arrivals": 1211,
+  "limits": {
+    "time_s": 0.1,
+    "ray_param_s_rad": 0.05,
+    "turning_depth_km": 0.5
+  },
+  "maximum_errors": {
+    "time_s": 5.162536353964242e-08,
+    "ray_param_s_rad": 2.8896920412080362e-09,
+    "turning_depth_km": 2.2718268155585974e-08,
+    "path_depth_km": 0.28618656428329814,
+    "endpoint_distance_deg": 1.9680843621472377e-09
+  },
+  "failure_count": 8,
+  "failures": [
+    "depth=0 distance=14.321290194436862 P: count 5 != 3",
+    "depth=0 distance=16.079770378412682 P: count 7 != 5",
+    "depth=10 distance=14.233705124372891 P: count 5 != 3",
+    "depth=10 distance=15.997805622263655 P: count 7 != 5",
+    "depth=29 distance=14.043099327268486 P: count 5 != 3",
+    "depth=29 distance=15.821371716544144 P: count 7 != 5",
+    "depth=100 distance=10.752823687610258 P: count 3 != 1",
+    "depth=100 distance=16.94913194366442 S: count 7 != 5"
+  ]
+}

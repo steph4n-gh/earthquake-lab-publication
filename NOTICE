@@ -1,0 +1,27 @@
+Earthquake Lab
+
+This project contains a limited Rust adaptation of ObsPy 1.5.1 TauP
+and a sampled IASP91 model prepared with that implementation.
+
+Upstream copyright notice:
+Copyright (c) 2011-2015 by The ObsPy Dev Team.
+The ObsPy package header identifies The ObsPy Development Team.
+
+Rust adaptation and application changes by steph4n-gh, October 2026.
+The implemented scope is downward P, S, and PKIKP for surface receivers.
+This project is independent and is not endorsed by ObsPy or TauP.
+
+The application code is offered under LGPL-3.0-only.
+LICENSE contains the complete LGPL version 3 text.
+licenses/obspy-LICENSE.txt preserves the complete upstream GPL version 3
+and LGPL version 3 texts unchanged.
+THIRD_PARTY.md identifies the direct sources and retained notices.
+
+Data and imagery retain their separate source policies and credits.
+Credit Albuquerque Seismological Laboratory/USGS for IU recordings.
+Data access used EarthScope Consortium's NSF National Geophysical Facility
+archive, supported by NSF award 2435260.
+Credit NASA Earth Observatory for the July 2004 globe surface imagery.
+Natural Earth supplies public-domain geographic polygons.
+Three.js is used under MIT. See licenses/three.txt.
+Locked Rust dependency license texts are retained in licenses/rust/.

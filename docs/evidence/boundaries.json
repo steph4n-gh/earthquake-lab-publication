@@ -1,0 +1,23 @@
+{
+  "verdict": "VERIFIED",
+  "corpus": "fixtures/reference-boundaries.json",
+  "corpus_sha256": "bf960c134273b2997bc0ed12cbf60fe780663b059a3f20431e6f467e8a42836c",
+  "rust_source_sha256": "5553f974f40fca69b587f24019fb4e5f782e000db0c7fb5ce926383fa00564a8",
+  "native_binary_sha256": "d26590ff2630fb116922abe9ebff42b739472e2519b411514df418e49818ce56",
+  "cases": 84,
+  "reference_arrivals": 208,
+  "limits": {
+    "time_s": 0.1,
+    "ray_param_s_rad": 0.05,
+    "turning_depth_km": 0.5
+  },
+  "maximum_errors": {
+    "time_s": 6.818368092353921e-11,
+    "ray_param_s_rad": 2.4645032681291923e-09,
+    "turning_depth_km": 1.0469193512108177e-08,
+    "path_depth_km": 1.6609027941873612e-06,
+    "endpoint_distance_deg": 3.3879565819461277e-12
+  },
+  "failure_count": 0,
+  "failures": []
+}

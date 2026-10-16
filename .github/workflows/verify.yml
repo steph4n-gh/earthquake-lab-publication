@@ -1,0 +1,86 @@
+name: Verify Earthquake Lab
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build and investigate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249
+        with:
+          toolchain: 1.99.0
+          targets: wasm32-unknown-unknown
+          components: clippy, rustfmt
+      - name: Install locked dependencies and browser
+        run: |
+          npm ci
+          cargo install wasm-bindgen-cli --version 0.2.129 --locked
+          npx playwright install --with-deps chrome
+      - name: Reproduce narrow factual data offline
+        run: |
+          python -m pip install -r requirements-reference.txt
+          python scripts/test_catalog_facts.py
+          python scripts/investigation-data/prepare.py --verify
+          python scripts/fetch_waveforms.py --verify
+          python scripts/prepare-events.py --verify
+          npm run verify:publication
+      - name: Check source and numerical corpora
+        run: |
+          npm run check:project
+          npm test
+          cargo fmt --all -- --check
+          cargo test --release --locked
+          cargo clippy --all-targets --all-features --locked -- -D warnings
+          cargo build --release --locked
+          npm run verify:numerics
+          python3 scripts/verify_numerics.py --corpus fixtures/reference-boundaries.json
+      - name: Build and inspect distribution
+        run: |
+          npm run build
+          npm run verify:distribution
+      - name: Drive the real investigations
+        run: npm run verify
+      - name: Retain workflow evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: investigation-evidence
+          path: |
+            .audit/lab/browser/
+            .audit/atlas/browser/
+            .audit/globe/browser/
+            .audit/wavefronts/browser/
+            .audit/open-source-readiness/polish/
+            .audit/numerics*.json
+          if-no-files-found: ignore
+          include-hidden-files: true
+          retention-days: 7

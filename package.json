@@ -1,0 +1,56 @@
+{
+  "name": "earthquake-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "LGPL-3.0-only",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build:wasm": "bash scripts/build-wasm.sh",
+    "build": "npm run check:project && npm run verify:publication && node scripts/verify-assets.mjs && npm run build:wasm && vite build && node scripts/package-dist.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "verify:numerics": "python3 scripts/verify_numerics.py",
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:atlas": "node scripts/verify-atlas.mjs",
+    "check:project": "node scripts/verify-project.mjs",
+    "test": "node scripts/test-wavefronts.mjs && node scripts/test-project-checks.mjs && python3 scripts/test_publication.py",
+    "verify:distribution": "node scripts/package-dist.mjs --check",
+    "verify:globe": "node scripts/verify-globe.mjs",
+    "verify:wavefronts": "node scripts/verify-wavefronts.mjs",
+    "verify:polish": "node scripts/verify-polish.mjs",
+    "verify": "npm run verify:browser && npm run verify:atlas && npm run verify:globe && npm run verify:wavefronts && npm run verify:polish",
+    "record": "node scripts/record-wavefronts.mjs",
+    "measure": "node scripts/measure-wavefronts.mjs",
+    "verify:publication": "python3 scripts/verify-publication.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "vite": "8.3.4"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "description": "Replay real earthquakes, investigate their source, and explore modeled seismic wavefronts with local Rust and WebAssembly.",
+  "author": "steph4n-gh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steph4n-gh/earthquake-lab-publication.git"
+  },
+  "homepage": "https://github.com/steph4n-gh/earthquake-lab-publication#readme",
+  "bugs": {
+    "url": "https://github.com/steph4n-gh/earthquake-lab-publication/issues"
+  },
+  "keywords": [
+    "earthquake",
+    "seismology",
+    "webassembly",
+    "rust",
+    "threejs",
+    "iasp91",
+    "education",
+    "scientific-visualization"
+  ],
+  "engines": {
+    "node": ">=24"
+  }
+}

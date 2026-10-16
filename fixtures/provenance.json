@@ -1,0 +1,12 @@
+{
+  "java_taup_revision": "d2cde943f6954792298cdff105e87486945aefe4",
+  "obspy_version": "1.5.1",
+  "numpy_version": "2.5.4",
+  "model_sha256": "2a64bd69790c69168c61a7de0d8048af5ce1e26064efedc6e7d89f9dfbc72971",
+  "reference_sha256": "bec8daf81bc993246191873bfd2b06f215602145224456a0eb6922b5dd81f5d9",
+  "velocity_sha256": "c16b31d1eeae292e857a4224ac98719abcad7aff5c0068204fcadeb2868dd6f2",
+  "case_count": 176,
+  "arrival_count": 427,
+  "upstream_url": "https://github.com/crotwell/TauP/tree/d2cde943f6954792298cdff105e87486945aefe4",
+  "obspy_url": "https://github.com/obspy/obspy/tree/1.5.1"
+}
