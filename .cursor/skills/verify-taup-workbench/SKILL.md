@@ -13,6 +13,7 @@ Use Git, Node.js, Rust, the `wasm32-unknown-unknown` target, wasm-bindgen CLI 0.
 
 ```sh
 npm ci
+npm run verify:publication
 cargo build --release --locked
 npm run build
 npm run verify:browser
@@ -59,9 +60,15 @@ python3 scripts/verify_numerics.py --corpus fixtures/reference-boundaries.json
 
 For wavefront numerical changes also read [the front journey](features/wavefronts.md) and run the independent arbitrary-parameter reference check. It qualifies the exported finite ray sample, not a complete wavefield.
 
-With the pinned scientific Python environment, `scripts/investigation-data/prepare.py --verify` checks 20 source/derivative hashes and exact offline reproduction. `scripts/fetch_waveforms.py --verify` checks the legacy seven hashes. The numerical contract documents the strict held-out count diagnostic. It intentionally fails in eight frozen groups. An unexplained difference is a failure; never turn the known diagnostic into a claim of full TauP parity.
+With the pinned scientific Python environment, `scripts/investigation-data/prepare.py --verify` and `scripts/fetch_waveforms.py --verify` check retained source, derivative and producer-dependency hashes and exact offline reproduction. Both use compact Tohoku catalog facts. Full catalog captures are not required. The numerical contract documents the strict held-out count diagnostic. It intentionally fails in eight frozen groups. An unexplained difference is a failure; never turn the known diagnostic into a claim of full TauP parity.
 
-`./.venv/bin/python scripts/prepare-events.py --verify` independently checks 32 hashes and reproduces the two additional cases byte for byte without network access. `npm run build` checks 64 frozen data, model, cartography and Earth imagery hashes. New cases have null challenges even when manual picks exist.
+`./.venv/bin/python scripts/prepare-events.py --verify` independently checks retained inputs and producer dependencies, then reproduces the two additional cases byte for byte without network access. `npm run build` checks frozen data, model, cartography, Earth imagery and producer hashes. The reports state the current counts. New cases have null challenges even when manual picks exist.
+
+## Verify publication data
+
+Run `npm run verify:publication` against a complete checkout of the intended independent publication history. The gate checks working files, staged blobs and every object reachable from all refs. Shallow history, object alternates and full catalog aggregates fail. `npm test` includes the isolated history controls.
+
+Run `.venv/bin/python scripts/test_catalog_facts.py` and all three producer `--verify` commands with the pinned scientific environment. Missing picks and unknown creator, channel and uncertainty remain explicit. The four browser derivatives must reproduce exactly without network access or excluded source captures. Use [the archive-comparison procedure](../../../docs/reproduce-catalog-facts.md) only for an optional historical source audit. Reacquisition drift must fail without overwriting frozen facts. The [publication-data record](../../../docs/publication-data.md) defines the retained scope and privacy boundary.
 
 ## Evidence
 
@@ -91,4 +98,4 @@ Read [the polish journey](features/polish.md) when changing recording labels, pr
 
 ## Helpers
 
-All repository helpers have executable shebangs and are invoked above. Use Playwright Trace Viewer on the retained `trace.zip` to inspect a failed journey. Read the matching feature file before changing an assertion. Keep controls, feature map and harness aligned. `/maintain-verification-skill` provides the maintenance loop when the UI changes.
+Invoke repository helpers through the interpreter or npm command shown above. Use Playwright Trace Viewer on the retained `trace.zip` to inspect a failed journey. Read the matching feature file before changing an assertion. Keep controls, feature map and harness aligned. `/maintain-verification-skill` provides the maintenance loop when the UI changes.

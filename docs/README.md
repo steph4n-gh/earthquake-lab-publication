@@ -43,3 +43,5 @@ These pages describe earlier source snapshots. They are not current release-perf
 - [Source-fit responsiveness](responsiveness.md). The earlier Tohoku-only investigation.
 - [Browser comparison](browser-comparison.md). A restricted numerical runtime compared with a pinned ObsPy browser distribution.
 - [ObsPy browser baseline](baseline.md) and [baseline replay](baseline-replay.md). The broader existing browser implementation and its pinned assets.
+
+The [publication-data record](publication-data.md) explains the narrow factual dataset and independent history. The [archive-comparison procedure](reproduce-catalog-facts.md) checks its facts against optional private captures.
