@@ -72,7 +72,9 @@ Run `.venv/bin/python scripts/test_catalog_facts.py` and all three producer `--v
 
 ## Hosted target
 
-The same five helpers support `TAUP_URL` with the private Site root. Read the [hosted verification procedure](../../../docs/verification.md#private-hosted-verification). Each process reads its Site service credential through hidden stdin. Keep it out of arguments, environment variables, reports, traces, HAR and saved browser state. Hosted mode retains the original application assertions, screenshots and downloads but disables trace recording. Run `npm run verify:target` for real two-origin dummy-credential controls. Verify anonymous denial and native owner-only policy independently. Service access does not verify interactive owner OAuth.
+The production Site is public. Follow the [public hosted procedure](../../../docs/verification.md#public-hosted-verification) using fresh anonymous browser contexts, without service authorization or saved identity. Verify both domains, source/deployment identities, all mapped controls and exports, and the continued privacy of the original repository and archive.
+
+For a private target, the same five helpers support `TAUP_URL` with a Site service credential through hidden stdin. Read the [private hosted procedure](../../../docs/verification.md#private-hosted-verification). Keep credentials out of arguments, environment variables, reports, traces, HAR and saved browser state. Hosted mode retains the application assertions, screenshots and downloads but disables traces. Run `npm run verify:target` for two-origin dummy-credential controls. Require anonymous denial and native owner-only policy only when the selected audience is private. Service access verifies neither anonymous public access nor completed owner OAuth.
 
 ## Evidence
 
