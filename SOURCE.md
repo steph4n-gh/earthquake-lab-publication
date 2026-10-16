@@ -8,7 +8,7 @@ Before distributing a compiled build, provide recipients with its matching corre
 
 ## Build the application
 
-Use Git, Node.js 24 or later, Rust with Cargo, the wasm32-unknown-unknown target, and wasm-bindgen CLI 0.2.129. The preview was developed with Rust 1.99.0. A browser needs WebGL2 and module Worker support.
+Use Git, Node.js 24 or later, standard-library Python 3, Rust with Cargo, the wasm32-unknown-unknown target, and wasm-bindgen CLI 0.2.129. The preview was developed with Rust 1.99.0. A browser needs WebGL2 and module Worker support.
 
 For an unpacked source archive without a `.git` directory, run `git init` in its root first. Project checks use Git to detect ignored documentation targets.
 
@@ -24,8 +24,12 @@ npm run verify:distribution
 npm run preview -- --port 4181 --strictPort
 ```
 
-Open http://127.0.0.1:4181/. No account, database, server API, Python, or Java runtime is needed by the app. Python is an optional scientific-reference tool.
+Open http://127.0.0.1:4181/. No account, database, server API, Python, or Java runtime is needed by the browser app. Source builds and tests require standard-library Python 3 for publication checks. The separate pinned scientific Python environment is optional for observation regeneration and independent reference calculations.
 
 The source repository's `docs/development.md`, `docs/verification.md`, and fixture manifests describe development, checks, and scientific inputs. The build copies this file and the legal notices into `dist`. It does not automatically create or deliver a corresponding-source archive.
 
 This independent publication candidate excludes the full multi-agency catalog responses and original development history. The original private archive remains preserved separately. See [the publication-data record](docs/publication-data.md) for the exact factual scope and reproduction path.
+
+## Hosted source revision
+
+The hosted Site includes `DEPLOYMENT.json` with the exact publication repository commit and its immutable source URL. Use that commit when reproducing the deployed build. The Site wrapper records the completed distribution hashes separately. Its internal source repository and access policy remain private during preview; the original full-catalog archive is not the corresponding source offered for this clean publication candidate.

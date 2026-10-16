@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {chromium} from '@playwright/test';
 import assert from 'node:assert/strict';
+import {verificationTarget} from './verification-target.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,10 +9,11 @@ import {spawn, spawnSync} from 'node:child_process';
 
 const evidenceDir = path.resolve(process.env.TAUP_EVIDENCE || '.audit/open-source-readiness/polish');
 const port = Number(process.env.TAUP_PORT || 5198);
-const url = `http://127.0.0.1:${port}/`;
+const verification = await verificationTarget(port);
+const url = verification.url;
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 const filesIn = directory => fs.readdirSync(directory, {withFileTypes: true}).flatMap(entry => entry.isDirectory() ? filesIn(path.join(directory, entry.name)) : [path.join(directory, entry.name)]);
-const sources = ['scripts/verify-polish.mjs', 'target/release/taup', 'crates/taup-core/src/lib.rs', 'web/pkg/taup_core_bg.wasm', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/observed/tohoku-2011.json', ...filesIn('web').filter(file => /\.(js|css)$/.test(file))];
+const sources = ['scripts/verification-target.mjs', 'scripts/verify-polish.mjs', 'target/release/taup', 'crates/taup-core/src/lib.rs', 'web/pkg/taup_core_bg.wasm', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/observed/tohoku-2011.json', ...filesIn('web').filter(file => /\.(js|css)$/.test(file))];
 const fixture = JSON.parse(fs.readFileSync('fixtures/investigation/tohoku-investigation.json'));
 const legacy = JSON.parse(fs.readFileSync('fixtures/observed/tohoku-2011.json'));
 const stations = new Map(fixture.stations.map(station => [station.id, station]));
@@ -30,7 +32,7 @@ const report = {
 };
 fs.mkdirSync(evidenceDir, {recursive: true});
 const log = fs.openSync(path.join(evidenceDir, 'server.log'), 'w');
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
+const server = verification.hosted ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
 let browser;
 const contexts = new Set();
 
@@ -133,8 +135,11 @@ async function verifyRecording(page, state, name) {
   return actual;
 }
 
+report.verificationAccess = verification.evidenceScope;
+
 try {
-  for (let attempt = 0; ; attempt++) {
+  if (verification.hosted) await verification.probe();
+  else for (let attempt = 0; ; attempt++) {
     assert.equal(server.exitCode, null, 'Our preview exited. Inspect server.log for a port conflict.');
     try {if ((await fetch(url)).ok) break;} catch {}
     assert.ok(attempt < 80, 'Preview did not become ready.');
@@ -142,9 +147,9 @@ try {
   }
   browser = await chromium.launch({channel: 'chrome', headless: true});
   for (const width of [1440, 993, 390]) {
-    const context = await browser.newContext({viewport: {width, height: width === 390 ? 844 : 1080}, isMobile: width === 390, hasTouch: width === 390, deviceScaleFactor: 1});
+    const context = await verification.newContext(browser, {viewport: {width, height: width === 390 ? 844 : 1080}, isMobile: width === 390, hasTouch: width === 390, deviceScaleFactor: 1});
     contexts.add(context);
-    await context.tracing.start({screenshots: true, snapshots: true});
+    await verification.startTrace(context, {screenshots: true, snapshots: true});
     const page = await context.newPage();
     page.on('pageerror', error => report.errors.push(String(error)));
     page.on('console', message => {if (message.type() === 'error') report.errors.push(message.text());});
@@ -192,7 +197,7 @@ try {
     assert.equal(pending.path, before.path); assert.equal(pending.clock, 620);
     report.steps.push({name: 'Pending calculation suppresses stale model labels and exact lines', viewport: page.viewportSize(), waveformHash: sha256(pending.path), clock: pending.clock});
     state = await ready(page); await verifyRecording(page, state, 'Completed empty geometry preserves trace and explicit absent-phase caption');
-    await context.tracing.stop({path: path.join(evidenceDir, `${width}-trace.zip`)});
+    await verification.stopTrace(context, {path: path.join(evidenceDir, `${width}-trace.zip`)});
     await context.close(); contexts.delete(context);
   }
   assert.deepEqual(report.errors, []);
@@ -201,13 +206,13 @@ try {
   report.verdict = 'FAIL'; report.errors.push(error.stack || String(error)); process.exitCode = 1;
 } finally {
   for (const context of contexts) {
-    await context.tracing.stop({path: path.join(evidenceDir, 'failure-trace.zip')});
+    await verification.stopTrace(context, {path: path.join(evidenceDir, 'failure-trace.zip')});
     await context.close();
   }
   if (browser) await browser.close();
-  if (server.exitCode === null) {const exited = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await exited;}
+  if (server?.exitCode === null) {const exited = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await exited;}
   fs.closeSync(log);
-  report.finishedAt = new Date().toISOString(); report.serverExitCode = server.exitCode; report.serverSignal = server.signalCode;
+  report.finishedAt = new Date().toISOString(); report.serverExitCode = server?.exitCode ?? null; report.serverSignal = server?.signalCode ?? null;
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({verdict: report.verdict, checks: report.steps.length, errors: report.errors, evidenceDir}, null, 2));
 }

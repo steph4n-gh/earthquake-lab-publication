@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {chromium, expect} from '@playwright/test';
 import assert from 'node:assert/strict';
+import {verificationTarget} from './verification-target.mjs';
 import fs from 'node:fs';
 import {stripVTControlCharacters} from 'node:util';
 import path from 'node:path';
@@ -10,10 +11,11 @@ import {spawn, spawnSync} from 'node:child_process';
 const evidenceDir = path.resolve(process.env.TAUP_EVIDENCE || '.audit/atlas/browser');
 fs.mkdirSync(evidenceDir, {recursive: true});
 const port = Number(process.env.TAUP_PORT || 4193);
-const url = `http://127.0.0.1:${port}/`;
+const verification = await verificationTarget(port);
+const url = verification.url;
 const report = {startedAt: new Date().toISOString(), url, steps: [], errors: [], windowErrors: [], hashes: {}, nativeQueries: 0};
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
-const sourceFiles = ['scripts/verify-atlas.mjs', 'package.json', 'package-lock.json', 'fixtures/iasp91.json', 'target/release/taup', 'crates/taup-core/src/lib.rs', ...fs.readdirSync('web').filter(file => /\.(js|css)$/.test(file)).map(file => `web/${file}`), 'index.html', 'web/pkg/taup_core_bg.wasm', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/okhotsk-2013/case.json'];
+const sourceFiles = ['scripts/verification-target.mjs', 'scripts/verify-atlas.mjs', 'package.json', 'package-lock.json', 'fixtures/iasp91.json', 'target/release/taup', 'crates/taup-core/src/lib.rs', ...fs.readdirSync('web').filter(file => /\.(js|css)$/.test(file)).map(file => `web/${file}`), 'index.html', 'web/pkg/taup_core_bg.wasm', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/okhotsk-2013/case.json'];
 for (const file of sourceFiles) report.hashes[file] = hash(fs.readFileSync(file));
 report.assets = Object.fromEntries(fs.readdirSync('dist/assets').map(file => [file, hash(fs.readFileSync(`dist/assets/${file}`))]));
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -89,7 +91,7 @@ function note(action, state, extra = {}) {
   report.steps.push({action, event: state.investigation.key, experiment: state.experiment, source: state.snapshot?.source, arrivals: state.snapshot?.arrivals.map(arrival => ({phase: arrival.phase, timeS: arrival.time_s})), stats: state.stats, ...extra});
 }
 const log = fs.openSync(path.join(evidenceDir, 'server.log'), 'w');
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
+const server = verification.hosted ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
 let browser, context, page, releaseBootHold, releaseStartupHold;
 const watch = target => {
   target.on('pageerror', error => report.errors.push(String(error)));
@@ -284,8 +286,11 @@ async function download(format, filename) {
   return fs.readFileSync(file, 'utf8');
 }
 
+report.verificationAccess = verification.evidenceScope;
+
 try {
-  for (let attempt = 0; ; attempt++) {
+  if (verification.hosted) await verification.probe();
+  else for (let attempt = 0; ; attempt++) {
     assert.equal(server.exitCode, null, 'Owned preview exited. Inspect server.log.');
     if (stripVTControlCharacters(fs.readFileSync(path.join(evidenceDir, 'server.log'), 'utf8')).includes('Local:')) {
       const response = await fetch(url);
@@ -298,9 +303,9 @@ try {
   }
   browser = await chromium.launch({channel: 'chrome', headless: true, ignoreDefaultArgs: ['--disable-back-forward-cache']});
   report.runtime = {node: process.version, chrome: browser.version(), platform: process.platform, architecture: process.arch, physicalMobile: false};
-  context = await browser.newContext({viewport: {width: 1440, height: 1080}, acceptDownloads: true});
+  context = await verification.newContext(browser, {viewport: {width: 1440, height: 1080}, acceptDownloads: true});
   await context.addInitScript(() => addEventListener('error', event => console.error('[atlas-window-error]', event.message, event.filename, event.lineno)));
-  await context.tracing.start({screenshots: true, snapshots: true});
+  await verification.startTrace(context, {screenshots: true, snapshots: true});
   page = await context.newPage(); watch(page);
   await page.goto(url);
   let state = await ready(); checkSnapshot(state);
@@ -412,7 +417,7 @@ try {
   const box = await canvas.boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.move(box.x + box.width / 2 + 58, box.y + box.height / 2 + 19, {steps: 8}); await page.mouse.up();
   await page.getByRole('button', {name: 'Share experiment', exact: false}).click(); state = await ready();
-  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(/^http:\/\//);
+  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(page.url());
   const sharedUrl = await page.getByLabel('Reproducible experiment URL').inputValue();
   assert.ok(sharedUrl.includes('#lab=2&event=okhotsk-2013'));
   const shared = await context.newPage(); watch(shared); await shared.goto(sharedUrl); const restored = await ready(shared, 'okhotsk-2013');
@@ -445,7 +450,7 @@ try {
 
   state = await event('tohoku-2011');
   await page.getByRole('button', {name: 'Share experiment', exact: false}).click();
-  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(/^http:\/\//);
+  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(page.url());
   const tohokuUrl = new URL(await page.getByLabel('Reproducible experiment URL').inputValue());
   const oldFields = new URLSearchParams(tohokuUrl.hash.slice(1)); oldFields.set('lab', '1'); oldFields.set('phase', 'S'); oldFields.set('time', '321.7'); for (const key of ['event', 'view', 'interior']) oldFields.delete(key);
   await page.goto(url + '#' + oldFields); state = await ready(page, 'tohoku-2011');
@@ -537,7 +542,7 @@ try {
   let delayedBootRequests = 0;
   const holdStartup = new Promise(resolve => { releaseStartupHold = resolve; });
   const workerRoute = '**/compute-worker-*.js';
-  await context.route(workerRoute, async route => { delayedBootRequests++; if (delayedBootRequests === 1) await holdStartup; await route.continue().catch(() => {}); });
+  await context.route(workerRoute, async route => { delayedBootRequests++; if (delayedBootRequests === 1) await holdStartup; await route.fallback().catch(() => {}); });
   await page.goto(url, {waitUntil: 'domcontentloaded'});
   await expect.poll(() => delayedBootRequests, {timeout: 5000}).toBe(1);
   await page.waitForFunction(() => window.workbench?.state.pending && !window.workbench.state.snapshot, null, {timeout: 5000});
@@ -553,13 +558,13 @@ try {
   note('Switch events during real source fitting, travel sampling and engine startup; observe no old-case answers or labels', state, {fitRace, chartRace, startupRace});
   state = await event('tohoku-2011'); state = await mode('locate');
   await page.getByRole('button', {name: 'Share experiment', exact: false}).click();
-  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(/^http:\/\//);
+  await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(page.url());
   const bootUrl = await page.getByLabel('Reproducible experiment URL').inputValue();
-  await context.tracing.stop({path: path.join(evidenceDir, 'desktop-trace.zip')}); await context.close(); await browser.close();
+  await verification.stopTrace(context, {path: path.join(evidenceDir, 'desktop-trace.zip')}); await context.close(); await browser.close();
   browser = await chromium.launch({channel: 'chrome', headless: true, ignoreDefaultArgs: ['--disable-back-forward-cache']});
-  context = await browser.newContext({viewport: {width: 1440, height: 1080}, acceptDownloads: true});
+  context = await verification.newContext(browser, {viewport: {width: 1440, height: 1080}, acceptDownloads: true});
   await context.addInitScript(() => addEventListener('error', event => console.error('[atlas-window-error]', event.message, event.filename, event.lineno)));
-  await context.tracing.start({screenshots: true, snapshots: true});
+  await verification.startTrace(context, {screenshots: true, snapshots: true});
   page = await context.newPage(); watch(page);
   let wasmRequests = 0;
   let firstHeld;
@@ -569,7 +574,7 @@ try {
   await context.route(wasmRoute, async route => {
     wasmRequests++;
     if (wasmRequests === 1) { firstHeld(); await holdFirst; }
-    await route.continue().catch(() => {});
+    await route.fallback().catch(() => {});
   });
   await page.goto(bootUrl, {waitUntil: 'commit'});
   await Promise.race([firstRequested, new Promise((_, reject) => setTimeout(() => reject(new Error('The first real WASM request was not held.')), 10000))]);
@@ -590,11 +595,11 @@ try {
   state = await event('maule-2010'); await expect.poll(() => page.workers().length, {timeout: 10000}).toBe(1);
   note('Cancel the first real WASM startup, retry before releasing it, dispose the late obsolete Worker and keep one Worker after the next event', state, {heldWasmRequests: wasmRequests, retryStats, completedOperations: ['initialize', 'evaluate', 'wavefronts'], finalWorkerCount: page.workers().length});
 
-  await context.tracing.stop({path: path.join(evidenceDir, 'boot-trace.zip')}); await context.close(); context = null;
+  await verification.stopTrace(context, {path: path.join(evidenceDir, 'boot-trace.zip')}); await context.close(); context = null;
 
-  context = await browser.newContext({viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
+  context = await verification.newContext(browser, {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
   await context.addInitScript(() => addEventListener('error', event => console.error('[atlas-window-error]', event.message, event.filename, event.lineno)));
-  await context.tracing.start({screenshots: true, snapshots: true});
+  await verification.startTrace(context, {screenshots: true, snapshots: true});
   page = await context.newPage(); watch(page); await page.goto(url); await ready();
   for (const key of cases.keys()) {
     state = await event(key);
@@ -638,9 +643,9 @@ try {
 } finally {
   releaseStartupHold?.();
   releaseBootHold?.();
-  if (context) await context.tracing.stop({path: path.join(evidenceDir, 'trace.zip')}).catch(() => {});
+  if (context) await verification.stopTrace(context, {path: path.join(evidenceDir, 'trace.zip')}).catch(() => {});
   await context?.close(); await browser?.close();
-  server.kill('SIGTERM'); await new Promise(resolve => { if (server.exitCode !== null) resolve(); else server.once('exit', resolve); });
+  if (server) { server.kill('SIGTERM'); await new Promise(resolve => { if (server.exitCode !== null) resolve(); else server.once('exit', resolve); }); }
   fs.closeSync(log);
   report.finishedAt = new Date().toISOString();
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);

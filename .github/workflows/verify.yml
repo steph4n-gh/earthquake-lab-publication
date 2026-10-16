@@ -69,7 +69,9 @@ jobs:
           npm run build
           npm run verify:distribution
       - name: Drive the real investigations
-        run: npm run verify
+        run: |
+          npm run verify:target
+          npm run verify
       - name: Retain workflow evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9

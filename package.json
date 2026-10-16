@@ -21,7 +21,8 @@
     "verify": "npm run verify:browser && npm run verify:atlas && npm run verify:globe && npm run verify:wavefronts && npm run verify:polish",
     "record": "node scripts/record-wavefronts.mjs",
     "measure": "node scripts/measure-wavefronts.mjs",
-    "verify:publication": "python3 scripts/verify-publication.py"
+    "verify:publication": "python3 scripts/verify-publication.py",
+    "verify:target": "node scripts/test-verification-target.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

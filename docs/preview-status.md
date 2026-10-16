@@ -1,8 +1,8 @@
 # Private preview qualification
 
-Earthquake Lab 0.1.0 is a private educational preview in [steph4n-gh/earthquake-lab](https://github.com/steph4n-gh/earthquake-lab-publication). It supports the three curated events and the complete Tohoku investigation described in [the user guide](investigation-guide.md). It is prepared for open-source review, with the public-opening boundary below.
+Earthquake Lab 0.1.0 is a private educational preview in [steph4n-gh/earthquake-lab-publication](https://github.com/steph4n-gh/earthquake-lab-publication). It supports the three curated events and the complete Tohoku investigation described in [the user guide](investigation-guide.md). It is prepared for open-source review, with the public-opening boundary below.
 
-The measurements and media below describe the original private development candidate. They remain historical evidence until a new candidate has its own exact-commit qualification. The private hosted lab continues to serve that original qualified build.
+The measurements and media below describe the original private development candidate. They remain historical evidence until a new candidate has its own exact-commit qualification. For clean publication deployments, `DEPLOYMENT.json` identifies the exact hosted publication commit and its immutable corresponding-source URL. The historical media below do not identify the current deployment.
 
 ## Clean-clone qualification
 

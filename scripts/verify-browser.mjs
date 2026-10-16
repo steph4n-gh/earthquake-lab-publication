@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {chromium, expect} from '@playwright/test';
 import assert from 'node:assert/strict';
+import {verificationTarget} from './verification-target.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -9,12 +10,13 @@ import {spawn, spawnSync} from 'node:child_process';
 const evidenceDir = path.resolve(process.env.TAUP_EVIDENCE || '.audit/lab/browser');
 fs.mkdirSync(evidenceDir, {recursive: true});
 const port = Number(process.env.TAUP_PORT || 4180);
-const url = `http://127.0.0.1:${port}/`;
+const verification = await verificationTarget(port);
+const url = verification.url;
 const log = fs.openSync(path.join(evidenceDir, 'server.log'), 'w');
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
+const server = verification.hosted ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
 const report = {startedAt: new Date().toISOString(), url, steps: [], errors: [], hashes: {}};
 const fixture = JSON.parse(fs.readFileSync('fixtures/investigation/tohoku-investigation.json'));
-for (const file of ['crates/taup-core/src/lib.rs', 'web/main.js', 'web/experiment.js', 'web/compute.js', 'web/compute-worker.js', 'web/location.js', 'web/globe.js', 'web/section.js', 'web/evidence.js', 'web/panels.js', 'web/style.css', 'index.html', 'web/pkg/taup_core_bg.wasm']) report.hashes[file] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+for (const file of ['scripts/verification-target.mjs', 'crates/taup-core/src/lib.rs', 'web/main.js', 'web/experiment.js', 'web/compute.js', 'web/compute-worker.js', 'web/location.js', 'web/globe.js', 'web/section.js', 'web/evidence.js', 'web/panels.js', 'web/style.css', 'index.html', 'web/pkg/taup_core_bg.wasm']) report.hashes[file] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 let browser, context;
 const native = (depth, distance) => {
   const run = spawnSync('target/release/taup', [String(depth), String(distance)], {encoding: 'utf8'});
@@ -56,16 +58,19 @@ const checkResiduals = state => {
 };
 const note = (action, state, extra = {}) => report.steps.push({action, experiment: state.experiment, source: state.snapshot?.source, distanceDeg: state.snapshot?.distanceDeg, arrivals: state.snapshot?.arrivals.map(a => ({phase: a.phase, timeS: a.time_s})), ...extra});
 
+report.verificationAccess = verification.evidenceScope;
+
 try {
-  for (let attempt = 0; ; attempt++) {
+  if (verification.hosted) await verification.probe();
+  else for (let attempt = 0; ; attempt++) {
     assert.equal(server.exitCode, null, 'Our preview exited; inspect server.log for a port conflict.');
     try { const response = await fetch(url); if (response.ok && (await response.text()).includes('Earthquake Lab')) break; } catch {}
     assert.ok(attempt < 80, 'Preview did not become ready.');
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   browser = await chromium.launch({channel: 'chrome', headless: true, ignoreDefaultArgs: ['--disable-back-forward-cache']});
-  context = await browser.newContext({viewport: {width: 1440, height: 1080}, acceptDownloads: true});
-  await context.tracing.start({screenshots: true, snapshots: true});
+  context = await verification.newContext(browser, {viewport: {width: 1440, height: 1080}, acceptDownloads: true});
+  await verification.startTrace(context, {screenshots: true, snapshots: true});
   await context.addInitScript(() => { addEventListener('pageshow', event => { window.verificationCacheRestored = event.persisted; }); });
   let page = await context.newPage();
   const watch = page => {
@@ -269,10 +274,10 @@ try {
     await page.goto(url + invalid, {waitUntil: 'commit'}); state = await ready(); assert.equal(state.experiment.context.kind, 'replay'); await expect(page.locator('#notice')).toContainText('complete link was reset');
   }
   note('Atomically reset malformed, duplicate, wrong-identity and oversized links', state);
-  await context.tracing.stop({path: path.join(evidenceDir, 'desktop-trace.zip')});
+  await verification.stopTrace(context, {path: path.join(evidenceDir, 'desktop-trace.zip')});
   await context.close();
-  context = await browser.newContext({viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
-  await context.tracing.start({screenshots: true, snapshots: true});
+  context = await verification.newContext(browser, {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
+  await verification.startTrace(context, {screenshots: true, snapshots: true});
   page = await context.newPage(); watch(page);
   await page.goto(url); await ready();
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
@@ -296,10 +301,10 @@ try {
 } catch (error) {
   report.verdict = 'FAIL'; report.errors.push(error.stack || String(error)); process.exitCode = 1;
 } finally {
-  if (context) { await context.tracing.stop({path: path.join(evidenceDir, 'trace.zip')}); await context.close(); }
+  if (context) { await verification.stopTrace(context, {path: path.join(evidenceDir, 'trace.zip')}); await context.close(); }
   if (browser) await browser.close();
-  if (server.exitCode === null) { const ended = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await ended; }
-  fs.closeSync(log); report.finishedAt = new Date().toISOString(); report.serverExitCode = server.exitCode; report.serverSignal = server.signalCode;
+  if (server?.exitCode === null) { const ended = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await ended; }
+  fs.closeSync(log); report.finishedAt = new Date().toISOString(); report.serverExitCode = server?.exitCode ?? null; report.serverSignal = server?.signalCode ?? null;
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({verdict: report.verdict, steps: report.steps.length, errors: report.errors, evidenceDir}, null, 2));
 }

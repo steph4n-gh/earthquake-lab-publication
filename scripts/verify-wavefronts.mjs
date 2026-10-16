@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
+import {verificationTarget} from './verification-target.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {stripVTControlCharacters} from 'node:util';
@@ -10,10 +11,11 @@ import { spawn, spawnSync } from 'node:child_process';
 
 const evidenceDir = path.resolve(process.env.TAUP_EVIDENCE || '.audit/wavefronts/browser');
 const port = Number(process.env.TAUP_PORT || 5197);
-const url = `http://127.0.0.1:${port}/`;
+const verification = await verificationTarget(port);
+const url = verification.url;
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 const filesIn = directory => fs.existsSync(directory) ? fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? filesIn(path.join(directory, entry.name)) : [path.join(directory, entry.name)]) : [];
-const sourceFiles = ['scripts/verify-wavefronts.mjs', 'scripts/verify-assets.mjs', 'package.json', 'package-lock.json', 'index.html', 'fixtures/iasp91.json', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/investigation/manifest.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/observed/manifest.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/maule-2010/manifest.json', 'fixtures/events/okhotsk-2013/case.json', 'fixtures/events/okhotsk-2013/manifest.json', 'crates/taup-core/src/lib.rs', 'crates/taup-core/src/bin/taup.rs', 'target/release/taup', 'web/pkg/taup_core_bg.wasm', ...filesIn('web').filter(file => /\.(js|css)$/.test(file)), ...filesIn('fixtures/earth')];
+const sourceFiles = ['scripts/verification-target.mjs', 'scripts/verify-wavefronts.mjs', 'scripts/verify-assets.mjs', 'package.json', 'package-lock.json', 'index.html', 'fixtures/iasp91.json', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/investigation/manifest.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/observed/manifest.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/maule-2010/manifest.json', 'fixtures/events/okhotsk-2013/case.json', 'fixtures/events/okhotsk-2013/manifest.json', 'crates/taup-core/src/lib.rs', 'crates/taup-core/src/bin/taup.rs', 'target/release/taup', 'web/pkg/taup_core_bg.wasm', ...filesIn('web').filter(file => /\.(js|css)$/.test(file)), ...filesIn('fixtures/earth')];
 fs.mkdirSync(evidenceDir, { recursive: true });
 const report = {
   startedAt: new Date().toISOString(), url, steps: [], errors: [], windowErrors: [], nativeFans: [],
@@ -79,12 +81,12 @@ function note(action, state, proof = {}) {
 let browser, page, context;
 const contexts = new Set();
 const log = fs.openSync(path.join(evidenceDir, 'server.log'), 'w');
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], { stdio: ['ignore', log, log] });
+const server = verification.hosted ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], { stdio: ['ignore', log, log] });
 async function newContext(name, mobile = false, viewport) {
-  const owned = await browser.newContext({ viewport: viewport ?? (mobile ? { width: 390, height: 844 } : { width: 1440, height: 1080 }), isMobile: mobile, hasTouch: mobile, deviceScaleFactor: 1 });
+  const owned = await verification.newContext(browser, { viewport: viewport ?? (mobile ? { width: 390, height: 844 } : { width: 1440, height: 1080 }), isMobile: mobile, hasTouch: mobile, deviceScaleFactor: 1 });
   contexts.add(owned);
   await owned.addInitScript(() => addEventListener('error', event => console.error('[wavefront-window-error]', event.message, event.filename, event.lineno)));
-  await owned.tracing.start({ screenshots: true, snapshots: true });
+  await verification.startTrace(owned, { screenshots: true, snapshots: true });
   const target = await owned.newPage();
   target.on('pageerror', error => report.errors.push(String(error)));
   target.on('console', message => {
@@ -96,7 +98,7 @@ async function newContext(name, mobile = false, viewport) {
   return { context: owned, page: target };
 }
 async function closeContext(owned) {
-  await owned.tracing.stop({ path: path.join(evidenceDir, `${owned.proofName}-trace.zip`) });
+  await verification.stopTrace(owned, { path: path.join(evidenceDir, `${owned.proofName}-trace.zip`) });
   await owned.close();
   contexts.delete(owned);
 }
@@ -439,8 +441,11 @@ function checkReplacement(rows, finalEvent) {
   assert.equal(rows.at(-1).event, finalEvent);
 }
 
+report.verificationAccess = verification.evidenceScope;
+
 try {
-  for (let attempt = 0; ; attempt++) {
+  if (verification.hosted) await verification.probe();
+  else for (let attempt = 0; ; attempt++) {
     assert.equal(server.exitCode, null, 'The owned preview exited. Inspect server.log.');
     if (stripVTControlCharacters(fs.readFileSync(path.join(evidenceDir, 'server.log'), 'utf8')).includes('Local:')) {
       const response = await fetch(url);
@@ -674,8 +679,7 @@ try {
 } finally {
   for (const owned of [...contexts]) await closeContext(owned).catch(error => report.errors.push(`Cleanup failed. ${error}`));
   await browser?.close();
-  server.kill('SIGTERM');
-  await new Promise(resolve => { if (server.exitCode !== null) resolve(); else server.once('exit', resolve); });
+  if (server) { server.kill('SIGTERM'); await new Promise(resolve => { if (server.exitCode !== null) resolve(); else server.once('exit', resolve); }); }
   fs.closeSync(log);
   if (report.errors.length || report.windowErrors.length) {report.verdict = 'FAIL'; process.exitCode = 1;}
   report.finishedAt = new Date().toISOString();

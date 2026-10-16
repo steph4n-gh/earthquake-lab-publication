@@ -70,6 +70,10 @@ Run `npm run verify:publication` against a complete checkout of the intended ind
 
 Run `.venv/bin/python scripts/test_catalog_facts.py` and all three producer `--verify` commands with the pinned scientific environment. Missing picks and unknown creator, channel and uncertainty remain explicit. The four browser derivatives must reproduce exactly without network access or excluded source captures in both Linux and macOS CI. Preserve the [historical Linux negative result](../../../docs/evidence/observation-reproduction-linux.json). The [display-precision contract](../../../docs/observation-precision.md) records the format change. Do not relax equality or infer universal platform identity from the tested environments. Use [the archive-comparison procedure](../../../docs/reproduce-catalog-facts.md) only for an optional historical source audit. Reacquisition drift must fail without overwriting frozen facts. The [publication-data record](../../../docs/publication-data.md) defines the retained scope and privacy boundary.
 
+## Hosted target
+
+The same five helpers support `TAUP_URL` with the private Site root. Read the [hosted verification procedure](../../../docs/verification.md#private-hosted-verification). Each process reads its Site service credential through hidden stdin. Keep it out of arguments, environment variables, reports, traces, HAR and saved browser state. Hosted mode retains the original application assertions, screenshots and downloads but disables trace recording. Run `npm run verify:target` for real two-origin dummy-credential controls. Verify anonymous denial and native owner-only policy independently. Service access does not verify interactive owner OAuth.
+
 ## Evidence
 
 Default proof goes to `.audit/lab/browser/`. Require `report.json` with `verdict: PASS`, complete coverage of the mapped journeys and zero errors. Read the resulting experiment, exact residuals and fit receipt, not just a screenshot. Retain `trace.zip`, desktop/location/inner-core/mobile/shared captures, actual downloaded `scenario.json`, `scenario.csv` and `empty-scenario.csv`. The report binds the run to source and WASM hashes.

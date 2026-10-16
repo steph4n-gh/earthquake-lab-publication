@@ -22,8 +22,8 @@ The current run's outcome is recorded in the [preview qualification](docs/previe
 2. Review the exact files and Git history intended for public access. Recheck secrets and personal data after any new commits.
 3. Provide matching corresponding source with any compiled distribution. Preserve notices and separate data and media terms.
 4. Requalify the actual public candidate commit. Report browser and hardware coverage as tested. Physical phones and Safari require their own checks before compatibility claims expand.
-5. Review the existing private Site at [quakes.steph4n.dev](https://quakes.steph4n.dev/) with the matching candidate source. Set canonical and social image URLs for the intended public destination. Change its audience only with the maintainer's explicit coordinated-launch instruction.
-6. Enable a private security reporting channel where supported and verify its public instructions.
+5. Review the existing private Site at [quakes.steph4n.dev](https://quakes.steph4n.dev/) with the matching candidate source. Verify the prepared canonical and social image URLs against the intended public destination. Read the hosted `DEPLOYMENT.json` and confirm its immutable corresponding-source URL. Change its audience only with the maintainer's explicit coordinated-launch instruction.
+6. After the authorized repository opening and before announcing the launch, enable GitHub private vulnerability reporting and verify its public instructions. GitHub offers this feature for public repositories; keep the repository private until the coordinated instruction.
 7. Change repository visibility only on the maintainer's explicit instruction.
 
 No public deployment, npm publication, crate publication, or visibility change is part of the private-preview work.
