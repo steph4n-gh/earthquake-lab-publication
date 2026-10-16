@@ -11,7 +11,7 @@ Start with the investigation guide to use the lab. Use the developer and verific
 
 - [Private preview qualification](preview-status.md). Inspect the finished candidate's actual checks and remaining coverage limits.
 - [Preview responsiveness](preview-responsiveness.md). Inspect the current source snapshot, repeated playback and warm interactions, and measurement limits.
-- [Maintain the private hosted preview](hosting.md). Preserve Site identity, owner-only access, source provenance and DNS.
+- [Maintain the hosted lab](hosting.md). Preserve Site identity, its selected audience, source provenance and DNS.
 - [Build and develop locally](development.md). Install the toolchain, run the browser app or native core, and prepare optional scientific tools.
 - [Verify a change](verification.md). Run numerical, data, browser, recording, and responsiveness procedures.
 - [Curated scientific evidence](evidence/README.md). Inspect retained negative results and bounded reference checks with their source identities.

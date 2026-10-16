@@ -66,7 +66,7 @@ The frozen base and boundary corpora contain 635 reference arrivals across 260 q
 
 ## Project status and attribution
 
-Version 0.1.0 is a [private source preview](https://github.com/steph4n-gh/earthquake-lab-publication) prepared for open-source review. The [private hosted lab](https://quakes.steph4n.dev/) requires owner sign-in; [hosting instructions](docs/hosting.md) preserve its configuration. There is no public hosted demo, registry package, or operational earthquake service. [The public-release checklist](RELEASE_CHECKLIST.md) tracks the remaining opening decisions. This candidate uses a [narrow factual dataset and independent history](docs/publication-data.md). The original full source archives remain private.
+Version 0.1.0 is an [open-source educational preview](https://github.com/steph4n-gh/earthquake-lab-publication). [Open the lab](https://quakes.steph4n.dev/) without signing in. The [hosting instructions](docs/hosting.md) and [release checklist](RELEASE_CHECKLIST.md) describe deployment and qualification. This release uses a [narrow factual dataset and independent history](docs/publication-data.md); the original development repository and full source archives remain private. There is no registry package or operational earthquake service.
 
 Application code is licensed under [LGPL-3.0-only](LICENSE). [NOTICE](NOTICE) and [THIRD_PARTY.md](THIRD_PARTY.md) preserve the limited ObsPy TauP adaptation, scientific references, and dependency notices. Data and imagery keep their separate source terms and credits. NASA Earth Observatory supplies the July 2004 surface composite, which does not represent event-time weather.
 

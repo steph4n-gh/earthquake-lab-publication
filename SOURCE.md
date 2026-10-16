@@ -2,7 +2,7 @@
 
 The application and numerical adaptation use LGPL-3.0-only. Data, imagery, and dependencies have separate terms recorded in `THIRD_PARTY.md` and `licenses/`. The included `LICENSE` contains the complete LGPL version 3 text. `licenses/obspy-LICENSE.txt` preserves the complete upstream GPL version 3 and LGPL version 3 texts unchanged.
 
-The source repository is https://github.com/steph4n-gh/earthquake-lab-publication. It is private during preview preparation. Access to a private repository is not a public source offer.
+The public source repository is https://github.com/steph4n-gh/earthquake-lab-publication.
 
 Before distributing a compiled build, provide recipients with its matching corresponding source under the applicable license terms. Include the Rust and JavaScript sources, fixture inputs, Cargo.lock, package-lock.json, build scripts, notices, and instructions. Record the exact source commit. Do not substitute a moving default branch for the source that produced a binary. Preserve modifications and upstream attribution.
 
@@ -32,4 +32,4 @@ This independent publication candidate excludes the full multi-agency catalog re
 
 ## Hosted source revision
 
-The hosted Site includes `DEPLOYMENT.json` with the exact publication repository commit and its immutable source URL. Use that commit when reproducing the deployed build. The Site wrapper records the completed distribution hashes separately. Its internal source repository and access policy remain private during preview; the original full-catalog archive is not the corresponding source offered for this clean publication candidate.
+The public hosted lab includes `DEPLOYMENT.json` with the exact publication repository commit and its immutable source URL. Use that commit when reproducing the deployed build. The Site wrapper records the completed distribution hashes separately. Its managed internal source history and the original development repository and full-catalog archive remain private; this independent GitHub repository provides the corresponding source for the clean publication.

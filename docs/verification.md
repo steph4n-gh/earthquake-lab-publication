@@ -102,7 +102,7 @@ The committed [walkthrough](media/wavefront-walkthrough.mp4) demonstrates its re
 6. Preserve the strict held-out negative result and its separate reconciliation.
 7. List untested targets and scientific limits beside the result.
 
-The committed [evidence directory](evidence/README.md) contains curated historical scientific snapshots. Generated local receipts and prior performance numbers are not evidence that fresh CI is green. A future public opening also requires the [public-release checklist](../RELEASE_CHECKLIST.md).
+The committed [evidence directory](evidence/README.md) contains curated historical scientific snapshots. Generated local receipts and prior performance numbers are not evidence that fresh CI is green. Public releases follow the [release checklist](../RELEASE_CHECKLIST.md).
 
 The [historical Linux negative result](evidence/observation-reproduction-linux.json) records why the earlier display format failed exact regeneration. Current [display precision](observation-precision.md) uses an explicit decimal rounding rule. All three producer assertions remain exact, and both Linux and macOS CI run them. Read each actual run before claiming a platform is qualified.
 

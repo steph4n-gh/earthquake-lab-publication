@@ -1,6 +1,6 @@
-# Private preview qualification
+# Preview qualification
 
-Earthquake Lab 0.1.0 is a private educational preview in [steph4n-gh/earthquake-lab-publication](https://github.com/steph4n-gh/earthquake-lab-publication). It supports the three curated events and the complete Tohoku investigation described in [the user guide](investigation-guide.md). It is prepared for open-source review, with the public-opening boundary below.
+Earthquake Lab 0.1.0 is an open-source educational preview in [steph4n-gh/earthquake-lab-publication](https://github.com/steph4n-gh/earthquake-lab-publication), with a [public hosted lab](https://quakes.steph4n.dev/). It supports the three curated events and the complete Tohoku investigation described in [the user guide](investigation-guide.md). The repository and Site opened together on October 16, 2026; the original development repository and full archive remain private.
 
 The measurements and media below describe the original private development candidate. They remain historical evidence until a new candidate has its own exact-commit qualification. For clean publication deployments, `DEPLOYMENT.json` identifies the exact hosted publication commit and its immutable corresponding-source URL. The historical media below do not identify the current deployment.
 
@@ -62,6 +62,6 @@ The [numerical contract](numerical-contract.md) describes the limited spherical 
 
 The fixed-depth Tohoku location control retains about 0.476 s residual RMS and about 41.9 km catalog mismatch. Archived pick uncertainty and channel identity are absent. Real instrumental recordings, archived picks, model predictions and display interpolation remain distinct.
 
-The repository stays private. This independent publication candidate uses a [narrow factual distribution](publication-data.md). It excludes full source aggregates and original development history. The original private archive is preserved. The [release checklist](../RELEASE_CHECKLIST.md) requires exact source, history and offline-reproduction qualification before public opening. Code licensing and data rights remain separate.
+This independent publication uses a [narrow factual distribution](publication-data.md). It excludes full source aggregates and original development history. The original private archive is preserved. The [release checklist](../RELEASE_CHECKLIST.md) requires exact source, history and offline-reproduction qualification. Code licensing and data rights remain separate.
 
-There is no public hosted demo, registry package or operational earthquake service. Physical phones, Safari, cold network loading, battery use and physical display timing need separate qualification before those claims expand.
+The [hosted demo](https://quakes.steph4n.dev/) is public. There is no registry package or operational earthquake service. Physical phones, Safari, cold network loading, battery use and physical display timing need separate qualification before those claims expand.

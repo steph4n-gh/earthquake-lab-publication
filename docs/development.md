@@ -1,9 +1,9 @@
 # Build and develop locally
 
-The application is static and needs no service credentials. With access to [the private source repository](https://github.com/steph4n-gh/earthquake-lab-publication), clone it with GitHub CLI.
+The application is static and needs no service credentials. Clone [the public source repository](https://github.com/steph4n-gh/earthquake-lab-publication) with GitHub CLI or ordinary Git; no GitHub login is needed for a public HTTPS clone.
 
 ```sh
-gh repo clone steph4n-gh/earthquake-lab-publication
+git clone https://github.com/steph4n-gh/earthquake-lab-publication.git
 cd earthquake-lab-publication
 ```
 

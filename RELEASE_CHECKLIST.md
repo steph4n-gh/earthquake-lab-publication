@@ -1,6 +1,6 @@
-# Private preview and public release
+# Release qualification
 
-The current target is a finished 0.1.0 private educational preview. A private repository, source license, and passing tests do not automatically establish permission to republish every bundled source archive.
+Version 0.1.0 is a public educational preview. The independent publication repository and hosted lab opened together on October 16, 2026, on explicit maintainer instruction, with private vulnerability reporting enabled. The original development repository and full archive remain private. A source license and passing tests do not automatically establish permission to republish every bundled source archive.
 
 ## Qualify a preview
 
@@ -12,7 +12,7 @@ The current target is a finished 0.1.0 private educational preview. A private re
 - Inspect the exact tracked files for secrets, personal paths, generated output, and oversized development artifacts.
 - Confirm that `dist` contains byte-identical notices, dependency licenses, and corresponding-source instructions.
 - Confirm that CI passes on the candidate commit. Keep performance evidence separate from CI correctness.
-- Keep GitHub and the hosted Site private throughout this task.
+- Preserve the selected GitHub and Site audience. A visibility change requires explicit maintainer instruction.
 
 The current run's outcome is recorded in the [preview qualification](docs/preview-status.md). Generated raw checks remain outside Git and can be reproduced from source.
 
@@ -23,7 +23,7 @@ The current run's outcome is recorded in the [preview qualification](docs/previe
 3. Provide matching corresponding source with any compiled distribution. Preserve notices and separate data and media terms.
 4. Requalify the actual public candidate commit. Report browser and hardware coverage as tested. Physical phones and Safari require their own checks before compatibility claims expand.
 5. Review the existing private Site at [quakes.steph4n.dev](https://quakes.steph4n.dev/) with the matching candidate source. Verify the prepared canonical and social image URLs against the intended public destination. Read the hosted `DEPLOYMENT.json` and confirm its immutable corresponding-source URL. Change its audience only with the maintainer's explicit coordinated-launch instruction.
-6. After the authorized repository opening and before announcing the launch, enable GitHub private vulnerability reporting and verify its public instructions. GitHub offers this feature for public repositories; keep the repository private until the coordinated instruction.
+6. Enable GitHub private vulnerability reporting and verify its public instructions before announcing. This was enabled during the coordinated opening. Recheck the setting for later releases.
 7. Change repository visibility only on the maintainer's explicit instruction.
 
-No public deployment, npm publication, crate publication, or visibility change is part of the private-preview work.
+The coordinated opening publishes the clean repository and hosted lab. npm and crate publication, release tags, and announcements are separate maintainer decisions.

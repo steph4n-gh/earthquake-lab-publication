@@ -4,7 +4,7 @@ Earthquake Lab is a local educational application. It has no account system or p
 
 ## Report a vulnerability
 
-Use GitHub's private vulnerability reporting option if the repository's Security tab offers it. If that option is unavailable, open an issue asking the maintainer for a private reporting channel. Do not include exploit details, credentials, or private experiments in that issue.
+Use [GitHub's private vulnerability reporting form](https://github.com/steph4n-gh/earthquake-lab-publication/security/advisories/new). Private vulnerability reporting is enabled for this repository. Do not include exploit details, credentials, or private experiments in public issues.
 
 Include the source revision, affected browser or native command, reproduction steps, and expected impact in the private report. The maintainer does not promise a response deadline.
 
