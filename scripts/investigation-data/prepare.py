@@ -23,6 +23,7 @@ from scipy.signal import resample_poly
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from catalog_facts import as_picks, dependency_hashes, load_facts, verify_dependencies
+from display_quantization import display_samples, geographic_degrees
 
 OUTPUT = ROOT / "fixtures/investigation"
 FACTS = OUTPUT / "catalog-facts.json"
@@ -41,7 +42,7 @@ PROCESSING = [
     "Apply a cosine taper to 2 percent at each end, limited to 30 seconds.",
     "Apply a 4-corner, zero-phase Butterworth bandpass at 0.02 to 0.2 Hz.",
     "Resample 20 Hz to 1 Hz with scipy.signal.resample_poly, up=1, down=20, window=('kaiser', 5.0), padtype='constant'. This includes an anti-alias FIR filter.",
-    "Round the displayed count samples to three decimal places. Preserve the raw MiniSEED separately.",
+    "Round the displayed count samples to one decimal place using decimal round-half-even. Preserve the raw MiniSEED separately.",
 ]
 
 
@@ -152,8 +153,8 @@ def station_observation(station, event, picks):
         "latitude_deg": channel.latitude,
         "longitude_deg": channel.longitude,
         "elevation_m": channel.elevation,
-        "distance_deg": float(locations2degrees(event["latitude_deg"], event["longitude_deg"], channel.latitude, channel.longitude)),
-        "azimuth_deg": azimuth,
+        "distance_deg": geographic_degrees(locations2degrees(event["latitude_deg"], event["longitude_deg"], channel.latitude, channel.longitude)),
+        "azimuth_deg": geographic_degrees(azimuth),
         "selection_reason": station.reason,
         "observed_pick": {
             "phase": pick.phase_hint,
@@ -177,7 +178,7 @@ def station_observation(station, event, picks):
             "units": "counts",
             "component": "Vertical, StationXML dip -90 degrees",
             "instrument_response_removed": False,
-            "samples": np.round(samples, 3).tolist(),
+            "samples": display_samples(samples),
             "processing": PROCESSING,
             "raw": {"start_time_utc": str(trace.stats.starttime), "end_time_utc": str(trace.stats.endtime), "sample_rate_hz": 20, "sample_count": trace.stats.npts, "parsed_record_groups": raw_records, "positive_record_groups": sum(t.stats.npts > 0 for t in stream)},
             "source": {"waveform_url": url("dataselect", station, nodata=404), "station_url": url("station", station, level="response", format="xml"), "network_doi": "https://doi.org/10.7914/SN/IU", "license_url": POLICY_URL},

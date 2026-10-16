@@ -103,7 +103,7 @@ def as_picks(facts):
 
 def dependency_hashes(producer, facts_path):
     return {str(path.relative_to(ROOT)): sha256(path.read_bytes()).hexdigest()
-            for path in (Path(producer).resolve(), Path(__file__).resolve(), Path(facts_path).resolve())}
+            for path in (Path(producer).resolve(), Path(__file__).resolve(), Path(__file__).with_name("display_quantization.py"), Path(facts_path).resolve())}
 
 
 def verify_dependencies(manifest, producer, facts_path):

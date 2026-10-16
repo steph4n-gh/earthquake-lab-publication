@@ -46,10 +46,13 @@ jobs:
           npm ci
           cargo install wasm-bindgen-cli --version 0.2.129 --locked
           npx playwright install --with-deps chrome
-      - name: Check narrow factual inputs
+      - name: Reproduce narrow factual data offline
         run: |
           python -m pip install -r requirements-reference.txt
           python scripts/test_catalog_facts.py
+          python scripts/investigation-data/prepare.py --verify
+          python scripts/fetch_waveforms.py --verify
+          python scripts/prepare-events.py --verify
           npm run verify:publication
       - name: Check source and numerical corpora
         run: |

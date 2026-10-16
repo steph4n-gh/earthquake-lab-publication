@@ -1,8 +1,8 @@
 # Scientific evidence snapshots
 
-This directory retains six small historical receipts. They preserve useful results and failures without publishing the local browser videos, traces, caches, or full audit directory. [manifest.json](manifest.json) records each original path, original SHA-256, curated SHA-256, and permitted interpretation.
+This directory retains six original historical receipts and one annotated observation-reproduction failure. They preserve useful results and failures without publishing the local browser videos, traces, caches, or full audit directory. [manifest.json](manifest.json) records each original path, original SHA-256, curated SHA-256, and permitted interpretation.
 
-Every JSON receipt is a byte-identical copy of its local source. None contained a personal absolute path, so no field required redaction. Embedded source, binary, helper, and contract hashes describe the historical run. They are not assertions about the current checkout. Some input paths identify local artifacts that are not included in this directory. A file hash identifies omitted bytes but does not make those bytes available.
+The six original JSON receipts are byte-identical copies of their local sources. None contained a personal absolute path. The later Linux reproduction receipt adds source and environment annotations. Its manifest records both original and curated hashes. Embedded source, binary, helper, and contract hashes describe the historical run. They are not assertions about the current checkout. Some input paths identify local artifacts that are not included in this directory. A file hash identifies omitted bytes but does not make those bytes available.
 
 ## What each receipt establishes
 
@@ -68,6 +68,6 @@ Raw native fans, independent oracle paths, and the original executable are not b
 
 ## Observation reproduction differs across platforms
 
-The [Linux observation-reproduction result](observation-reproduction-linux.json) preserves a failed exact-byte comparison from the publication repair. The original processing remains unchanged. Nine displayed waveform samples differ by one 0.001-count rounding unit, and three geographic scalars differ near 1e-14 degrees. The selected picks, recording clocks and other metadata match. The legacy two-station pack reproduces exactly.
+The [Linux observation-reproduction result](observation-reproduction-linux.json) preserves a failed exact-byte comparison from the publication repair. That historical run used the original three-decimal processing. Nine displayed waveform samples differ by one 0.001-count rounding unit, and three geographic scalars differ near 1e-14 degrees. The selected picks, recording clocks and other metadata match. The legacy two-station pack reproduces exactly.
 
-The three producer `--verify` commands retain their exact equality checks. They continue to reject this Linux output. The recorded Python and package versions alone do not promise byte-identical results across platform-specific NumPy and SciPy libraries. Exact regeneration is qualified separately on the macOS ARM64 reference job. Its actual current CI result defines the qualified runner. Linux still runs factual-boundary, source-history, numerical-core, production-build and all browser checks. Read the [verification guide](../verification.md) before treating a scientific receipt as current qualification.
+The three producer `--verify` commands retain exact equality checks. That historical Linux output still fails the old dataset comparison. Current [display precision](../observation-precision.md) is an explicit format change that must reproduce exactly in both Linux and macOS CI. Neither historical failure is relabeled as a pass. Read the [verification guide](../verification.md) and the current exact-commit CI before claiming qualification.

@@ -13,7 +13,7 @@
     "verify:browser": "node scripts/verify-browser.mjs",
     "verify:atlas": "node scripts/verify-atlas.mjs",
     "check:project": "node scripts/verify-project.mjs",
-    "test": "node scripts/test-wavefronts.mjs && node scripts/test-project-checks.mjs && python3 scripts/test_publication.py",
+    "test": "node scripts/test-wavefronts.mjs && node scripts/test-project-checks.mjs && python3 scripts/test_publication.py && python3 scripts/test_display_quantization.py",
     "verify:distribution": "node scripts/package-dist.mjs --check",
     "verify:globe": "node scripts/verify-globe.mjs",
     "verify:wavefronts": "node scripts/verify-wavefronts.mjs",

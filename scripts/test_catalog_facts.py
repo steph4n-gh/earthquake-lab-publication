@@ -57,11 +57,11 @@ class CatalogFactsControls(unittest.TestCase):
             with self.subTest(control=index), self.assertRaises(ValueError):
                 validate(facts)
 
-    def test_dependencies_pin_producer_shared_module_and_facts(self):
+    def test_dependencies_pin_producer_shared_modules_and_facts(self):
         producer = ROOT / "scripts/prepare-events.py"
         facts_path = ROOT / "fixtures/events/maule-2010/catalog-facts.json"
         dependencies = dependency_hashes(producer, facts_path)
-        self.assertEqual(set(dependencies), {"scripts/prepare-events.py", "scripts/catalog_facts.py", "fixtures/events/maule-2010/catalog-facts.json"})
+        self.assertEqual(set(dependencies), {"scripts/prepare-events.py", "scripts/catalog_facts.py", "scripts/display_quantization.py", "fixtures/events/maule-2010/catalog-facts.json"})
         verify_dependencies({"producer_dependencies": dependencies}, producer, facts_path)
         for name in dependencies:
             changed = {**dependencies, name: "0" * 64}

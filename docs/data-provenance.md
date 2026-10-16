@@ -45,7 +45,7 @@ The browser JSON is a compact derivative of the raw observations. Both traces us
 3. Apply a cosine taper to two percent at each end, limited to 30 seconds.
 4. Apply a four-corner, zero-phase Butterworth bandpass from 0.02 to 0.2 Hz.
 5. Resample from 20 Hz to 1 Hz with SciPy's polyphase resampler and its Kaiser-window anti-alias filter.
-6. Round the browser samples to three decimal places.
+6. Round browser samples to one decimal count with decimal half-even rounding. Round derived distance and azimuth metadata to ten decimal degrees. Raw coordinates and all clocks remain unchanged.
 
 These values remain filtered instrumental counts. The instrument response is preserved in StationXML but is not removed. The amplitudes do not represent displacement, velocity, or acceleration. Do not compare the amplitudes between stations as calibrated ground motion.
 
@@ -97,4 +97,4 @@ The default command reuses the captured files and regenerates the derivative. It
 
 A refresh replaces only this fixture's source snapshots and derivative. If a download fails before its acquisition record is written, use `--refresh` to obtain a complete new capture. Each request has a 30-second timeout.
 
-Exact observation-byte regeneration has a platform boundary. The [retained Linux negative result](evidence/observation-reproduction-linux.json) records display-rounding differences from the unchanged scientific preparation. The producer assertions remain exact. The macOS ARM64 CI job qualifies reference regeneration separately from Linux application and numerical checks. See [the reproduction scope](evidence/README.md#observation-reproduction-differs-across-platforms).
+The [historical Linux negative result](evidence/observation-reproduction-linux.json) records why the earlier display format failed exact regeneration. Current [display precision](observation-precision.md) uses an explicit decimal rounding rule. All three producer assertions remain exact, and both Linux and macOS CI run them. Read each actual run before claiming a platform is qualified.

@@ -18,6 +18,7 @@ import scipy
 from scipy.signal import resample_poly
 
 from catalog_facts import as_picks, dependency_hashes, load_facts, verify_dependencies
+from display_quantization import display_samples, geographic_degrees
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,7 +66,7 @@ PROCESSING = [
     "Apply a cosine taper to 2 percent at each end, limited to 30 seconds.",
     "Apply a 4-corner, zero-phase Butterworth bandpass at 0.02 to 0.2 Hz.",
     "Resample 20 Hz to 1 Hz with scipy.signal.resample_poly, up=1, down=20, window=('kaiser', 5.0), padtype='constant'. This includes an anti-alias FIR filter.",
-    "Round the displayed count samples to three decimal places. Preserve the raw MiniSEED separately.",
+    "Round the displayed count samples to one decimal place using decimal round-half-even. Preserve the raw MiniSEED separately.",
 ]
 LIMITATIONS = [
     "Replay and path exploration only. No validated source-location exercise is provided for this event.",
@@ -200,15 +201,15 @@ def station_observation(directory, config, code, event, picks):
         "id": station_id, "code": code, "name": site.site.name,
         "latitude_deg": channel.latitude, "longitude_deg": channel.longitude,
         "elevation_m": channel.elevation,
-        "distance_deg": float(locations2degrees(event["latitude_deg"], event["longitude_deg"], channel.latitude, channel.longitude)),
-        "azimuth_deg": azimuth, "selection_reason": config["stations"][code],
+        "distance_deg": geographic_degrees(locations2degrees(event["latitude_deg"], event["longitude_deg"], channel.latitude, channel.longitude)),
+        "azimuth_deg": geographic_degrees(azimuth), "selection_reason": config["stations"][code],
         "observed_pick": observed_pick,
         "trace": {
             "id": station_id, "start_time_utc": str(trace.stats.starttime),
             "start_offset_s": trace.stats.starttime - origin, "sample_rate_hz": 1,
             "sample_count": len(samples), "units": "counts",
             "component": "Vertical, StationXML dip -90 degrees", "instrument_response_removed": False,
-            "samples": np.round(samples, 3).tolist(), "processing": PROCESSING,
+            "samples": display_samples(samples), "processing": PROCESSING,
             "raw": {"start_time_utc": str(trace.stats.starttime), "end_time_utc": str(trace.stats.endtime), "sample_rate_hz": 20, "sample_count": trace.stats.npts, "parsed_record_groups": len(raw), "positive_record_groups": sum(t.stats.npts > 0 for t in raw)},
             "source": {"waveform_url": station_url(config, code, "dataselect"), "station_url": station_url(config, code, "station"), "network_doi": "https://doi.org/10.7914/SN/IU", "license_url": POLICY_URL},
             "raw_mseed_path": f"fixtures/events/{directory.name}/{station_id}.mseed",

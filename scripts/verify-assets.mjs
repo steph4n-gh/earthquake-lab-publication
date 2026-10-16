@@ -20,7 +20,7 @@ const producers = {
 for (const directory of [...Object.keys(producers), 'fixtures/earth']) {
   const manifest = JSON.parse(fs.readFileSync(path.join(directory, 'manifest.json')));
   for (const [file, record] of Object.entries(manifest.files)) verify(path.join(directory, file), record.sha256);
-  if (producers[directory]) assert.deepEqual(Object.keys(manifest.producer_dependencies ?? {}).sort(), [...producers[directory], 'scripts/catalog_facts.py'].sort(), `${directory} must pin its producer, shared module and factual input.`);
+  if (producers[directory]) assert.deepEqual(Object.keys(manifest.producer_dependencies ?? {}).sort(), [...producers[directory], 'scripts/catalog_facts.py', 'scripts/display_quantization.py'].sort(), `${directory} must pin its producer, shared modules and factual input.`);
   for (const [file, expected] of Object.entries(manifest.producer_dependencies ?? {})) {
     assert.ok(!path.isAbsolute(file) && !file.includes('\\') && file === path.posix.normalize(file) && !file.startsWith('../'), `Unsafe dependency path ${file}`);
     const resolved = fs.realpathSync(file);

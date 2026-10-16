@@ -20,6 +20,7 @@ import scipy
 from scipy.signal import resample_poly
 
 from catalog_facts import dependency_hashes, load_facts, verify_dependencies
+from display_quantization import display_samples, geographic_degrees
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,7 +40,7 @@ PROCESSING = [
     "Apply a cosine taper to 2 percent at each end, limited to 30 seconds.",
     "Apply a 4-corner, zero-phase Butterworth bandpass at 0.02 to 0.2 Hz.",
     "Resample 20 Hz to 1 Hz with scipy.signal.resample_poly, up=1, down=20, window=('kaiser', 5.0), padtype='constant'. This includes an anti-alias FIR filter.",
-    "Round the displayed count samples to three decimal places. Preserve the raw MiniSEED separately.",
+    "Round the displayed count samples to one decimal place using decimal round-half-even. Preserve the raw MiniSEED separately.",
 ]
 
 
@@ -161,8 +162,8 @@ def observed_trace(station, raw, metadata, event):
         "longitude_deg": channel.longitude,
         "elevation_m": channel.elevation,
         "sensor_depth_m": channel.depth,
-        "distance_deg": distance,
-        "azimuth_deg": azimuth,
+        "distance_deg": geographic_degrees(distance),
+        "azimuth_deg": geographic_degrees(azimuth),
         "distance_convention": "Spherical geographic great-circle distance, without geocentric latitude correction.",
         "role": station.role,
         "start_time_utc": str(trace.stats.starttime),
@@ -172,7 +173,7 @@ def observed_trace(station, raw, metadata, event):
         "units": "counts",
         "component": "Vertical, positive up as described by StationXML dip -90 degrees.",
         "instrument_response_removed": False,
-        "samples": np.round(samples, 3).tolist(),
+        "samples": display_samples(samples),
         "processing": PROCESSING,
         "raw": {
             "start_time_utc": str(trace.stats.starttime),

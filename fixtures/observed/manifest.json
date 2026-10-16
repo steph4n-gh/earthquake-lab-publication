@@ -7,10 +7,11 @@
     "numpy": "2.5.4",
     "scipy": "1.18.1"
   },
-  "producer_script_sha256": "9268d31319f14dcdf022c84be896320faec87b37601f924b482ec72f03d5bbb3",
+  "producer_script_sha256": "c27aac12e2e6edc302c64c361fc59181775f99be165d94605d2736c40025743c",
   "producer_dependencies": {
-    "scripts/fetch_waveforms.py": "9268d31319f14dcdf022c84be896320faec87b37601f924b482ec72f03d5bbb3",
-    "scripts/catalog_facts.py": "61376b99160e2ae758feabe1603f63c2883bfb8752183830d1305388b54d806c",
+    "scripts/fetch_waveforms.py": "c27aac12e2e6edc302c64c361fc59181775f99be165d94605d2736c40025743c",
+    "scripts/catalog_facts.py": "471008497939e3e21309213137862c244714fb034cb1461af5e71b869d58766a",
+    "scripts/display_quantization.py": "49d5013402f336f5af63bdc01bb45c2f6ef4f0d26c16207ed4c8b01b1a07c0a6",
     "fixtures/investigation/catalog-facts.json": "47d9b1208f8eab12b4bd39d90e895ef227818f07522190ee68706761418d9b6e"
   },
   "downloads": {
@@ -67,8 +68,8 @@
       "bytes": 12486
     },
     "tohoku-2011.json": {
-      "sha256": "a5ad45a8325a710e7885f25f37914d8bcb0d93db9de661d80d818430730f4223",
-      "bytes": 59956
+      "sha256": "8379e39c67dec9d0dfde14cd03c03c2691083ef287ce41cce3b3539b8f6fb6f0",
+      "bytes": 49559
     }
   },
   "credit": "Albuquerque Seismological Laboratory/USGS (1988), Global Seismograph Network (GSN - IRIS/USGS), doi:10.7914/SN/IU. Accessed through the EarthScope-operated IRIS Data Management Center.",

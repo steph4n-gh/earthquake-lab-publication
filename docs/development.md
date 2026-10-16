@@ -83,7 +83,7 @@ python3.13 -m venv .venv
 .venv/bin/python -m pip install -r requirements-reference.txt
 ```
 
-The pinned environment includes ObsPy 1.5.1 and SciPy 1.18.1. Exact derivative-byte regeneration is reference-platform work. The macOS ARM64 CI job uses Python 3.13.5. Linux can build and verify the application while its strict observation-byte check retains the [documented rounding mismatch](evidence/observation-reproduction-linux.json). Run the [scientific checks](verification.md#reproduce-observations-and-reference-calculations) before changing frozen inputs. Data verification uses retained compact catalog facts, captured recordings and station metadata. Refresh flags acquire replacement recordings and metadata. Catalog facts require the separate extraction and review procedure in the [publication-data record](publication-data.md).
+The pinned environment includes ObsPy 1.5.1 and SciPy 1.18.1. Both Linux and macOS CI require exact derivative regeneration. The [display-precision contract](observation-precision.md) records the decimal rule and historical platform failures. Run the [scientific checks](verification.md#reproduce-observations-and-reference-calculations) before changing frozen inputs. Data verification uses retained compact catalog facts, captured recordings and station metadata. Refresh flags acquire replacement recordings and metadata. Catalog facts require the separate extraction and review procedure in the [publication-data record](publication-data.md).
 
 ## Prepare optional recording tools
 
