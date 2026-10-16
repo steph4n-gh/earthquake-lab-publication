@@ -20,7 +20,7 @@ The source exercise demonstrates model mismatch as well as a fit. The independen
 
 ## Run locally
 
-The development environment uses Node.js 24, Rust 1.99.0, and wasm-bindgen CLI 0.2.129. The [developer guide](docs/development.md) lists prerequisites and troubleshooting.
+The source build uses Node.js 24, Rust 1.99.0, wasm-bindgen CLI 0.2.129, and Python 3 for the standard-library publication gate. The [developer guide](docs/development.md) lists prerequisites and troubleshooting.
 
 ```sh
 gh repo clone steph4n-gh/earthquake-lab-publication

@@ -11,7 +11,7 @@ Run the remaining commands from that repository root. For an unpacked source arc
 
 ## Install the application toolchain
 
-The development environment uses Node.js 24.3.0, Rust 1.99.0, and wasm-bindgen CLI 0.2.129. These are observed development versions, not a claim that every operating system is qualified. Install Git, Node.js, and a Rust toolchain with the platform's usual compiler and linker.
+The development environment uses Node.js 24.3.0, Rust 1.99.0, and wasm-bindgen CLI 0.2.129. These are observed development versions, not a claim that every operating system is qualified. Install Git, Node.js, Python 3 available as `python3`, and a Rust toolchain with the platform's usual compiler and linker. The publication gate in `npm run build` and the history controls in `npm test` use only Python's standard library.
 
 ```sh
 rustup target add wasm32-unknown-unknown
@@ -76,7 +76,7 @@ A touch-enabled 390-pixel desktop Chrome context qualifies that layout and its s
 
 ## Prepare optional scientific tools
 
-Python is needed only to reproduce data derivatives and reference checks. It is not loaded by the app.
+The source build and history controls already need standard-library Python 3. The separate pinned environment below adds packages for optional data-derivative and reference checks. Python is not loaded by the application.
 
 ```sh
 python3.13 -m venv .venv

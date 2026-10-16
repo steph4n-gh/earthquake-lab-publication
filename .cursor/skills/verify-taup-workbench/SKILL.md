@@ -9,7 +9,7 @@ Use the browser as the primary surface. The native CLI and frozen real observati
 
 ## Launch
 
-Use Git, Node.js, Rust, the `wasm32-unknown-unknown` target, wasm-bindgen CLI 0.2.129 and installed Google Chrome. Exact prerequisites are in the [developer guide](../../../docs/development.md).
+Use Git, Node.js, standard-library Python 3, Rust, the `wasm32-unknown-unknown` target, wasm-bindgen CLI 0.2.129 and installed Google Chrome. Exact prerequisites are in the [developer guide](../../../docs/development.md).
 
 ```sh
 npm ci
