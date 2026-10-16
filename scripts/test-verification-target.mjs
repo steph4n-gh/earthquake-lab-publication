@@ -17,11 +17,24 @@ if (['--child', '--failure-child'].includes(process.argv[2])) {
     await context.grantPermissions(['local-network-access']);
     const page = await context.newPage();
     page.on('console', message => { if (message.type()==='error') console.error(message.text()); });
-    await page.goto(process.argv[2] === '--failure-child' ? new URL('/broken.js', target.url).href : target.url);
+    await page.goto(target.url);
     try { await page.waitForFunction(() => window.sameLoaded && window.foreignLoaded && window.redirectLoaded); }
     catch (error) { console.error(JSON.stringify(await page.evaluate(() => ({same: Boolean(window.sameLoaded), foreign: Boolean(window.foreignLoaded), redirected: Boolean(window.redirectLoaded)})))); throw error; }
+    const failure = process.argv[2] === '--failure-child';
+    if (failure) {
+      const failed = page.waitForEvent('requestfailed', request => new URL(request.url()).pathname === '/broken.js');
+      await page.evaluate(() => { void fetch('/broken.js').catch(() => {}); });
+      await failed;
+      assert.deepEqual(target.errors, ['Private Site resource request failed.'], 'An active subresource reset must be retained as a verification error.');
+      console.log('Expected private resource failure retained.');
+    } else {
+      const pending = page.waitForRequest(request => new URL(request.url()).pathname === '/slow.js');
+      await page.evaluate(() => { void fetch('/slow.js').catch(() => {}); });
+      await pending;
+    }
     await target.stopTrace(context, {path: process.argv[4]});
-    await context.close();
+    await target.closeContext(context);
+    assert.deepEqual(target.errors, failure ? ['Private Site resource request failed.'] : [], 'Intentional closure cancels pending requests without hiding active transport failures.');
   } finally { await browser.close(); }
   process.exit(0);
 }
@@ -39,6 +52,7 @@ const foreign = server('foreign', (request, response) => {
 });
 const own = server('own', (request, response) => {
   if (request.url === '/broken.js') { request.socket.destroy(); return; }
+  if (request.url === '/slow.js') { setTimeout(() => { response.setHeader('Content-Type', 'text/javascript'); response.end(''); }, 500); return; }
   if (request.url === '/redirect.js') {
     response.writeHead(302, {Location: foreignOrigin + '/redirect.js'}); response.end(); return;
   }
@@ -60,7 +74,8 @@ async function run(url, trace, mode = '--child') {
   child.stdin.end(JSON.stringify({token: 'dummy-transport-control'}) + '\n');
   const code = await new Promise(resolve => child.on('exit', resolve));
   if (mode === '--failure-child') {
-    assert.notEqual(code, 0, 'A reset private resource must fail verification.');
+    assert.equal(code, 0, output);
+    assert.ok(output.includes('Expected private resource failure retained.'), 'A reset private subresource must populate verification errors.');
     assert.ok(received.some(item => item.path === '/broken.js' && item.authorization === 'Bearer dummy-transport-control'));
     assert.ok(!output.includes('dummy-transport-control'), 'Failure output must omit the credential.');
   } else assert.equal(code, 0, output + JSON.stringify(received.map(item => ({...item, authorization: Boolean(item.authorization)}))));

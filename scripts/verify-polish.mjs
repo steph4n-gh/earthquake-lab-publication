@@ -20,7 +20,7 @@ const stations = new Map(fixture.stations.map(station => [station.id, station]))
 for (const trace of legacy.traces) if (!stations.has(trace.id)) stations.set(trace.id, {id: trace.id, trace});
 const nativeCache = new Map();
 const report = {
-  startedAt: new Date().toISOString(), url, steps: [], errors: [], nativeChecks: [],
+  startedAt: new Date().toISOString(), url, steps: [], errors: verification.errors, nativeChecks: [],
   hashes: Object.fromEntries(sources.map(file => [file, sha256(fs.readFileSync(file))])),
   assets: Object.fromEntries(filesIn('dist').map(file => [file, sha256(fs.readFileSync(file))])),
   contracts: {
@@ -198,7 +198,7 @@ try {
     report.steps.push({name: 'Pending calculation suppresses stale model labels and exact lines', viewport: page.viewportSize(), waveformHash: sha256(pending.path), clock: pending.clock});
     state = await ready(page); await verifyRecording(page, state, 'Completed empty geometry preserves trace and explicit absent-phase caption');
     await verification.stopTrace(context, {path: path.join(evidenceDir, `${width}-trace.zip`)});
-    await context.close(); contexts.delete(context);
+    await verification.closeContext(context); contexts.delete(context);
   }
   assert.deepEqual(report.errors, []);
   report.verdict = 'PASS';
@@ -207,12 +207,13 @@ try {
 } finally {
   for (const context of contexts) {
     await verification.stopTrace(context, {path: path.join(evidenceDir, 'failure-trace.zip')});
-    await context.close();
+    await verification.closeContext(context);
   }
   if (browser) await browser.close();
   if (server?.exitCode === null) {const exited = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await exited;}
   fs.closeSync(log);
   report.finishedAt = new Date().toISOString(); report.serverExitCode = server?.exitCode ?? null; report.serverSignal = server?.signalCode ?? null;
+  if (report.errors.length) { report.verdict = 'FAIL'; process.exitCode = 1; }
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({verdict: report.verdict, checks: report.steps.length, errors: report.errors, evidenceDir}, null, 2));
 }

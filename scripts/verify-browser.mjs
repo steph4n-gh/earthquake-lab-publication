@@ -14,7 +14,7 @@ const verification = await verificationTarget(port);
 const url = verification.url;
 const log = fs.openSync(path.join(evidenceDir, 'server.log'), 'w');
 const server = verification.hosted ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {stdio: ['ignore', log, log]});
-const report = {startedAt: new Date().toISOString(), url, steps: [], errors: [], hashes: {}};
+const report = {startedAt: new Date().toISOString(), url, steps: [], errors: verification.errors, hashes: {}};
 const fixture = JSON.parse(fs.readFileSync('fixtures/investigation/tohoku-investigation.json'));
 for (const file of ['scripts/verification-target.mjs', 'crates/taup-core/src/lib.rs', 'web/main.js', 'web/experiment.js', 'web/compute.js', 'web/compute-worker.js', 'web/location.js', 'web/globe.js', 'web/section.js', 'web/evidence.js', 'web/panels.js', 'web/style.css', 'index.html', 'web/pkg/taup_core_bg.wasm']) report.hashes[file] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 let browser, context;
@@ -275,7 +275,7 @@ try {
   }
   note('Atomically reset malformed, duplicate, wrong-identity and oversized links', state);
   await verification.stopTrace(context, {path: path.join(evidenceDir, 'desktop-trace.zip')});
-  await context.close();
+  await verification.closeContext(context);
   context = await verification.newContext(browser, {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
   await verification.startTrace(context, {screenshots: true, snapshots: true});
   page = await context.newPage(); watch(page);
@@ -301,10 +301,11 @@ try {
 } catch (error) {
   report.verdict = 'FAIL'; report.errors.push(error.stack || String(error)); process.exitCode = 1;
 } finally {
-  if (context) { await verification.stopTrace(context, {path: path.join(evidenceDir, 'trace.zip')}); await context.close(); }
+  if (context) { await verification.stopTrace(context, {path: path.join(evidenceDir, 'trace.zip')}); await verification.closeContext(context); }
   if (browser) await browser.close();
   if (server?.exitCode === null) { const ended = new Promise(resolve => server.once('exit', resolve)); server.kill('SIGTERM'); await ended; }
   fs.closeSync(log); report.finishedAt = new Date().toISOString(); report.serverExitCode = server?.exitCode ?? null; report.serverSignal = server?.signalCode ?? null;
+  if (report.errors.length) { report.verdict = 'FAIL'; process.exitCode = 1; }
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({verdict: report.verdict, steps: report.steps.length, errors: report.errors, evidenceDir}, null, 2));
 }

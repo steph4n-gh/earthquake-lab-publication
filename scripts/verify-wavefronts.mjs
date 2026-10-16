@@ -18,7 +18,7 @@ const filesIn = directory => fs.existsSync(directory) ? fs.readdirSync(directory
 const sourceFiles = ['scripts/verification-target.mjs', 'scripts/verify-wavefronts.mjs', 'scripts/verify-assets.mjs', 'package.json', 'package-lock.json', 'index.html', 'fixtures/iasp91.json', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/investigation/manifest.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/observed/manifest.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/maule-2010/manifest.json', 'fixtures/events/okhotsk-2013/case.json', 'fixtures/events/okhotsk-2013/manifest.json', 'crates/taup-core/src/lib.rs', 'crates/taup-core/src/bin/taup.rs', 'target/release/taup', 'web/pkg/taup_core_bg.wasm', ...filesIn('web').filter(file => /\.(js|css)$/.test(file)), ...filesIn('fixtures/earth')];
 fs.mkdirSync(evidenceDir, { recursive: true });
 const report = {
-  startedAt: new Date().toISOString(), url, steps: [], errors: [], windowErrors: [], nativeFans: [],
+  startedAt: new Date().toISOString(), url, steps: [], errors: verification.errors, windowErrors: [], nativeFans: [],
   hashes: Object.fromEntries(sourceFiles.map(file => [file, sha256(fs.readFileSync(file))])),
   assets: Object.fromEntries(filesIn('dist').map(file => [file, sha256(fs.readFileSync(file))])),
   contracts: {
@@ -99,7 +99,7 @@ async function newContext(name, mobile = false, viewport) {
 }
 async function closeContext(owned) {
   await verification.stopTrace(owned, { path: path.join(evidenceDir, `${owned.proofName}-trace.zip`) });
-  await owned.close();
+  await verification.closeContext(owned);
   contexts.delete(owned);
 }
 async function ready(target = page, eventKey) {

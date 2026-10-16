@@ -43,8 +43,11 @@ export async function verificationTarget(port) {
     if (new URL(request.url()).origin === parsed.origin) result['OAI-Sites-Authorization'] = `Bearer ${token}`;
     return result;
   };
+  const contexts = new WeakMap();
+  const errors = [];
   return {
     hosted,
+    errors,
     url: parsed.href,
     evidenceScope: hosted ? 'Site-only service authorization, not interactive visitor identity. Traces and HAR are disabled to avoid persisting credentials.' : 'Owned local production preview with browser traces.',
     async probe() {
@@ -54,16 +57,26 @@ export async function verificationTarget(port) {
     },
     async newContext(browser, options) {
       const context = await browser.newContext(options);
+      const state = {closing: false};
+      contexts.set(context, state);
+      context.on('close', () => { state.closing = true; });
       if (hosted) await context.route('**/*', async route => {
         if (new URL(route.request().url()).origin !== parsed.origin) return route.continue({headers: headers(route.request())});
         try {
           const response = await route.fetch({headers: headers(route.request()), maxRedirects: 0});
           await route.fulfill({response});
-        } catch (error) {
-          throw new Error(String(error).replaceAll(token, '[redacted]'));
+        } catch {
+          const cancelled = state.closing || route.request().failure()?.errorText === 'net::ERR_ABORTED';
+          if (!cancelled) errors.push('Private Site resource request failed.');
+          await route.abort('failed').catch(() => {});
         }
       });
       return context;
+    },
+    async closeContext(context) {
+      const state = contexts.get(context);
+      if (state) state.closing = true;
+      await context.close();
     },
     async startTrace(context, options) { if (!hosted) await context.tracing.start(options); },
     async stopTrace(context, options) { if (!hosted) await context.tracing.stop(options); },

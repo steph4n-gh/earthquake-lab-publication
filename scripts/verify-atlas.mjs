@@ -13,7 +13,7 @@ fs.mkdirSync(evidenceDir, {recursive: true});
 const port = Number(process.env.TAUP_PORT || 4193);
 const verification = await verificationTarget(port);
 const url = verification.url;
-const report = {startedAt: new Date().toISOString(), url, steps: [], errors: [], windowErrors: [], hashes: {}, nativeQueries: 0};
+const report = {startedAt: new Date().toISOString(), url, steps: [], errors: verification.errors, windowErrors: [], hashes: {}, nativeQueries: 0};
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const sourceFiles = ['scripts/verification-target.mjs', 'scripts/verify-atlas.mjs', 'package.json', 'package-lock.json', 'fixtures/iasp91.json', 'target/release/taup', 'crates/taup-core/src/lib.rs', ...fs.readdirSync('web').filter(file => /\.(js|css)$/.test(file)).map(file => `web/${file}`), 'index.html', 'web/pkg/taup_core_bg.wasm', 'fixtures/investigation/tohoku-investigation.json', 'fixtures/observed/tohoku-2011.json', 'fixtures/events/maule-2010/case.json', 'fixtures/events/okhotsk-2013/case.json'];
 for (const file of sourceFiles) report.hashes[file] = hash(fs.readFileSync(file));
@@ -560,7 +560,7 @@ try {
   await page.getByRole('button', {name: 'Share experiment', exact: false}).click();
   await expect(page.getByLabel('Reproducible experiment URL')).toHaveValue(page.url());
   const bootUrl = await page.getByLabel('Reproducible experiment URL').inputValue();
-  await verification.stopTrace(context, {path: path.join(evidenceDir, 'desktop-trace.zip')}); await context.close(); await browser.close();
+  await verification.stopTrace(context, {path: path.join(evidenceDir, 'desktop-trace.zip')}); await verification.closeContext(context); await browser.close();
   browser = await chromium.launch({channel: 'chrome', headless: true, ignoreDefaultArgs: ['--disable-back-forward-cache']});
   context = await verification.newContext(browser, {viewport: {width: 1440, height: 1080}, acceptDownloads: true});
   await context.addInitScript(() => addEventListener('error', event => console.error('[atlas-window-error]', event.message, event.filename, event.lineno)));
@@ -595,7 +595,7 @@ try {
   state = await event('maule-2010'); await expect.poll(() => page.workers().length, {timeout: 10000}).toBe(1);
   note('Cancel the first real WASM startup, retry before releasing it, dispose the late obsolete Worker and keep one Worker after the next event', state, {heldWasmRequests: wasmRequests, retryStats, completedOperations: ['initialize', 'evaluate', 'wavefronts'], finalWorkerCount: page.workers().length});
 
-  await verification.stopTrace(context, {path: path.join(evidenceDir, 'boot-trace.zip')}); await context.close(); context = null;
+  await verification.stopTrace(context, {path: path.join(evidenceDir, 'boot-trace.zip')}); await verification.closeContext(context); context = null;
 
   context = await verification.newContext(browser, {viewport: {width: 390, height: 844}, isMobile: true, hasTouch: true, deviceScaleFactor: 2, acceptDownloads: true});
   await context.addInitScript(() => addEventListener('error', event => console.error('[atlas-window-error]', event.message, event.filename, event.lineno)));
@@ -644,10 +644,11 @@ try {
   releaseStartupHold?.();
   releaseBootHold?.();
   if (context) await verification.stopTrace(context, {path: path.join(evidenceDir, 'trace.zip')}).catch(() => {});
-  await context?.close(); await browser?.close();
+  if (context) await verification.closeContext(context); await browser?.close();
   if (server) { server.kill('SIGTERM'); await new Promise(resolve => { if (server.exitCode !== null) resolve(); else server.once('exit', resolve); }); }
   fs.closeSync(log);
   report.finishedAt = new Date().toISOString();
+  if (report.errors.length || report.windowErrors.length) { report.verdict = 'FAIL'; process.exitCode = 1; }
   fs.writeFileSync(path.join(evidenceDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify({verdict: report.verdict, steps: report.steps.length, errors: report.errors.length, windowErrors: report.windowErrors.length, nativeQueries: report.nativeQueries, evidenceDir, failure: report.failure}));
 }
