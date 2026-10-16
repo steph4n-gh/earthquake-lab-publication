@@ -65,3 +65,9 @@ Generate native fan inputs before checking the wavefront rays. The reference com
 The reference helper uses exact arbitrary ray-parameter ObsPy shots and records its oracle source hash. It also writes a separate oracle JSON. The checker-control helper exercises time corruption, nonfinite coordinates, omitted discontinuity metadata, incorrectly joined segments, and corrupted analytic coordinates. Both report paths remain under `.audit/wavefronts/reference/`.
 
 Raw native fans, independent oracle paths, and the original executable are not bundled with these snapshots. The commands generate fresh versions. Reference package versions and build toolchains can affect resulting binary hashes. Keep new evidence labeled with its actual inputs and scope.
+
+## Observation reproduction differs across platforms
+
+The [Linux observation-reproduction result](observation-reproduction-linux.json) preserves a failed exact-byte comparison from the publication repair. The original processing remains unchanged. Nine displayed waveform samples differ by one 0.001-count rounding unit, and three geographic scalars differ near 1e-14 degrees. The selected picks, recording clocks and other metadata match. The legacy two-station pack reproduces exactly.
+
+The three producer `--verify` commands retain their exact equality checks. They continue to reject this Linux output. The recorded Python and package versions alone do not promise byte-identical results across platform-specific NumPy and SciPy libraries. Exact regeneration is qualified separately on the macOS ARM64 reference job. Its actual current CI result defines the qualified runner. Linux still runs factual-boundary, source-history, numerical-core, production-build and all browser checks. Read the [verification guide](../verification.md) before treating a scientific receipt as current qualification.

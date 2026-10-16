@@ -39,3 +39,5 @@ The [archive-comparison procedure](reproduce-catalog-facts.md) gives exact comma
 ## Publication boundary
 
 The repository and existing hosted preview remain private. A passing factual-data gate does not change visibility or authorize a public release. The [release checklist](../RELEASE_CHECKLIST.md) retains explicit coordinated-launch approval and exact-source qualification. Current browser and physical-device limitations remain visible.
+
+Exact observation-byte regeneration has a platform boundary. The [retained Linux negative result](evidence/observation-reproduction-linux.json) records display-rounding differences from the unchanged scientific preparation. The producer assertions remain exact. The macOS ARM64 CI job qualifies reference regeneration separately from Linux application and numerical checks. See [the reproduction scope](evidence/README.md#observation-reproduction-differs-across-platforms).

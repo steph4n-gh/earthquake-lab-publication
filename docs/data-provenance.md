@@ -96,3 +96,5 @@ The default command reuses the captured files and regenerates the derivative. It
 ```
 
 A refresh replaces only this fixture's source snapshots and derivative. If a download fails before its acquisition record is written, use `--refresh` to obtain a complete new capture. Each request has a 30-second timeout.
+
+Exact observation-byte regeneration has a platform boundary. The [retained Linux negative result](evidence/observation-reproduction-linux.json) records display-rounding differences from the unchanged scientific preparation. The producer assertions remain exact. The macOS ARM64 CI job qualifies reference regeneration separately from Linux application and numerical checks. See [the reproduction scope](evidence/README.md#observation-reproduction-differs-across-platforms).

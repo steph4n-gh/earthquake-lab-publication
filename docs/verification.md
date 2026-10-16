@@ -103,3 +103,5 @@ The committed [walkthrough](media/wavefront-walkthrough.mp4) demonstrates its re
 7. List untested targets and scientific limits beside the result.
 
 The committed [evidence directory](evidence/README.md) contains curated historical scientific snapshots. Generated local receipts and prior performance numbers are not evidence that fresh CI is green. A future public opening also requires the [public-release checklist](../RELEASE_CHECKLIST.md).
+
+Exact observation-byte regeneration has a platform boundary. The [retained Linux negative result](evidence/observation-reproduction-linux.json) records display-rounding differences from the unchanged scientific preparation. The producer assertions remain exact. The macOS ARM64 CI job qualifies reference regeneration separately from Linux application and numerical checks. See [the reproduction scope](evidence/README.md#observation-reproduction-differs-across-platforms).

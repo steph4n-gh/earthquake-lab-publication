@@ -1,0 +1,116 @@
+{
+  "python": "3.13.16",
+  "platform": "Linux-7.0.14-linuxkit-x86_64-with-glibc2.41",
+  "cases": {
+    "tohoku": {
+      "exact": false,
+      "expected_sha256": "ee27e9e57bf03e02b84e7751c9d40b63479b98b5cc57e5cf0a0c65bb54f53b2c",
+      "actual_sha256": "9bfc19e288739c553862aea415c307da49d0626a9278b3951fcd23ae58eb6e47",
+      "differences": [
+        {
+          "path": "/stations/0/trace/samples/2160",
+          "expected": -1917408.032,
+          "actual": -1917408.033,
+          "delta": -0.0010000001639127731
+        },
+        {
+          "path": "/stations/1/trace/samples/689",
+          "expected": -636982.329,
+          "actual": -636982.33,
+          "delta": -0.0009999999310821295
+        }
+      ]
+    },
+    "legacy": {
+      "exact": true,
+      "expected_sha256": "a5ad45a8325a710e7885f25f37914d8bcb0d93db9de661d80d818430730f4223",
+      "actual_sha256": "a5ad45a8325a710e7885f25f37914d8bcb0d93db9de661d80d818430730f4223",
+      "differences": []
+    },
+    "maule-2010": {
+      "exact": false,
+      "expected_sha256": "87b9670d6bb9f07cefb4205e733fb7b59b17dfc5cb3fc038d2087baf65978594",
+      "actual_sha256": "c45728740e56f36027fa3ed272d59bfc386c144fd7388513c13eb9783c8d1df0",
+      "differences": [
+        {
+          "path": "/stations/0/trace/samples/528",
+          "expected": 8688096.766,
+          "actual": 8688096.765,
+          "delta": -0.0010000001639127731
+        },
+        {
+          "path": "/stations/0/trace/samples/532",
+          "expected": 31556274.884,
+          "actual": 31556274.883,
+          "delta": -0.000999998301267624
+        },
+        {
+          "path": "/stations/0/trace/samples/535",
+          "expected": 37374624.0,
+          "actual": 37374623.999,
+          "delta": -0.0010000020265579224
+        },
+        {
+          "path": "/stations/0/trace/samples/684",
+          "expected": 4840082.082,
+          "actual": 4840082.083,
+          "delta": 0.0009999992325901985
+        },
+        {
+          "path": "/stations/0/trace/samples/2196",
+          "expected": 402437.867,
+          "actual": 402437.868,
+          "delta": 0.0009999999892897904
+        },
+        {
+          "path": "/stations/5/azimuth_deg",
+          "expected": 231.92081092232098,
+          "actual": 231.92081092232095,
+          "delta": -2.842170943040401e-14
+        }
+      ]
+    },
+    "okhotsk-2013": {
+      "exact": false,
+      "expected_sha256": "7afa92f126185de209ecb36de782f4a32a2fd2b1977d74d0e99fa013a04580ce",
+      "actual_sha256": "546463011d3dd8fe18de6359ebe5e2038410b7794e49cc438a8fef209bf99614",
+      "differences": [
+        {
+          "path": "/stations/0/trace/samples/516",
+          "expected": 3345873.864,
+          "actual": 3345873.863,
+          "delta": -0.0010000001639127731
+        },
+        {
+          "path": "/stations/1/distance_deg",
+          "expected": 37.922559038825234,
+          "actual": 37.92255903882524,
+          "delta": 7.105427357601002e-15
+        },
+        {
+          "path": "/stations/2/trace/samples/1128",
+          "expected": -963848.039,
+          "actual": -963848.04,
+          "delta": -0.0010000000474974513
+        },
+        {
+          "path": "/stations/3/distance_deg",
+          "expected": 49.33419565426886,
+          "actual": 49.33419565426887,
+          "delta": 7.105427357601002e-15
+        }
+      ]
+    }
+  },
+  "mode": "historical-negative-result",
+  "claim": "Exact byte reproduction failed for three observation packs on this Linux x86_64 probe. Frozen observations and exact verification assertions remain unchanged. This is not a passing cross-platform reproduction claim.",
+  "container_image": "python:3.13.16-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f",
+  "source_head": "6d726e78cf54c2721683c8bfbb224f506ef20200",
+  "requirements_sha256": "c6799175024f4d448c1da1cf9531aa6763ce6467890d1e2401d0b050dda07e52",
+  "producer_hashes": {
+    "scripts/catalog_facts.py": "61376b99160e2ae758feabe1603f63c2883bfb8752183830d1305388b54d806c",
+    "scripts/investigation-data/prepare.py": "12083fca893ee8390db0f6d1d66c35435850fd8b839829e54e4db16275040db1",
+    "scripts/fetch_waveforms.py": "9268d31319f14dcdf022c84be896320faec87b37601f924b482ec72f03d5bbb3",
+    "scripts/prepare-events.py": "2a56cd51efe576d9f74de7fa91f3e52235eb68b52b58939467186f75d990135b"
+  }
+}

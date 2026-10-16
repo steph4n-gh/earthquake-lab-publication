@@ -63,6 +63,16 @@
       "bytes": 3492,
       "transformation": "None. Byte-identical copy. No personal absolute path was present.",
       "claim": "Synthetic and self-reference controls check rejection sensitivity of the checker. They do not validate Rust rays."
+    },
+    {
+      "path": "observation-reproduction-linux.json",
+      "mode": "historical-negative-result",
+      "source_path": ".audit/publication/linux-repro/report.json",
+      "original_sha256": "67128b18f7990708444309a95a963c22d7ab7caf56be9f0020ef47657ff7e60b",
+      "curated_sha256": "868b0a4ce2b1f1155c3b479404f1f5959f108de0393c30110a14047c5f4aa34c",
+      "bytes": 4331,
+      "transformation": "Original complete case diffs retained. Added source, environment and negative-result scope.",
+      "claim": "Exact byte reproduction failed for three observation packs on this Linux x86_64 probe. Frozen observations and exact verification assertions remain unchanged. This is not a passing cross-platform reproduction claim."
     }
   ]
 }
