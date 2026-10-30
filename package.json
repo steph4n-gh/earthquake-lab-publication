@@ -29,7 +29,7 @@
     "vite": "8.3.5"
   },
   "dependencies": {
-    "three": "0.186.1"
+    "three": "0.187.0"
   },
   "description": "Replay real earthquakes, investigate their source, and explore modeled seismic wavefronts with local Rust and WebAssembly.",
   "author": "steph4n-gh",
