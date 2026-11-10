@@ -13,8 +13,8 @@ import subprocess
 import sys
 
 from npm_evidence import (
-    EvidenceError, MAX_FILE, MAX_MANIFEST, archive_facts, collect_evidence,
-    confined_file, is_registry_path, json_bytes, load_lock, manifest_facts,
+    EvidenceError, MAX_FILE, MAX_MANIFEST, archive_facts, archive_facts_nested, collect_evidence,
+    confined_file, declared_bundles, direct_bundle_name, is_registry_path, json_bytes, load_lock, manifest_facts,
     read_limited, safe_relative, sha256, strict_json,
 )
 
@@ -268,9 +268,35 @@ def command_text(output, label, evidence):
     evidence_dir = output / label / "evidence"
     index = strict_json(read_limited(evidence_dir / "index.json"))
     entry = next((item for item in index["packages"] if item["path"] == path), None)
-    if entry is None:
+    if entry is None and facts.get("kind") != "bundled_artifact":
         raise EvidenceError(f"qualified instance lacks a locator: {path!r}")
-    if facts.get("kind") == "artifact" and "artifact" in entry:
+    if facts.get("kind") == "bundled_artifact":
+        parent = facts["bundle_parent"]
+        parent_entry = next((item for item in index["packages"] if item["path"] == parent), None)
+        if parent_entry is None or "artifact" not in parent_entry or not path.startswith(parent + "/"):
+            raise EvidenceError(f"qualified bundled instance lacks a parent locator: {path!r}")
+        lock = strict_json(read_limited(output / label / "project" / "package-lock.json"))
+        parent_record = lock["packages"][parent]
+        child_record = lock["packages"].get(path, {})
+        if (parent_record.get("resolved") != facts.get("bundle_parent_source")
+                or parent_record.get("integrity") != facts.get("bundle_parent_integrity")
+                or child_record.get("inBundle") is not True):
+            raise EvidenceError(f"bundled source binding disagrees with reviewer view: {path!r}")
+        archive = read_limited(confined_file(evidence_dir, parent_entry["artifact"]))
+        relative = path[len(parent) + 1:]
+        _, parent_manifest, _, _, nested = archive_facts_nested(archive, parent_record["integrity"], {relative})
+        name = direct_bundle_name(relative)
+        if name is None or name not in declared_bundles(parent_manifest):
+            raise EvidenceError(f"bundled declaration disagrees with reviewer view: {path!r}")
+        selected = nested.get(relative, {})
+        data = selected.get("manifest")
+        if data is None or hashlib.sha512(archive).hexdigest() != facts.get("artifact_sha512"):
+            raise EvidenceError(f"bundled archive bytes disagree with reviewer view: {path!r}")
+        manifest = strict_json(data)
+        binding_hash = selected.get("binding_hash")
+        binding_gyp = binding_hash is not None
+        source_project = False
+    elif facts.get("kind") == "artifact" and "artifact" in entry:
         archive = read_limited(confined_file(evidence_dir, entry["artifact"]))
         lock = strict_json(read_limited(output / label / "project" / "package-lock.json"))
         integrity = lock["packages"][path]["integrity"]
@@ -291,6 +317,31 @@ def command_text(output, label, evidence):
         raise EvidenceError(f"qualified lifecycle bytes disagree with reviewer view: {path!r}")
     scripts = manifest.get("scripts", {})
     return {event: scripts[event] for event in sorted(observed["lifecycle"])}
+
+
+def next_action(reason):
+    message = str(reason or "").lower()
+    if "sha512 sri mismatch" in message:
+        return "Do not use these archive bytes. Resolve the lock/archive mismatch before rerunning."
+    if "sha512 sri" in message:
+        return "Restore a lock entry with canonical SHA512 integrity for the original archive, then rerun; otherwise review this package manually."
+    if "download requires https registry.npmjs.org" in message or "artifact redirects are unsupported" in message:
+        return "Have the repository owner supply the exact SHA512-bound archive through a trusted offline cache, then rerun."
+    if "artifact acquisition failed" in message:
+        return "Retry acquisition of the same lock-bound archive or provide it through a trusted offline cache."
+    if "unsupported artifact source" in message:
+        return "Review this source manually or replace it with a supported archive and canonical SHA512 lock entry."
+    if "compressed limit" in message or "decompressed limit" in message or "tar exceeds 10000 entries" in message:
+        return "Review this archive manually; it exceeds the supported inspection bounds."
+    if "nonportable tar path" in message or "pax" in message or "unsupported tar" in message:
+        return "Review the archive manually or obtain a package with a supported portable tar layout."
+    if "manifest" in message and ("does not match" in message or "differs" in message):
+        return "Resolve the lockfile/manifest disagreement from the original sources, then rerun."
+    if "missing locator" in message or "bundle parent lacks qualified" in message:
+        return "Supply the original verified package evidence and rerun; review manually until it is available."
+    if "source approval" in message or "approval file" in message:
+        return "Ask a trusted administrator to repair the base policy, then rerun this head."
+    return "Resolve this exact input or evidence gap and rerun this head; use manual review until then."
 
 
 def review_view(report, output):
@@ -327,7 +378,7 @@ def review_view(report, output):
         for item in core.get(label, {}).get("execution_evidence", []):
             if item.get("state") != "qualified":
                 unknowns.append({"side": label, "path": item.get("path"), "state": item.get("state"),
-                                 "reason": item.get("reason")})
+                                 "reason": item.get("reason"), "next_action": next_action(item.get("reason"))})
     return {"execution_changes": rows, "remaining_execution_changes": len(changes) - len(rows),
             "unknowns": unknowns}
 
@@ -501,13 +552,32 @@ def summary(report):
             qualified = sum(item.get("state") == "qualified" for item in snapshot.get("execution_evidence", []))
             lines.append(f"{title}: {len(snapshot.get('packages', []))} locked instances; {qualified} qualified execution-evidence records.")
     lines.extend(["", f"{len(packages)} package changes. {len(changes)} execution evidence changes. {len(unknowns)} unqualified package sides."])
+    lifecycle_changes = sum(((change.get("before") or {}).get("facts") or {}).get("lifecycle")
+                            != ((change.get("after") or {}).get("facts") or {}).get("lifecycle")
+                            for change in changes)
+    candidate_changes = sum(bool((change.get("before") or {}).get("candidate")
+                                 or (change.get("after") or {}).get("candidate")) for change in changes)
+    lines.append(f"{lifecycle_changes} changed lifecycle command sets; {candidate_changes} changed evidence rows with automatic install execution potential.")
+    direct = [change for change in packages
+              if len(change.get("after_introducer_path") or change.get("before_introducer_path") or []) == 2]
+    if direct:
+        lines.extend(["", "## Direct dependency changes", ""])
+        for change in direct[:8]:
+            before, after = change.get("before") or {}, change.get("after") or {}
+            old = f"{before.get('name', '?')}@{before.get('version', '?')}" if before else "absent"
+            new = f"{after.get('name', '?')}@{after.get('version', '?')}" if after else "absent"
+            lines.append(f"- `{markdown_text(change['path'])}`: `{markdown_text(old)}` to `{markdown_text(new)}`.")
+        if len(direct) > 8:
+            lines.append(f"- {len(direct) - 8} more direct changes are in `report.json`.")
     if view.get("execution_changes"):
         lines.extend(["", "## Execution evidence, current to proposed", ""])
     for row in view.get("execution_changes", []):
         path = markdown_text(row["path"] or "<root>")
         before, after = row["before"], row["after"]
         old_facts, new_facts = before.get("facts") or {}, after.get("facts") or {}
-        fields = [key for key in ("kind", "artifact_sha512", "manifest_sha256", "lifecycle", "binding_gyp_sha256", "implicit_node_gyp", "binary_entrypoints")
+        fields = [key for key in ("kind", "bundle_parent", "bundle_parent_source", "bundle_parent_integrity",
+                                  "artifact_sha512", "manifest_sha256", "lifecycle",
+                                  "binding_gyp_sha256", "implicit_node_gyp", "binary_entrypoints")
                   if old_facts.get(key) != new_facts.get(key)]
         lines.extend([f"### `{path}`", "", f"Changed: {', '.join(fields) or 'qualification or fingerprint'}.",
                       f"Introducer, proposed: {route_text(after['route'], row['path'])}.", ""])
@@ -516,6 +586,9 @@ def summary(report):
             evidence = f"manifest SHA-256 `{markdown_text(facts.get('manifest_sha256'))}`"
             if facts.get("kind") == "artifact":
                 evidence += f"; verified archive SHA-512 `{markdown_text(item.get('verified_artifact_sha512'))}`"
+            elif facts.get("kind") == "bundled_artifact":
+                evidence += (f"; bundled in `{markdown_text(facts.get('bundle_parent'))}`"
+                             f"; verified parent archive SHA-512 `{markdown_text(facts.get('artifact_sha512'))}`")
             elif facts.get("kind") == "source_project":
                 evidence += "; captured Git source manifest"
             elif facts.get("kind") == "workspace_link":
@@ -559,15 +632,11 @@ def summary(report):
     for candidate in policy.get("unapproved_execution_candidates", []):
         lines.append(f"- Unapproved `{markdown_text(candidate['path'] or '<root>')}` fingerprint `{candidate['fingerprint']}`.")
     if unknowns:
-        counts = {}
-        for item in unknowns:
-            key = (item["side"], item["state"], json.dumps(item["reason"], sort_keys=True, ensure_ascii=False))
-            counts[key] = counts.get(key, 0) + 1
-        lines.extend(["", "## Unknown evidence", ""])
-        for (side, state, reason), count in sorted(counts.items(), key=lambda entry: (-entry[1], entry[0]))[:12]:
-            lines.append(f"- {count} {side} package sides: {markdown_text(state)}; {markdown_text(reason)}.")
-        if len(counts) > 12:
-            lines.append(f"- {len(counts) - 12} further reason groups are in `report.json`.")
+        lines.extend(["", "## Evidence gaps", ""])
+        for item in unknowns[:20]:
+            lines.append(f"- {item['side']} `{markdown_text(item['path'] or '<root>')}`: {markdown_text(item['state'])}; {markdown_text(item['reason'])}. Next: {markdown_text(item['next_action'])}")
+        if len(unknowns) > 20:
+            lines.append(f"- {len(unknowns) - 20} more package sides and their next actions are in `report.json`.")
     reasons = list(report["errors"])
     for label in ("base", "head"):
         snapshot = core.get(label, {})
@@ -585,10 +654,10 @@ def summary(report):
     if "review_input_issue" in policy:
         reasons.append({"stage": "policy", "message": policy["review_input_issue"]})
     if reasons:
-        lines.extend(["", "Incomplete input reasons:"])
+        lines.extend(["", "## Input and policy gaps", ""])
         for reason in reasons:
             text = reason["message"] if isinstance(reason["message"], str) else json.dumps(reason["message"], sort_keys=True)
-            lines.append(f"- {reason['stage']}: {markdown_text(text)}")
+            lines.append(f"- {reason['stage']}: {markdown_text(text)}. Next: {markdown_text(next_action(text))}")
     lines.extend(["", "Artifact integrity binds bytes to the lock. Source snapshots retain caller trust. This report does not prove scripts safe or predict host installation selection.", ""])
     return "\n".join(lines)
 
@@ -734,7 +803,7 @@ def review(args):
         message = str(exc)
         for original, replacement in replacements:
             message = message.replace(original, replacement)
-        report["errors"].append({"stage": stage, "message": message})
+        report["errors"].append({"stage": stage, "message": message, "next_action": next_action(message)})
     for label, snapshot in snapshots.items():
         report[label] = snapshot.report()
     if output is not None:
