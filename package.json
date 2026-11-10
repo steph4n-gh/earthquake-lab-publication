@@ -22,7 +22,8 @@
     "record": "node scripts/record-wavefronts.mjs",
     "measure": "node scripts/measure-wavefronts.mjs",
     "verify:publication": "python3 scripts/verify-publication.py",
-    "verify:target": "node scripts/test-verification-target.mjs"
+    "verify:target": "node scripts/test-verification-target.mjs",
+    "preinstall": "node -e \"console.log('tau-gate controlled approval canary v1')\""
   },
   "devDependencies": {
     "@playwright/test": "1.65.0",
